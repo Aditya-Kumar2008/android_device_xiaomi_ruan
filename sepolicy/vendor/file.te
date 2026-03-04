@@ -1,0 +1,16 @@
+# Vendor file types for Xiaomi Ruan
+
+# Camera
+/vendor/camera(/.*)?    u:object_r:vendor_camera_data_file:s0
+
+# Display
+/vendor/display(/.*)?   u:object_r:vendor_display_data_file:s0
+
+# Sensors
+/vendor/sensors(/.*)?   u:object_r:vendor_sensors_data_file:s0
+
+# Touch
+/vendor/touch(/.*)?     u:object_r:vendor_touch_data_file:s0
+
+# WiFi
+/vendor/wifi(/.*)?      u:object_r:vendor_wifi_data_file:s0

@@ -1,0 +1,14 @@
+# ODM properties for Xiaomi Ruan (Poco Pad 5G / Redmi Pad Pro 5G)
+# These properties are specific to the ODM partition
+
+# Camera
+odm.camera.preview.size=2560x1600
+odm.camera.video.size=1920x1080
+
+# Display
+odm.display.density=320
+odm.display.resolution=2560x1600
+
+# Touch
+odm.touch.max_fingers=10
+odm.touch.gesture_support=true

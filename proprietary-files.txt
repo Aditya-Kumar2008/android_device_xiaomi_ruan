@@ -1,0 +1,395 @@
+#
+# Copyright (C) 2024 The LineageOS Project
+# Copyright (C) 2024 The Android Open Source Project
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+# ACDB - Audio calibration
+vendor/etc/acdbdata/Bluetooth_cal.acdb
+vendor/etc/acdbdata/General_cal.acdb
+vendor/etc/acdbdata/Global_cal.acdb
+vendor/etc/acdbdata/Handset_cal.acdb
+vendor/etc/acdbdata/Hdmi_cal.acdb
+vendor/etc/acdbdata/Headset_cal.acdb
+vendor/etc/acdbdata/Speaker_cal.acdb
+vendor/etc/acdbdata/adsp_avs_config.acdb
+
+# ADSP - Audio DSP
+vendor/bin/adsprpcd
+vendor/bin/adsprpcd_security_system
+vendor/lib64/libadsp_default_listener.so
+vendor/lib64/libadsprpc.so
+vendor/lib64/libcdsp_default_listener.so
+vendor/lib64/libcdsprpc.so
+vendor/lib64/libfastcvrpc.so
+vendor/lib64/libfastrpc_utf_stub.so
+vendor/lib64/libmdsprpc.so
+vendor/lib64/libsdsp_default_listener.so
+vendor/lib64/libsdsprpc.so
+
+# Audio
+vendor/lib64/hw/audio.primary.parrot.so
+vendor/lib64/liba2dpoffload.so
+vendor/lib64/libacdb-fts.so
+vendor/lib64/libacdbloader.so
+vendor/lib64/libacdbrtac.so
+vendor/lib64/libadiertac.so
+vendor/lib64/libadm.so
+vendor/lib64/libadpcmdec.so
+vendor/lib64/libadsp_hvx_interface.so
+vendor/lib64/libadspd.so
+vendor/lib64/libagm.so
+vendor/lib64/libagmclient.so
+vendor/lib64/libagmipc.so
+vendor/lib64/libalsautils.so
+vendor/lib64/libar-pal.so
+vendor/lib64/libats.so
+vendor/lib64/libaudioconfigstore.so
+vendor/lib64/libaudioformat.so
+vendor/lib64/libaudioroute.so
+vendor/lib64/libcirrusspkrprot.so
+vendor/lib64/libcne.so
+vendor/lib64/libcneapiclient.so
+vendor/lib64/libcneoplookup.so
+vendor/lib64/libcneqmiutils.so
+vendor/lib64/libcomprcapture.so
+vendor/lib64/libdiag.so
+vendor/lib64/libdsd2pcm.so
+vendor/lib64/libgcs-calwrapper.so
+vendor/lib64/libgcs-ipc.so
+vendor/lib64/libgcs-osal.so
+vendor/lib64/libgcs.so
+vendor/lib64/libhdmiedid.so
+vendor/lib64/libhdmipassthru.so
+vendor/lib64/libhfp.so
+vendor/lib64/liblxosutil.so
+vendor/lib64/libmaskext.so
+vendor/lib64/libmm-audio-resampler.so
+vendor/lib64/libmmosal.so
+vendor/lib64/libmulawdec.so
+vendor/lib64/liboemaids.so
+vendor/lib64/libpalclient.so
+vendor/lib64/libqcodec2_base.so
+vendor/lib64/libqcodec2_core.so
+vendor/lib64/libqcodec2_platform.so
+vendor/lib64/libqcodec2_utils.so
+vendor/lib64/libqcodec2_v4l2codec.so
+vendor/lib64/libqtigef.so
+vendor/lib64/libsmemlog.so
+vendor/lib64/libsndmonitor.so
+vendor/lib64/libspkrprot.so
+vendor/lib64/libssrec.so
+vendor/lib64/libsurround_3mic_proc.so
+vendor/lib64/libswgamedap.so
+vendor/lib64/libswvdec.so
+vendor/lib64/libsysmon_cdsp_skel.so
+vendor/lib64/libvorbisidec.so
+vendor/lib64/libvpu.so
+vendor/lib64/libxlog.so
+vendor/lib64/soundfx/libaudiopreprocessing.so
+vendor/lib64/soundfx/libbundlewrapper.so
+vendor/lib64/soundfx/libdownmix.so
+vendor/lib64/soundfx/libdynproc.so
+vendor/lib64/soundfx/libeffectproxy.so
+vendor/lib64/soundfx/libhapticgenerator.so
+vendor/lib64/soundfx/libldnhncr.so
+vendor/lib64/soundfx/libqcompostprocbundle.so
+vendor/lib64/soundfx/libqcomvisualizer.so
+vendor/lib64/soundfx/libqcomvoiceprocessing.so
+vendor/lib64/soundfx/libreverbwrapper.so
+vendor/lib64/soundfx/libvisualizer.so
+
+# Bluetooth
+vendor/bin/hw/android.hardware.bluetooth@1.1-service
+vendor/etc/init/android.hardware.bluetooth@1.1-service.rc
+vendor/lib64/android.hardware.bluetooth@1.0.so
+vendor/lib64/android.hardware.bluetooth@1.1.so
+vendor/lib64/hw/android.hardware.bluetooth@1.1-impl.so
+vendor/lib64/libbluetooth_audio_session.so
+vendor/lib64/libbluetooth_audio_session_qti.so
+vendor/lib64/libbthost_if.so
+vendor/lib64/libbtconfigstore.so
+
+# Camera - Single 8MP tablet camera
+vendor/bin/hw/android.hardware.camera.provider@2.7-service-google
+vendor/etc/camera/camera_config.xml
+vendor/etc/camera/pureShot_parameter.xml
+vendor/etc/camera/pureView_parameter.xml
+vendor/etc/init/android.hardware.camera.provider@2.7-service-google.rc
+vendor/lib64/android.hardware.camera.device@1.0.so
+vendor/lib64/android.hardware.camera.device@3.2.so
+vendor/lib64/android.hardware.camera.device@3.3.so
+vendor/lib64/android.hardware.camera.device@3.4.so
+vendor/lib64/android.hardware.camera.device@3.5.so
+vendor/lib64/android.hardware.camera.device@3.6.so
+vendor/lib64/android.hardware.camera.device@3.7.so
+vendor/lib64/android.hardware.camera.metadata@3.2.so
+vendor/lib64/android.hardware.camera.metadata@3.3.so
+vendor/lib64/android.hardware.camera.metadata@3.4.so
+vendor/lib64/android.hardware.camera.metadata@3.5.so
+vendor/lib64/android.hardware.camera.metadata@3.6.so
+vendor/lib64/android.hardware.camera.provider@2.4.so
+vendor/lib64/android.hardware.camera.provider@2.5.so
+vendor/lib64/android.hardware.camera.provider@2.6.so
+vendor/lib64/android.hardware.camera.provider@2.7.so
+vendor/lib64/camera.device@1.0-impl.so
+vendor/lib64/camera.device@3.2-impl.so
+vendor/lib64/camera.device@3.3-impl.so
+vendor/lib64/camera.device@3.4-impl.so
+vendor/lib64/camera.device@3.5-impl.so
+vendor/lib64/camera.device@3.6-impl.so
+vendor/lib64/hw/android.hardware.camera.provider@2.7-impl.so
+vendor/lib64/hw/camera.qcom.so
+vendor/lib64/hw/camera.xiaomi.so
+vendor/lib64/libCamera.so
+vendor/lib64/libCameraJNI.so
+vendor/lib64/libmmcamera_interface.so
+vendor/lib64/libmmjpeg_interface.so
+vendor/lib64/libmmcamera2_stats_modules.so
+
+# Display
+vendor/bin/hw/vendor.qti.hardware.display.composer-service
+vendor/bin/hw/vendor.qti.hardware.display.allocator-service
+vendor/bin/hw/init.qti.display_boot.sh
+vendor/lib64/libsdmcore.so
+vendor/lib64/libsdmutils.so
+vendor/lib64/libqdMetaData.so
+vendor/lib64/libdisplayconfig.qti.so
+vendor/lib64/libdisplayconfig.system.qti.so
+vendor/lib64/libmemutils.so
+vendor/lib64/libtinyxml.so
+vendor/lib64/hw/gralloc.default.so
+vendor/lib64/hw/android.hardware.graphics.mapper@4.0-impl-qti-display.so
+
+# DRM
+vendor/bin/hw/android.hardware.drm@1.4-service.clearkey
+vendor/lib64/libdrm.so
+vendor/lib64/libdrmframework.so
+
+# Gatekeeper
+vendor/bin/hw/android.hardware.gatekeeper@1.0-service
+vendor/lib64/hw/gatekeeper.default.so
+vendor/lib64/libgatekeeper.so
+
+# GPS
+vendor/bin/hw/android.hardware.gnss@2.1-service
+vendor/lib64/hw/gps.default.so
+vendor/lib64/libgps.utils.so
+vendor/lib64/liblocation_api.so
+vendor/lib64/libgnss.so
+
+# Graphics - Adreno
+vendor/lib64/libEGL_adreno.so
+vendor/lib64/libGLESv1_CM_adreno.so
+vendor/lib64/libGLESv2_adreno.so
+vendor/lib64/libGLESv3_adreno.so
+vendor/lib64/libadreno_utils.so
+vendor/lib64/libgsl.so
+vendor/lib64/libllvm-glnext.so
+vendor/lib64/libllvm-qgl.so
+
+# Keymaster
+vendor/bin/hw/android.hardware.keymaster@4.1-service
+vendor/lib64/hw/keystore.default.so
+vendor/lib64/libkeymaster_messages.so
+vendor/lib64/libkeymaster_portable.so
+vendor/lib64/libpuresoftkeymasterdevice.so
+
+# Media
+vendor/lib64/libOmxCore.so
+vendor/lib64/libOmxVdec.so
+vendor/lib64/libOmxVenc.so
+vendor/lib64/libstagefrighthw.so
+vendor/lib64/libmm-omxcore.so
+
+# 5G MODEM - CRITICAL FOR RUAN (5G variant)
+# Modem image partition
+vendor/firmware/modem.mdt
+vendor/firmware/modem.b00
+vendor/firmware/modem.b01
+vendor/firmware/modem.b02
+vendor/firmware/modem.b03
+vendor/firmware/modem.b04
+vendor/firmware/modem.b05
+vendor/firmware/modem.b06
+vendor/firmware/modem.b07
+
+# MD1IMG partition files (5G modem)
+vendor/firmware/md1img.img
+vendor/firmware/md1rom.img
+vendor/firmware/md1dsp.img
+
+# Modem firmware
+vendor/firmware/mba.mbn
+vendor/firmware/mba.mdt
+vendor/firmware/modem.mbn
+vendor/firmware/modem.mdt
+vendor/firmware/modem_pr/mcfg/configs/mcfg_sw/generic/common/Default/Default/mcfg_sw.mbn
+
+# DSP firmware
+vendor/firmware/dspso.bin
+vendor/firmware/dspso.mdt
+
+# QDSP6 firmware
+vendor/firmware/adspso.bin
+vendor/firmware/adspso.mdt
+
+# CDSP firmware
+vendor/firmware/cdsp.mbn
+vendor/firmware/cdsp.mdt
+
+# ADSP firmware
+vendor/firmware/adsp.mbn
+vendor/firmware/adsp.mdt
+
+# SDSP firmware
+vendor/firmware/sdsp.mbn
+vendor/firmware/sdsp.mdt
+
+# GPU firmware
+vendor/firmware/a650_gmu.bin
+vendor/firmware/a650_sqe.fw
+vendor/firmware/a650_zap.b00
+vendor/firmware/a650_zap.b01
+vendor/firmware/a650_zap.b02
+vendor/firmware/a650_zap.elf
+vendor/firmware/a650_zap.mdt
+
+# TZ (TrustZone) firmware
+vendor/firmware/tz.mbn
+vendor/firmware/tz.mdt
+vendor/firmware/cmnlib.b00
+vendor/firmware/cmnlib.b01
+vendor/firmware/cmnlib.b02
+vendor/firmware/cmnlib.b03
+vendor/firmware/cmnlib.b04
+vendor/firmware/cmnlib.b05
+vendor/firmware/cmnlib.b06
+vendor/firmware/cmnlib.b07
+vendor/firmware/cmnlib.mdt
+vendor/firmware/cmnlib64.b00
+vendor/firmware/cmnlib64.b01
+vendor/firmware/cmnlib64.b02
+vendor/firmware/cmnlib64.b03
+vendor/firmware/cmnlib64.b04
+vendor/firmware/cmnlib64.b05
+vendor/firmware/cmnlib64.b06
+vendor/firmware/cmnlib64.b07
+vendor/firmware/cmnlib64.mdt
+
+# IPA firmware
+vendor/firmware/ipa_fws.b00
+vendor/firmware/ipa_fws.b01
+vendor/firmware/ipa_fws.b02
+vendor/firmware/ipa_fws.b03
+vendor/firmware/ipa_fws.b04
+vendor/firmware/ipa_fws.elf
+vendor/firmware/ipa_fws.mdt
+
+# Widevine DRM
+vendor/firmware/widevine.b00
+vendor/firmware/widevine.b01
+vendor/firmware/widevine.b02
+vendor/firmware/widevine.b03
+vendor/firmware/widevine.b04
+vendor/firmware/widevine.b05
+vendor/firmware/widevine.b06
+vendor/firmware/widevine.b07
+vendor/firmware/widevine.mdt
+
+# NFC (if applicable for variant)
+vendor/bin/hw/android.hardware.nfc@1.2-service
+vendor/etc/init/android.hardware.nfc@1.2-service.rc
+vendor/lib64/libnfc-nci.so
+vendor/lib64/libnfc_st.so
+
+# Power
+vendor/bin/hw/android.hardware.power-service
+vendor/lib64/libperfmgr.so
+vendor/lib64/libqti-perfd-client.so
+
+# QMI
+vendor/lib64/libqti_vndfwk_detect.so
+vendor/lib64/libvndfwk_detect_jni.qti.so
+
+# RIL - 5G Radio Interface Layer
+vendor/bin/hw/rild
+vendor/bin/loc_launcher
+vendor/lib64/libril.so
+vendor/lib64/librilutils.so
+vendor/lib64/librmnetctl.so
+vendor/lib64/libreference-ril.so
+vendor/lib64/libqmi_cci.so
+vendor/lib64/libqmi_client_qmux.so
+vendor/lib64/libqmi_common_so.so
+vendor/lib64/libqmi_csi.so
+vendor/lib64/libqmi_encdec.so
+vendor/lib64/libqmiservices.so
+vendor/lib64/libqmi.so
+vendor/lib64/libqmiidl.so
+
+# Sensors
+vendor/bin/hw/android.hardware.sensors@2.1-service
+vendor/lib64/hw/sensors.default.so
+vendor/lib64/libsensorndkbridge.so
+
+# Thermal
+vendor/bin/hw/android.hardware.thermal@2.0-service
+vendor/lib64/hw/thermal.default.so
+
+# USB
+vendor/bin/hw/android.hardware.usb@1.3-service
+vendor/lib64/libusb.so
+
+# Vibrator
+vendor/bin/hw/vendor.qti.hardware.vibrator.service
+vendor/lib64/libvibrator.so
+
+# WiFi
+vendor/bin/hw/android.hardware.wifi@1.0-service
+vendor/bin/hostapd
+vendor/bin/wpa_supplicant
+vendor/lib64/libwifi-hal-qcom.so
+vendor/lib64/libwpa_client.so
+vendor/lib64/libcld80211.so
+
+# Configuration files
+vendor/etc/audio_effects.xml
+vendor/etc/audio_policy_configuration.xml
+vendor/etc/camera/camera_config.xml
+vendor/etc/gps.conf
+vendor/etc/izat.conf
+vendor/etc/sensors/hals.conf
+vendor/etc/wifi/WCNSS_qcom_cfg.ini
+vendor/etc/wifi/p2p_supplicant_overlay.conf
+vendor/etc/wifi/wpa_supplicant_overlay.conf
+
+# Init scripts
+vendor/etc/init/android.hardware.audio.service.rc
+vendor/etc/init/android.hardware.bluetooth@1.1-service.rc
+vendor/etc/init/android.hardware.camera.provider@2.7-service-google.rc
+vendor/etc/init/android.hardware.gatekeeper@1.0-service.rc
+vendor/etc/init/android.hardware.gnss@2.1-service.rc
+vendor/etc/init/android.hardware.keymaster@4.1-service.rc
+vendor/etc/init/android.hardware.nfc@1.2-service.rc
+vendor/etc/init/android.hardware.power-service.rc
+vendor/etc/init/android.hardware.sensors@2.1-service.rc
+vendor/etc/init/android.hardware.thermal@2.0-service.rc
+vendor/etc/init/android.hardware.usb@1.3-service.rc
+vendor/etc/init/android.hardware.wifi@1.0-service.rc
+vendor/etc/init/vendor.qti.hardware.vibrator.service.rc
+
+# RIL init scripts
+vendor/etc/init/rild.rc
+vendor/etc/init/dataqti.rc
+vendor/etc/init/netmgrd.rc
+vendor/etc/init/qmipriod.rc
+
+# Hostapd config
+vendor/etc/hostapd/hostapd_default.conf
+vendor/etc/hostapd/hostapd.accept
+vendor/etc/hostapd/hostapd.deny
+
+# MAC address configuration
+vendor/etc/wlan_mac.bin

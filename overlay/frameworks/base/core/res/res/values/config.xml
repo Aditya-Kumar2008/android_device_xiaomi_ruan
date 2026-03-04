@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2024 The LineageOS Project
+     Copyright (C) 2024 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Whether the device is a tablet -->
+    <bool name="config_isTablet">true</bool>
+
+    <!-- Whether the device has a large screen -->
+    <bool name="config_largeScreen">true</bool>
+
+    <!-- Default screen refresh rate -->
+    <integer name="config_defaultRefreshRate">120</integer>
+
+    <!-- Supported screen refresh rates -->
+    <integer-array name="config_availableRefreshRates">
+        <item>60</item>
+        <item>90</item>
+        <item>120</item>
+    </integer-array>
+
+    <!-- Whether the device supports variable refresh rate -->
+    <bool name="config_supportsVariableRefreshRate">true</bool>
+
+    <!-- Whether the device supports HDR -->
+    <bool name="config_supportsHdr">true</bool>
+
+    <!-- Whether the device supports wide color gamut -->
+    <bool name="config_supportsWideColorGamut">true</bool>
+
+    <!-- Default color mode -->
+    <integer name="config_defaultColorMode">0</integer>
+
+    <!-- Whether the device supports adaptive brightness -->
+    <bool name="config_automatic_brightness_available">true</bool>
+
+    <!-- Whether the device supports double tap to wake -->
+    <bool name="config_supportDoubleTapWake">true</bool>
+
+    <!-- Whether the device supports tap to wake -->
+    <bool name="config_supportTapToWake">true</bool>
+
+    <!-- Whether the device supports camera flash -->
+    <bool name="config_cameraFlashDisabled">true</bool>
+
+    <!-- Whether the device supports flashlight -->
+    <bool name="config_deviceHasFlashlight">false</bool>
+
+    <!-- Whether the device supports fingerprint -->
+    <bool name="config_hasFingerprintHardware">false</bool>
+
+    <!-- Whether the device supports face unlock -->
+    <bool name="config_faceAuthSupported">false</bool>
+
+    <!-- Whether the device supports NFC -->
+    <bool name="config_deviceHasNfc">true</bool>
+
+    <!-- Whether the device supports secure NFC -->
+    <bool name="config_deviceSupportsSecureNfc">true</bool>
+
+    <!-- Whether the device supports HCE (Host Card Emulation) -->
+    <bool name="config_hceCapable">true</bool>
+
+    <!-- Whether the device supports HCE-F (Host Card Emulation FeliCa) -->
+    <bool name="config_hceFCapable">false</bool>
+
+    <!-- Whether the device supports UWB -->
+    <bool name="config_deviceSupportsUwb">false</bool>
+
+    <!-- Whether the device supports infrared -->
+    <bool name="config_deviceHasIrEmitter">true</bool>
+
+    <!-- Whether the device supports GPS -->
+    <bool name="config_deviceHasGps">true</bool>
+
+    <!-- Whether the device supports Bluetooth -->
+    <bool name="config_deviceHasBluetooth">true</bool>
+
+    <!-- Whether the device supports WiFi -->
+    <bool name="config_deviceHasWifi">true</bool>
+
+    <!-- Whether the device supports WiFi Aware -->
+    <bool name="config_wifiAwareSupported">true</bool>
+
+    <!-- Whether the device supports WiFi RTT -->
+    <bool name="config_wifiRttSupported">true</bool>
+
+    <!-- Whether the device supports WiFi Passpoint -->
+    <bool name="config_wifi_passpoint_supported">true</bool>
+
+    <!-- Whether the device supports WiFi P2P -->
+    <bool name="config_wifi_p2p_supported">true</bool>
+
+    <!-- Whether the device supports WiFi Display -->
+    <bool name="config_wifiDisplaySupported">true</bool>
+
+    <!-- Whether the device supports Miracast -->
+    <bool name="config_miracastSupported">true</bool>
+
+    <!-- Whether the device supports Ethernet -->
+    <bool name="config_ethernet_supported">false</bool>
+
+    <!-- Whether the device supports USB host mode -->
+    <bool name="config_usbHostSupported">true</bool>
+
+    <!-- Whether the device supports USB accessory mode -->
+    <bool name="config_usbAccessorySupported">true</bool>
+
+    <!-- Whether the device supports audio output -->
+    <bool name="config_deviceHasAudioOutput">true</bool>
+
+    <!-- Whether the device supports audio input -->
+    <bool name="config_deviceHasAudioInput">true</bool>
+
+    <!-- Whether the device supports vibration -->
+    <bool name="config_deviceHasVibrator">true</bool>
+
+    <!-- Whether the device supports haptic feedback -->
+    <bool name="config_hapticFeedbackSupported">true</bool>
+
+    <!-- Whether the device supports ambient display -->
+    <bool name="config_dozeAlwaysOnDisplayAvailable">true</bool>
+
+    <!-- Whether the device supports always on display -->
+    <bool name="config_dozeAlwaysOnEnabled">false</bool>
+
+    <!-- Whether the device supports lift to wake -->
+    <bool name="config_dozePulseLiftToWake">true</bool>
+
+    <!-- Whether the device supports tap to wake on ambient display -->
+    <bool name="config_dozePulseTapToWake">true</bool>
+
+    <!-- Whether the device supports pickup to wake -->
+    <bool name="config_dozePickupToWake">true</bool>
+
+    <!-- Whether the device supports significant motion detection -->
+    <bool name="config_dozePulseOnSignificantMotion">true</bool>
+
+    <!-- Whether the device supports proximity check on screen on -->
+    <bool name="config_proximityCheckOnWake">true</bool>
+
+    <!-- Whether the device supports proximity check on screen off -->
+    <bool name="config_proximityCheckOnWakeEnabledByDefault">false</bool>
+
+    <!-- Whether the device supports wake on plug -->
+    <bool name="config_wakeOnPlug">true</bool>
+
+    <!-- Whether the device supports battery light -->
+    <bool name="config_deviceHasBatteryLight">false</bool>
+
+    <!-- Whether the device supports notification light -->
+    <bool name="config_deviceHasNotificationLight">false</bool>
+
+    <!-- Whether the device supports attention light -->
+    <bool name="config_deviceHasAttentionLight">false</bool>
+
+    <!-- Whether the device supports LED notification -->
+    <bool name="config_ledNotificationSupported">false</bool>
+
+    <!-- Whether the device supports multi-user -->
+    <bool name="config_enableMultiUserUI">true</bool>
+
+    <!-- Maximum number of supported users -->
+    <integer name="config_multiuserMaximumUsers">4</integer>
+
+    <!-- Whether the device supports split screen -->
+    <bool name="config_supportsSplitScreenMultiWindow">true</bool>
+
+    <!-- Whether the device supports freeform windows -->
+    <bool name="config_freeformWindowManagement">true</bool>
+
+    <!-- Whether the device supports picture in picture -->
+    <bool name="config_supportsPictureInPicture">true</bool>
+
+    <!-- Whether the device supports system decorations -->
+    <bool name="config_supportsSystemDecorsOnSecondaryDisplays">true</bool>
+
+    <!-- Whether the device supports input on secondary displays -->
+    <bool name="config_supportsInputMethodOnSecondaryDisplays">true</bool>
+
+    <!-- Whether the device supports navigation bar -->
+    <bool name="config_showNavigationBar">true</bool>
+
+    <!-- Whether the device supports menu key in navigation bar -->
+    <bool name="config_showMenuShortcutsWhenKeyboardPresent">false</bool>
+
+    <!-- Whether the device supports search key in navigation bar -->
+    <bool name="config_showSearchShortcutsWhenKeyboardPresent">false</bool>
+
+    <!-- Whether the device supports home key in navigation bar -->
+    <bool name="config_showHomeShortcutsWhenKeyboardPresent">false</bool>
+
+    <!-- Whether the device supports back key in navigation bar -->
+    <bool name="config_showBackShortcutsWhenKeyboardPresent">false</bool>
+
+    <!-- Whether the device supports recents key in navigation bar -->
+    <bool name="config_showRecentsShortcutsWhenKeyboardPresent">false</bool>
+
+    <!-- Whether the device supports overview key in navigation bar -->
+    <bool name="config_showOverviewShortcutsWhenKeyboardPresent">false</bool>
+
+    <!-- Whether the device supports assist key in navigation bar -->
+    <bool name="config_showAssistShortcutsWhenKeyboardPresent">false</bool>
+
+    <!-- Whether the device supports voice interaction key in navigation bar -->
+    <bool name="config_showVoiceInteractionShortcutsWhenKeyboardPresent">false</bool>
+
+    <!-- Whether the device supports accessibility button in navigation bar -->
+    <bool name="config_showAccessibilityShortcutsWhenKeyboardPresent">false</bool>
+
+    <!-- Whether the device supports rotation suggestion -->
+    <bool name="config_showRotationSuggestions">true</bool>
+
+    <!-- Whether the device supports auto rotation -->
+    <bool name="config_autoRotationDefault">true</bool>
+
+    <!-- Default rotation mode -->
+    <integer name="config_defaultRotationMode">0</integer>
+
+    <!-- Whether the device supports screen off animation -->
+    <bool name="config_screenOffAnimation">true</bool>
+
+    <!-- Whether the device supports screen on animation -->
+    <bool name="config_screenOnAnimation">true</bool>
+
+    <!-- Whether the device supports window animation -->
+    <bool name="config_windowAnimation">true</bool>
+
+    <!-- Whether the device supports transition animation -->
+    <bool name="config_transitionAnimation">true</bool>
+
+    <!-- Whether the device supports animator duration scale -->
+    <bool name="config_animatorDurationScale">true</bool>
+
+    <!-- Default animator duration scale -->
+    <item name="config_defaultAnimatorDurationScale" format="float" type="dimen">1.0</item>
+
+    <!-- Whether the device supports transition animation scale -->
+    <bool name="config_transitionAnimationScale">true</bool>
+
+    <!-- Default transition animation scale -->
+    <item name="config_defaultTransitionAnimationScale" format="float" type="dimen">1.0</item>
+
+    <!-- Whether the device supports window animation scale -->
+    <bool name="config_windowAnimationScale">true</bool>
+
+    <!-- Default window animation scale -->
+    <item name="config_defaultWindowAnimationScale" format="float" type="dimen">1.0</item>
+
+</resources>

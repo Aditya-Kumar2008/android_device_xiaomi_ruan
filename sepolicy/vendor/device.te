@@ -1,0 +1,6 @@
+# Device specific SELinux rules for ruan
+
+type device, domain;
+
+# Allow init to interact with device domain
+init_daemon_domain(device)

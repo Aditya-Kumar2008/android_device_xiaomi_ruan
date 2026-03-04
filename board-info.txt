@@ -1,0 +1,18 @@
+# Board information for Xiaomi Ruan (Poco Pad 5G / Redmi Pad Pro 5G)
+# Format: require board=<board_name> [bootloader=<bootloader_version>]
+#         require version-bootloader=<version>
+#         require version-baseband=<version>
+
+require board=parrot
+
+# Bootloader versions
+require version-bootloader=ruan-14.0-xxxxxxxx
+
+# Baseband versions (if applicable)
+# require version-baseband=xxxx-xxxxxx
+
+# Board variants
+board=ruan
+
+# Asserts for recovery
+assert(ruan, ruan_global, ruan_in, ruan_cn)

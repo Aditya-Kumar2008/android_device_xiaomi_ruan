@@ -1,0 +1,48 @@
+# Android fstab file for Xiaomi Ruan (Poco Pad 5G / Redmi Pad Pro 5G)
+#<src>                                                  <mnt_point>            <type>  <mnt_flags and options>                            <fs_mgr_flags>
+
+# Core partitions (logical - dynamic partitions)
+system                                                  /system                ext4    ro,barrier=1,discard                                 wait,slotselect,avb=vbmeta_system,logical,first_stage_mount,avb_keys=/avb/q-gsi.avbpubkey:/avb/r-gsi.avbpubkey:/avb/s-gsi.avbpubkey
+system_ext                                              /system_ext            ext4    ro,barrier=1,discard                                 wait,slotselect,avb=vbmeta_system,logical,first_stage_mount
+product                                                 /product               ext4    ro,barrier=1,discard                                 wait,slotselect,avb=vbmeta_system,logical,first_stage_mount
+vendor                                                  /vendor                ext4    ro,barrier=1,discard                                 wait,slotselect,avb=vbmeta_vendor,logical,first_stage_mount
+vendor_dlkm                                             /vendor_dlkm           ext4    ro,barrier=1,discard                                 wait,slotselect,avb=vbmeta_vendor,logical,first_stage_mount
+odm                                                     /odm                   ext4    ro,barrier=1,discard                                 wait,slotselect,avb=vbmeta_vendor,logical,first_stage_mount
+
+# Boot partitions
+/dev/block/bootdevice/by-name/boot                      /boot                  emmc    defaults                                             first_stage_mount,nofail,slotselect,avb
+/dev/block/bootdevice/by-name/vendor_boot               /vendor_boot           emmc    defaults                                             first_stage_mount,nofail,slotselect,avb
+/dev/block/bootdevice/by-name/dtbo                      /dtbo                  emmc    defaults                                             defaults,slotselect,avb
+
+# 5G Modem partition - CRITICAL FOR RUAN
+/dev/block/bootdevice/by-name/md1img                    /vendor/firmware_mnt   vfat    ro,shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337,context=u:object_r:firmware_file:s0 wait,slotselect
+
+# Recovery
+/dev/block/bootdevice/by-name/recovery                  /recovery              emmc    defaults                                             defaults,slotselect,avb
+
+# Misc
+/dev/block/bootdevice/by-name/misc                      /misc                  emmc    defaults                                             defaults
+
+# Data partition
+/dev/block/by-name/userdata                             /data                  f2fs    noatime,nosuid,nodev,discard,reserve_root=32768,resgid=1065,fsync_mode=nobarrier,inlinecrypt latemount,wait,check,formattable,fileencryption=::inlinecrypt_optimized+wrappedkey_v0,metadata_encryption=::inlinecrypt_optimized+wrappedkey_v0,quota,reservedsize=128M,sysfs_path=/sys/devices/platform/soc/1d84000.ufshc,checkpoint=fs
+
+# Persist
+/dev/block/bootdevice/by-name/persist                   /mnt/vendor/persist    ext4    noatime,nosuid,nodev,barrier=1                       wait,check
+
+# Metadata
+/dev/block/bootdevice/by-name/metadata                  /metadata              ext4    noatime,nosuid,nodev,discard                         wait,formattable,first_stage_mount
+
+# Bluetooth firmware
+/dev/block/bootdevice/by-name/bluetooth                 /vendor/bt_firmware    vfat    ro,shortname=lower,uid=1002,gid=3002,dmask=227,fmask=337,context=u:object_r:bt_firmware_file:s0 wait,slotselect
+
+# DSP
+/dev/block/bootdevice/by-name/dsp                       /vendor/dsp            ext4    ro,nosuid,nodev,barrier=1                            wait,slotselect
+
+# Cache (if exists - may not be present on newer devices)
+/dev/block/bootdevice/by-name/cache                     /cache                 ext4    noatime,nosuid,nodev,nomblk_io_submit,errors=panic    wait,check
+
+# USB storage
+/devices/platform/soc/a600000.ssusb/a600000.dwc3/xhci-hcd.0.auto* /storage/usbotg    vfat    defaults    voldmanaged=usbotg:auto,encryptable=userdata
+
+# SD card (if supported)
+/devices/platform/soc/8804000.sdhci/mmc_host*           /storage/sdcard1       vfat    defaults    voldmanaged=sdcard1:auto,encryptable=userdata

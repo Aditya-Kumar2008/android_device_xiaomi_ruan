@@ -1,0 +1,38 @@
+# Vendor file contexts for Xiaomi Ruan
+
+# Camera
+/vendor/bin/hw/android\.hardware\.camera\.provider@2\.7-service-google    u:object_r:hal_camera_default_exec:s0
+/vendor/lib64/hw/camera\.xiaomi\.so                                       u:object_r:same_process_hal_file:s0
+/vendor/lib64/hw/camera\.qcom\.so                                         u:object_r:same_process_hal_file:s0
+
+# Display
+/vendor/bin/hw/vendor\.qti\.hardware\.display\.composer-service            u:object_r:hal_graphics_composer_default_exec:s0
+/vendor/bin/hw/vendor\.qti\.hardware\.display\.allocator-service           u:object_r:hal_graphics_allocator_default_exec:s0
+
+# Fingerprint (if applicable)
+/vendor/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.3-service\.xiaomi    u:object_r:hal_fingerprint_default_exec:s0
+
+# IR
+/vendor/bin/hw/android\.hardware\.ir@1\.0-service                         u:object_r:hal_ir_default_exec:s0
+
+# NFC
+/vendor/bin/hw/android\.hardware\.nfc@1\.2-service                        u:object_r:hal_nfc_default_exec:s0
+
+# Sensors
+/vendor/bin/hw/android\.hardware\.sensors@2\.1-service\.xiaomi-multihal    u:object_r:hal_sensors_default_exec:s0
+
+# Touch
+/vendor/bin/hw/vendor\.lineage\.touch@1\.0-service\.xiaomi                 u:object_r:hal_lineage_touch_default_exec:s0
+
+# Vibrator
+/vendor/bin/hw/vendor\.qti\.hardware\.vibrator\.service                    u:object_r:hal_vibrator_default_exec:s0
+
+# WiFi
+/vendor/bin/hw/android\.hardware\.wifi@1\.0-service                       u:object_r:hal_wifi_default_exec:s0
+/vendor/bin/hostapd                                                      u:object_r:hostapd_exec:s0
+/vendor/bin/wpa_supplicant                                               u:object_r:wpa_exec:s0
+
+# Data files
+/vendor/etc/camera(/.*)?                                                 u:object_r:vendor_camera_data_file:s0
+/vendor/etc/wifi(/.*)?                                                   u:object_r:vendor_wifi_data_file:s0
+/vendor/firmware(/.*)?                                                   u:object_r:vendor_firmware_file:s0

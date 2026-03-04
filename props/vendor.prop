@@ -1,0 +1,193 @@
+# Vendor properties for Xiaomi Ruan (Poco Pad 5G / Redmi Pad Pro 5G)
+# 5G Tablet specific configurations
+
+# Audio
+vendor.audio.adm.buffering.ms=6
+vendor.audio.dolby.ds2.enabled=false
+vendor.audio.dolby.ds2.hardbypass=false
+vendor.audio.enable.mirrorlink=false
+vendor.audio.flac.sw.decoder.24bit=true
+vendor.audio.hal.boot.timeout.ms=20000
+vendor.audio.hw.aac.encoder=true
+vendor.audio.mic.status=off
+vendor.audio.offload.buffer.size.kb=256
+vendor.audio.offload.gapless.enabled=true
+vendor.audio.offload.multiaac.enable=true
+vendor.audio.offload.multiple.enabled=false
+vendor.audio.offload.passthrough=false
+vendor.audio.offload.track.enable=true
+vendor.audio.parser.ip.buffer.size=262144
+vendor.audio.safx.pbe.enabled=true
+vendor.audio.spkr_prot.tx.sampling_rate=48000
+vendor.audio.tunnel.encode=false
+vendor.audio.use.sw.alac.decoder=false
+vendor.audio.use.sw.ape.decoder=false
+vendor.audio.use.sw.mpegh.decoder=false
+vendor.audio.volume.headset.gain.depcal=true
+
+# Bluetooth
+vendor.bluetooth.soc=cherokee
+vendor.qcom.bluetooth.soc=cherokee
+
+# Camera
+vendor.camera.aux.packagelist=org.codeaurora.snapcam,com.android.camera,com.google.camera
+vendor.camera.aux.packagelist.ext=org.codeaurora.snapcam,com.android.camera,com.google.camera
+vendor.camera.debug.logfile=1
+vendor.camera.lowpower.record.enable=1
+
+# CNE - Connectivity Engine
+persist.vendor.cne.feature=1
+persist.vendor.cne.rat.wlan.chip.oem=WCN3998
+
+# Data
+persist.vendor.data.mode=concurrent
+ro.vendor.use_data_netmgrd=true
+
+# Display
+vendor.display.comp_mask=0
+vendor.display.dataspace_saturation_matrix=1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0
+vendor.display.disable_decimation=1
+vendor.display.disable_excl_rect=0
+vendor.display.disable_excl_rect_partial_fb=1
+vendor.display.disable_hw_recovery_dump=1
+vendor.display.disable_idle_time_hdr=1
+vendor.display.disable_idle_time_video=1
+vendor.display.disable_layer_stitch=0
+vendor.display.disable_rotator_ubwc=1
+vendor.display.disable_scaler=0
+vendor.display.disable_skip_validate=1
+vendor.display.enable_async_powermode=1
+vendor.display.enable_async_vds_creation=1
+vendor.display.enable_camera_smooth=1
+vendor.display.enable_optimize_refresh=1
+vendor.display.enable_perf_hint_large_comp_cycle=1
+vendor.display.qdcm.disable_factory_mode=1
+vendor.display.qdcm.mode_combine=1
+vendor.display.use_smooth_motion=1
+
+# DRM
+vendor.drm.service.enabled=true
+
+# GPS
+persist.vendor.gps.lock=0
+
+# Graphics
+vendor.gralloc.disable_ubwc=0
+vendor.gralloc.secure_preview_buffer_format=420_sp
+
+# Media
+vendor.media.omx=0
+vendor.mm.enable.qcom_parser=16777199
+
+# Netmgr
+persist.vendor.netmgrd.qmi.enable=1
+ro.vendor.netmgr.evbond.enabled=1
+
+# Perf
+vendor.perf.gestureflingboost.enable=true
+vendor.perf.iop_v3.enable=true
+vendor.perf.workloadclassifier.enable=true
+
+# QMI
+vendor.qcom.adsp.gmns=1
+
+# 5G RIL - Radio Interface Layer (CRITICAL FOR RUAN)
+persist.vendor.radio.apm_sim_not_pwdn=1
+persist.vendor.radio.atfwd.start=true
+persist.vendor.radio.cdma_cap=true
+persist.vendor.radio.data_con_rprt=true
+persist.vendor.radio.data_ltd_sys_ind=1
+persist.vendor.radio.dynamic_sar=false
+persist.vendor.radio.enableadvancedscan=true
+persist.vendor.radio.force_ltd_sys_ind=1
+persist.vendor.radio.force_on_dc=true
+persist.vendor.radio.manual_nw_rej_ct=1
+persist.vendor.radio.mbn_load_flag=3
+persist.vendor.radio.mbn_wait=0
+persist.vendor.radio.mt_sms_ack=30
+persist.vendor.radio.no_wait_for_card=1
+persist.vendor.radio.oem_ind_to_both=0
+persist.vendor.radio.procedure_bytes=SKIP
+persist.vendor.radio.rat_on=combine
+persist.vendor.radio.sar_sensor=1
+persist.vendor.radio.sib16_support=1
+persist.vendor.radio.snapshot_enabled=1
+persist.vendor.radio.snapshot_timer=5
+persist.vendor.radio.start_ota_daemon=1
+persist.vendor.radio.sw_mbn_update=0
+persist.vendor.radio.use_se_table=1
+persist.vendor.radio.5g=1
+persist.vendor.radio.5g_mode=1
+persist.vendor.radio.5g_enabled=true
+persist.vendor.radio.5g_standalone=true
+persist.vendor.radio.5g_nsa=true
+persist.vendor.radio.5g_sa=true
+persist.vendor.radio.nr_mode=1
+persist.vendor.radio.nr_enabled=1
+vendor.rild.libpath=/vendor/lib64/libril-qc-hal-qmi.so
+
+# Sensors
+persist.vendor.sensors.allow_non_default_discovery=true
+persist.vendor.sensors.sync_request=true
+
+# Thermal
+vendor.thermal.config=thermal-engine.conf
+
+# Time
+persist.vendor.time.adjust=true
+persist.vendor.time.enable=true
+
+# USB
+persist.vendor.usb.config=mtp,adb
+vendor.usb.diag.func.name=diag
+vendor.usb.use_ffs_mtp=0
+
+# WiFi
+vendor.wifi.dualconcurrent.supported=1
+
+# 5G Network configurations
+persist.vendor.radio.carrier_aggregation=true
+persist.vendor.radio.ca_combo_list=
+persist.vendor.radio.lte_vrte_ltd=true
+persist.vendor.radio.cs_srv_type=1
+persist.vendor.radio.flexmap_type=none
+persist.vendor.radio.data_iwlan.enabled=true
+persist.vendor.radio.data_iwlan.ims=true
+persist.vendor.radio.epc_mode_preference=4
+persist.vendor.radio.fd.off.counter=50
+persist.vendor.radio.fd.r8.counter=50
+persist.vendor.radio.fd.retention.during_voice.call=0
+persist.vendor.radio.hw_mbn_update=0
+persist.vendor.radio.jbims=1
+persist.vendor.radio.lte_vrte_ltd=1
+persist.vendor.radio.msgtunnel.start=true
+persist.vendor.radio.nitz_lons_0_=
+persist.vendor.radio.nitz_lons_1_=
+persist.vendor.radio.nitz_lons_2_=
+persist.vendor.radio.nitz_lons_3_=
+persist.vendor.radio.nitz_plmn_0_=
+persist.vendor.radio.nitz_plmn_1_=
+persist.vendor.radio.nitz_plmn_2_=
+persist.vendor.radio.nitz_plmn_3_=
+persist.vendor.radio.nitz_sons_0_=
+persist.vendor.radio.nitz_sons_1_=
+persist.vendor.radio.nitz_sons_2_=
+persist.vendor.radio.nitz_sons_3_=
+persist.vendor.radio.oem_socket=true
+persist.vendor.radio.oem_ind_to_both=0
+persist.vendor.radio.qcril_uim_vcc_feature=1
+persist.vendor.radio.redir_party_num=0
+persist.vendor.radio.report_codec=1
+persist.vendor.radio.sib16_support=1
+persist.vendor.radio.sim.delay=true
+persist.vendor.radio.slot1.enable=1
+persist.vendor.radio.slot2.enable=1
+persist.vendor.radio.sub_state_cfg=0
+persist.vendor.radio.sub_state_cfg1=0
+persist.vendor.radio.sub_state_cfg2=0
+persist.vendor.radio.sub_state_cfg3=0
+persist.vendor.radio.sw_mbn_update=0
+persist.vendor.radio.uicc_se_enabled=false
+persist.vendor.radio.voice_on_lte=1
+persist.vendor.radio.voice_on_3g=1
+persist.vendor.radio.voice_on_2g=1

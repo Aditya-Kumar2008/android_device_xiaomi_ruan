@@ -1,0 +1,8 @@
+# System_ext properties for Xiaomi Ruan (Poco Pad 5G / Redmi Pad Pro 5G)
+# These properties are specific to the system_ext partition
+
+# Telephony
+persist.sys.fflag.override.settings_network_and_internet_v2=true
+
+# WiFi
+wifi.aware.interface=wifi-aware0
