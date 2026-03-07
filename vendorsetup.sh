@@ -1,3 +1,0 @@
-add_lunch_combo lineage_ruan-user
-add_lunch_combo lineage_ruan-userdebug
-add_lunch_combo lineage_ruan-eng

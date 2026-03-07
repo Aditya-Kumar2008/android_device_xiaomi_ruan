@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2024 The LineageOS Project
+    SPDX-License-Identifier: Apache-2.0
+    Media codec performance for parrot/SM7435 - Adreno 710
+-->
+<Included>
+    <Decoders>
+        <MediaCodec name="c2.qti.avc.decoder" type="video/avc">
+            <Limit name="measured-frame-rate-320x240" range="600-1000"/>
+            <Limit name="measured-frame-rate-720x480" range="450-750"/>
+            <Limit name="measured-frame-rate-1280x720" range="300-500"/>
+            <Limit name="measured-frame-rate-1920x1080" range="200-350"/>
+        </MediaCodec>
+        <MediaCodec name="c2.qti.hevc.decoder" type="video/hevc">
+            <Limit name="measured-frame-rate-320x240" range="600-1000"/>
+            <Limit name="measured-frame-rate-720x480" range="500-800"/>
+            <Limit name="measured-frame-rate-1280x720" range="350-600"/>
+            <Limit name="measured-frame-rate-1920x1080" range="250-400"/>
+            <Limit name="measured-frame-rate-3840x2160" range="60-120"/>
+        </MediaCodec>
+    </Decoders>
+    <Encoders>
+        <MediaCodec name="c2.qti.avc.encoder" type="video/avc">
+            <Limit name="measured-frame-rate-320x240" range="400-700"/>
+            <Limit name="measured-frame-rate-720x480" range="300-500"/>
+            <Limit name="measured-frame-rate-1280x720" range="200-350"/>
+            <Limit name="measured-frame-rate-1920x1080" range="100-200"/>
+        </MediaCodec>
+    </Encoders>
+</Included>

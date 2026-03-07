@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright (C) 2024 The LineageOS Project
+    SPDX-License-Identifier: Apache-2.0
+    Audio effects configuration for POCO Pad 5G (ruan) - parrot/SM7435 platform
+-->
+<audio_effects_conf version="2.0" xmlns="http://schemas.android.com/audio/audio_effects_conf/v2_0">
+    <libraries>
+        <library name="bundle" path="libbundlewrapper.so"/>
+        <library name="reverb" path="libreverbwrapper.so"/>
+        <library name="qcbassboost" path="libqcbassboost.so"/>
+        <library name="qcvirt" path="libqcvirt.so"/>
+        <library name="qcreverb" path="libqcreverb.so"/>
+        <library name="visualizer_hw" path="libqcomvisualizer.so"/>
+        <library name="downmix" path="libdownmix.so"/>
+        <library name="loudness_enhancer" path="libloudness_enhancer.so"/>
+        <library name="haptic_generator" path="libhapticgenerator.so"/>
+        <library name="preprocessing" path="libpreprocessing_nxp.so"/>
+    </libraries>
+    <effects>
+        <effect name="bassboost" library="qcbassboost" uuid="23f999e6-fed5-4b25-a734-b3df4b0f9049"/>
+        <effect name="virtualizer" library="qcvirt" uuid="d3467faa-acc7-4d34-acaf-0002a5d5c51b"/>
+        <effect name="equalizer" library="bundle" uuid="ce772f20-847d-11df-bb17-0002a5d5c51b"/>
+        <effect name="reverb_env_aux" library="qcreverb" uuid="a8c1e5f3-293d-43cd-95ec-d5a27fdad97e"/>
+        <effect name="reverb_env_ins" library="qcreverb" uuid="b271b062-1d96-4a4c-8b24-62c913b88eae"/>
+        <effect name="reverb_pre_aux" library="qcreverb" uuid="9dc10e62-0d3d-4a4a-9304-5d82fd9fe30f"/>
+        <effect name="reverb_pre_ins" library="qcreverb" uuid="aa476040-6342-4a3c-bf43-90fb5a49d7c2"/>
+        <effect name="visualizer" library="visualizer_hw" uuid="d069d9e0-8329-11df-9168-0002a5d5c51b"/>
+        <effect name="downmix" library="downmix" uuid="93f04452-e4fe-41cc-91f9-e475b6d1d69f"/>
+        <effect name="loudness_enhancer" library="loudness_enhancer" uuid="fa415329-2034-4bea-b5dc-5b381c8d1e2c"/>
+        <effect name="haptic_generator" library="haptic_generator" uuid="97c4acd1-8b82-4f2f-832e-c2fe5d7a9931"/>
+        <effect name="acoustic_echo_canceler" library="preprocessing" uuid="bb392ec0-8d4d-11e0-a896-0002a5d5c51b"/>
+        <effect name="noise_suppressor" library="preprocessing" uuid="c06c8400-8e06-11e0-9cb6-0002a5d5c51b"/>
+    </effects>
+    <postprocess>
+        <stream type="music">
+            <apply effect="bassboost"/>
+            <apply effect="virtualizer"/>
+            <apply effect="equalizer"/>
+            <apply effect="visualizer"/>
+        </stream>
+        <stream type="ring">
+            <apply effect="loudness_enhancer"/>
+        </stream>
+    </postprocess>
+    <preprocess>
+        <stream type="voice_communication">
+            <apply effect="acoustic_echo_canceler"/>
+            <apply effect="noise_suppressor"/>
+        </stream>
+    </preprocess>
+</audio_effects_conf>

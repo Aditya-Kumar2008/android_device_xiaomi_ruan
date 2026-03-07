@@ -38,11 +38,8 @@ odm                                                     /odm                   e
 # DSP
 /dev/block/bootdevice/by-name/dsp                       /vendor/dsp            ext4    ro,nosuid,nodev,barrier=1                            wait,slotselect
 
-# Cache (if exists - may not be present on newer devices)
-/dev/block/bootdevice/by-name/cache                     /cache                 ext4    noatime,nosuid,nodev,nomblk_io_submit,errors=panic    wait,check
-
 # USB storage
 /devices/platform/soc/a600000.ssusb/a600000.dwc3/xhci-hcd.0.auto* /storage/usbotg    vfat    defaults    voldmanaged=usbotg:auto,encryptable=userdata
 
-# SD card (if supported)
+# Hybrid SIM2 / microSD slot (dedicated microSD supported on ruan_in)
 /devices/platform/soc/8804000.sdhci/mmc_host*           /storage/sdcard1       vfat    defaults    voldmanaged=sdcard1:auto,encryptable=userdata

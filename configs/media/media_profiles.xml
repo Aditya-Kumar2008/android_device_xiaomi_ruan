@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2024 The LineageOS Project
+    SPDX-License-Identifier: Apache-2.0
+    Media profiles for POCO Pad 5G (ruan)
+-->
+<MediaSettings>
+    <CamcorderProfiles cameraId="0">
+        <EncoderProfile quality="low" fileFormat="mp4" duration="30">
+            <Video codec="h264" bitRate="192000" width="176" height="144" frameRate="20"/>
+            <Audio codec="aac" bitRate="24000" sampleRate="8000" channels="1"/>
+        </EncoderProfile>
+        <EncoderProfile quality="high" fileFormat="mp4" duration="30">
+            <Video codec="h264" bitRate="8000000" width="1920" height="1080" frameRate="30"/>
+            <Audio codec="aac" bitRate="96000" sampleRate="44100" channels="2"/>
+        </EncoderProfile>
+        <EncoderProfile quality="1080p" fileFormat="mp4" duration="30">
+            <Video codec="h264" bitRate="8000000" width="1920" height="1080" frameRate="30"/>
+            <Audio codec="aac" bitRate="96000" sampleRate="44100" channels="2"/>
+        </EncoderProfile>
+        <EncoderProfile quality="720p" fileFormat="mp4" duration="30">
+            <Video codec="h264" bitRate="4000000" width="1280" height="720" frameRate="30"/>
+            <Audio codec="aac" bitRate="96000" sampleRate="44100" channels="2"/>
+        </EncoderProfile>
+        <EncoderProfile quality="480p" fileFormat="mp4" duration="30">
+            <Video codec="h264" bitRate="2000000" width="720" height="480" frameRate="30"/>
+            <Audio codec="aac" bitRate="96000" sampleRate="44100" channels="2"/>
+        </EncoderProfile>
+        <EncoderProfile quality="timelapse1080p" fileFormat="mp4" duration="30">
+            <Video codec="h264" bitRate="8000000" width="1920" height="1080" frameRate="30"/>
+            <Audio codec="aac" bitRate="96000" sampleRate="44100" channels="2"/>
+        </EncoderProfile>
+    </CamcorderProfiles>
+    <EncoderOutputFileFormat name="3gp"/>
+    <EncoderOutputFileFormat name="mp4"/>
+    <VideoEncoderCap name="h264" enabled="true"
+        minBitRate="64000" maxBitRate="100000000"
+        minFrameWidth="176" maxFrameWidth="4096"
+        minFrameHeight="144" maxFrameHeight="2160"
+        minFrameRate="5" maxFrameRate="120"/>
+    <VideoEncoderCap name="hevc" enabled="true"
+        minBitRate="64000" maxBitRate="160000000"
+        minFrameWidth="176" maxFrameWidth="4096"
+        minFrameHeight="144" maxFrameHeight="2160"
+        minFrameRate="5" maxFrameRate="120"/>
+    <AudioEncoderCap name="aac" enabled="true"
+        minBitRate="758" maxBitRate="288000"
+        minSampleRate="8000" maxSampleRate="48000"
+        minChannels="1" maxChannels="2"/>
+    <VideoDecoderCap name="wmv" enabled="false"/>
+    <AudioDecoderCap name="wma" enabled="false"/>
+</MediaSettings>

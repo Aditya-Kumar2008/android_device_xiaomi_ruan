@@ -25,11 +25,14 @@ PRODUCT_SHIPPING_API_LEVEL := 33
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
-# Build fingerprint - Updated for latest HyperOS
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="ruan_global-user 15 AP3A.240905.015.A2 OS2.0.208.0.VFSMIXM release-keys"
+# Device characteristics - single definition here (removed from device.mk)
+PRODUCT_CHARACTERISTICS := tablet,telephony
 
-BUILD_FINGERPRINT := POCO/ruan_global/ruan:15/AP3A.240905.015.A2/OS2.0.208.0.VFSMIXM:user/release-keys
+# Build fingerprint - India (IN) variant HyperOS
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    PRIVATE_BUILD_DESC="ruan_in-user 15 AP3A.240905.015.A2 OS2.0.208.0.VFSINXM release-keys"
+
+BUILD_FINGERPRINT := POCO/ruan_in/ruan:15/AP3A.240905.015.A2/OS2.0.208.0.VFSINXM:user/release-keys
 
 # Device characteristics
 PRODUCT_CHARACTERISTICS := tablet,telephony

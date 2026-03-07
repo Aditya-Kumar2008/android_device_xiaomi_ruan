@@ -67,8 +67,6 @@ PRODUCT_PACKAGES += \
     libsndcardparser \
     libvolumelistener
 
-AUDIO_HAL_DIR := hardware/qcom-caf/sm8450/audio
-
 # Audio configs
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/configs/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_parrot/audio_effects.xml \
@@ -204,10 +202,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/configs/keylayout/gpio-keys.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/gpio-keys.kl
 
-# Lineage Health
-PRODUCT_PACKAGES += \
-    vendor.lineage.health-service.default
-
 # Media
 PRODUCT_PACKAGES += \
     libmm-omxcore \
@@ -219,15 +213,24 @@ PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/configs/media/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
     $(DEVICE_PATH)/configs/media/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles.xml
 
-# NFC - May be present on some variants
+# Lineage Health
 PRODUCT_PACKAGES += \
-    android.hardware.nfc@1.2-service \
-    com.android.nfc_extras \
-    NfcNci \
-    Tag
+    vendor.lineage.health-service.default
+
+# Power
+PRODUCT_PACKAGES += \
+    android.hardware.power-service.lineage-libperfmgr \
+    libqti-perfd-client
 
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/configs/nfc/libnfc-hal-st.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-hal-st.conf
+    $(DEVICE_PATH)/configs/power/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
+
+# Hotword enrollment
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/configs/hotword/hotword-hiddenapi-package-allowlist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/hotword-hiddenapi-package-allowlist.xml \
+    $(DEVICE_PATH)/configs/hotword/privapp-permissions-hotword.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-hotword.xml
+
+# Note: POCO Pad 5G does NOT have NFC hardware - NFC removed intentionally
 
 # Overlays
 PRODUCT_ENFORCE_RRO_TARGETS := *
@@ -244,18 +247,6 @@ PRODUCT_PACKAGES += \
 
 # Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
-
-# Perf
-PRODUCT_PACKAGES += \
-    vendor.qti.hardware.perf@2.3.vendor
-
-# Power
-PRODUCT_PACKAGES += \
-    android.hardware.power-service.lineage-libperfmgr \
-    libqti-perfd-client
-
-PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/configs/power/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
 
 # QMI
 PRODUCT_PACKAGES += \
@@ -369,13 +360,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_BOOT_JARS += \
     WfdCommon
 
-# Tablet-specific configurations
-PRODUCT_CHARACTERISTICS := tablet
-PRODUCT_AAPT_CONFIG := normal large xlarge
-PRODUCT_AAPT_PREF_CONFIG := xhdpi
-
 # Boot animation
 TARGET_BOOT_ANIMATION_RES := 1600
+
+# Tablet-specific resource configs
+PRODUCT_AAPT_CONFIG := normal large xlarge
+PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 # Inherit the proprietary files
 $(call inherit-product, vendor/xiaomi/ruan/ruan-vendor.mk)

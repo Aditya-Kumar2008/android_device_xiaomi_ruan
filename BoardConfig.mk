@@ -41,14 +41,14 @@ TARGET_ARCH_VARIANT := armv8-a-branchprot
 TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 :=
 TARGET_CPU_VARIANT := generic
-TARGET_CPU_VARIANT_RUNTIME := kryo300
+TARGET_CPU_VARIANT_RUNTIME := cortex-a78
 
 TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv8-2a
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := generic
-TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a75
+TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a55
 
 # Audio
 AUDIO_FEATURE_ENABLED_DLKM := true
@@ -84,7 +84,7 @@ TARGET_SCREEN_HEIGHT := 1600
 TARGET_SCREEN_WIDTH := 2560
 
 # Filesystem
-TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/configs/config.fs
+TARGET_FS_CONFIG_GEN += $(DEVICE_PATH)/configs/config.fs
 
 # Hardware
 BOARD_USES_QCOM_HARDWARE := true
@@ -114,6 +114,8 @@ BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 TARGET_KERNEL_ADDITIONAL_FLAGS := TARGET_PRODUCT=ruan
 
 # Prebuilt kernel option (for initial bringup)
+# Xiaomi has NOT released kernel source for SM7435. Prebuilt required.
+# Extract boot.img, vendor_boot.img, dtbo.img from stock ROM and place in prebuilt/
 TARGET_FORCE_PREBUILT_KERNEL := true
 
 BOARD_PREBUILT_BOOTIMAGE := $(DEVICE_PATH)/prebuilt/boot.img
@@ -220,9 +222,6 @@ include hardware/xiaomi/sepolicy/SEPolicy.mk
 SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
 SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/public
 BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
-
-# Verified Boot
-BOARD_AVB_ENABLE := true
 
 # WiFi
 BOARD_WLAN_DEVICE := qcwcn

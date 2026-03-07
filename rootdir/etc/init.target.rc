@@ -1,0 +1,86 @@
+# Copyright (C) 2024 The LineageOS Project
+# SPDX-License-Identifier: Apache-2.0
+
+# Poco Pad 5G (ruan) specific init configuration
+
+on early-init
+    setprop ro.build.characteristics tablet
+    setprop ro.sf.lcd_density 320
+
+on init
+    mkdir /mnt/vendor/persist 0751 root root
+    mkdir /vendor/firmware_mnt 0771 system system
+    mkdir /vendor/bt_firmware 0771 system system
+    mkdir /vendor/dsp 0771 system system
+    mkdir /metadata 0771 root root
+    mkdir /cache 0770 system cache
+
+    symlink /vendor/firmware_mnt /firmware
+    symlink /vendor/bt_firmware /bt_firmware
+    symlink /vendor/dsp /dsp
+
+on fs
+    wait /dev/block/by-name/metadata
+    mount ext4 /dev/block/by-name/metadata /metadata noatime,nosuid,nodev,discard
+    mount ext4 /dev/block/by-name/persist /mnt/vendor/persist noatime,nosuid,nodev,barrier=1
+    mount vfat /dev/block/by-name/modem /vendor/firmware_mnt ro,shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337,context=u:object_r:firmware_file:s0
+    mount vfat /dev/block/by-name/bluetooth /vendor/bt_firmware ro,shortname=lower,uid=1002,gid=3002,dmask=227,fmask=337,context=u:object_r:bt_firmware_file:s0
+    mount ext4 /dev/block/by-name/dsp /vendor/dsp ro,nosuid,nodev,barrier=1
+
+on post-fs-data
+    mkdir /data/vendor/wifi 0770 wifi wifi
+    mkdir /data/vendor/wifi/wpa 0770 wifi wifi
+    mkdir /data/vendor/sensors 0775 system system
+    mkdir /data/vendor/thermal 0771 root system
+    mkdir /data/vendor/time 0770 system system
+    mkdir /data/vendor/nfc 0770 nfc nfc
+    mkdir /data/vendor/gatekeeper 0770 system system
+    mkdir /data/vendor/keymaster 0770 system system
+    mkdir /data/vendor/keystore 0770 system system
+    mkdir /data/vendor/camera 0770 camera camera
+    mkdir /data/vendor/media 0770 media media
+    mkdir /data/vendor/audio 0770 audio audio
+    mkdir /data/vendor/gps 0770 system system
+    mkdir /data/vendor/radio 0770 system radio
+    mkdir /data/vendor/ims 0770 system radio
+    mkdir /data/vendor/location 0770 system system
+    mkdir /data/vendor/misc 0770 system system
+
+on boot
+    setprop ro.build.characteristics tablet
+    setprop ro.sf.lcd_density 320
+    setprop ro.hardware.keystore parrot
+    setprop ro.hardware.gatekeeper parrot
+    setprop ro.hardware.keymaster parrot
+
+on property:sys.boot_completed=1
+    write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 4
+    write /sys/class/kgsl/kgsl-3d0/force_clk_on 0
+    write /sys/class/kgsl/kgsl-3d0/force_bus_on 0
+    write /sys/class/kgsl/kgsl-3d0/force_rail_on 0
+    write /sys/class/kgsl/kgsl-3d0/force_no_nap 0
+    write /sys/class/kgsl/kgsl-3d0/idle_timer 80
+
+service vendor.adsprpcd /vendor/bin/adsprpcd
+    class core
+    user media
+    group media
+    disabled
+
+service vendor.cdsprpcd /vendor/bin/cdsprpcd
+    class core
+    user system
+    group system
+    disabled
+
+service vendor.ipacm /vendor/bin/ipacm
+    class main
+    user system
+    group system inet net_admin
+    disabled
+
+service vendor.qti.hardware.perf@2.3-service /vendor/bin/hw/vendor.qti.hardware.perf@2.3-service
+    class core
+    user root
+    group root
+    disabled

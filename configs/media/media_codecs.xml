@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2024 The LineageOS Project
+    SPDX-License-Identifier: Apache-2.0
+    Media codecs for POCO Pad 5G (ruan) - parrot/SM7435 platform
+-->
+<Included>
+    <Decoders>
+        <!-- Video Decoders -->
+        <MediaCodec name="c2.qti.avc.decoder" type="video/avc" update="true">
+            <Limit name="size" min="96x96" max="4096x2160"/>
+            <Limit name="alignment" value="2x2"/>
+            <Limit name="block-size" value="16x16"/>
+            <Limit name="blocks-per-second" min="1" max="1966080"/>
+            <Limit name="bitrate" range="1-100000000"/>
+            <Limit name="frame-rate" range="1-960"/>
+            <Feature name="adaptive-playback"/>
+        </MediaCodec>
+        <MediaCodec name="c2.qti.hevc.decoder" type="video/hevc" update="true">
+            <Limit name="size" min="96x96" max="8192x4320"/>
+            <Limit name="alignment" value="2x2"/>
+            <Limit name="block-size" value="16x16"/>
+            <Limit name="blocks-per-second" min="1" max="3916800"/>
+            <Limit name="bitrate" range="1-160000000"/>
+            <Limit name="frame-rate" range="1-960"/>
+            <Feature name="adaptive-playback"/>
+        </MediaCodec>
+        <MediaCodec name="c2.qti.vp9.decoder" type="video/x-vnd.on2.vp9" update="true">
+            <Limit name="size" min="96x96" max="8192x4320"/>
+            <Limit name="alignment" value="2x2"/>
+            <Limit name="block-size" value="16x16"/>
+            <Limit name="blocks-per-second" min="1" max="3916800"/>
+            <Limit name="bitrate" range="1-120000000"/>
+            <Limit name="frame-rate" range="1-960"/>
+            <Feature name="adaptive-playback"/>
+        </MediaCodec>
+        <MediaCodec name="c2.qti.av1.decoder" type="video/av01" update="true">
+            <Limit name="size" min="96x96" max="8192x4320"/>
+            <Limit name="alignment" value="2x2"/>
+            <Limit name="block-size" value="16x16"/>
+            <Limit name="blocks-per-second" min="1" max="3916800"/>
+            <Limit name="bitrate" range="1-120000000"/>
+            <Limit name="frame-rate" range="1-960"/>
+            <Feature name="adaptive-playback"/>
+        </MediaCodec>
+        <!-- Audio Decoders -->
+        <MediaCodec name="c2.android.mp3.decoder" type="audio/mpeg"/>
+        <MediaCodec name="c2.android.aac.decoder" type="audio/mp4a-latm"/>
+        <MediaCodec name="c2.android.flac.decoder" type="audio/flac"/>
+        <MediaCodec name="c2.android.opus.decoder" type="audio/opus"/>
+    </Decoders>
+    <Encoders>
+        <!-- Video Encoders -->
+        <MediaCodec name="c2.qti.avc.encoder" type="video/avc" update="true">
+            <Limit name="size" min="96x96" max="4096x2160"/>
+            <Limit name="alignment" value="2x2"/>
+            <Limit name="block-size" value="16x16"/>
+            <Limit name="blocks-per-second" min="1" max="1966080"/>
+            <Limit name="bitrate" range="1-100000000"/>
+            <Limit name="frame-rate" range="1-120"/>
+        </MediaCodec>
+        <MediaCodec name="c2.qti.hevc.encoder" type="video/hevc" update="true">
+            <Limit name="size" min="96x96" max="4096x2160"/>
+            <Limit name="alignment" value="2x2"/>
+            <Limit name="block-size" value="16x16"/>
+            <Limit name="blocks-per-second" min="1" max="1966080"/>
+            <Limit name="bitrate" range="1-100000000"/>
+            <Limit name="frame-rate" range="1-120"/>
+        </MediaCodec>
+        <!-- Audio Encoders -->
+        <MediaCodec name="c2.android.aac.encoder" type="audio/mp4a-latm"/>
+        <MediaCodec name="c2.android.opus.encoder" type="audio/opus"/>
+    </Encoders>
+</Included>

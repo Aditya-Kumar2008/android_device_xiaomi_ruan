@@ -1,0 +1,70 @@
+{
+    "AdpfConfig": [
+        {
+            "Name": "DEFAULT",
+            "PID_On": false,
+            "PID_Po": 0.0,
+            "PID_Pu": 0.0,
+            "PID_Ii": 0.0,
+            "PID_Iu": 0.0,
+            "SamplingWindowP": 1,
+            "SamplingWindowI": 0,
+            "SamplingWindowD": 0,
+            "UclampMinInit": 0,
+            "UclampMinHighLimit": 512,
+            "UclampMinLowLimit": 0,
+            "ErrHighThreshold": 0.0,
+            "ErrLowThreshold": 0.0,
+            "TargetTimeFactor": 1.0,
+            "StaleTimeFactor": 10.0
+        },
+        {
+            "Name": "GAME",
+            "PID_On": true,
+            "PID_Po": 0.0,
+            "PID_Pu": 0.0,
+            "PID_Ii": 0.0,
+            "PID_Iu": 0.0,
+            "SamplingWindowP": 1,
+            "SamplingWindowI": 0,
+            "SamplingWindowD": 0,
+            "UclampMinInit": 100,
+            "UclampMinHighLimit": 384,
+            "UclampMinLowLimit": 0,
+            "ErrHighThreshold": 0.0,
+            "ErrLowThreshold": 0.0,
+            "TargetTimeFactor": 1.0,
+            "StaleTimeFactor": 10.0
+        }
+    ],
+    "Profiles": [
+        {
+            "Id": 0,
+            "Name": "BATTERY_SAVER",
+            "SchedBoost": 0,
+            "Cluster0_Freq": 691200,
+            "Cluster1_Freq": 806400
+        },
+        {
+            "Id": 1,
+            "Name": "BALANCED",
+            "SchedBoost": 0,
+            "Cluster0_Freq": 0,
+            "Cluster1_Freq": 0
+        },
+        {
+            "Id": 2,
+            "Name": "PERFORMANCE",
+            "SchedBoost": 1,
+            "Cluster0_Freq": 1190400,
+            "Cluster1_Freq": 1843200
+        },
+        {
+            "Id": 3,
+            "Name": "GAMING",
+            "SchedBoost": 1,
+            "Cluster0_Freq": 1190400,
+            "Cluster1_Freq": 2035200
+        }
+    ]
+}
