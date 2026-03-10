@@ -1,26 +1,15 @@
-# Product properties for Xiaomi Ruan (Poco Pad 5G / Redmi Pad Pro 5G)
-
-# Audio
-ro.audio.monitor_rotation=true
-ro.audio.monitor_window_rotation=true
-
 # Bluetooth
-ro.bluetooth.a2dp_offload.supported=true
-ro.bluetooth.emb_wp_mode=false
-ro.bluetooth.wipower=false
-
-# Camera
-ro.camera.notify_nfc=1
-
-# Display
-ro.display.type=LCD
-ro.display.refresh_rate=120
-
-# DRM
-ro.netflix.bsp_rev=Q7435-37043-1
-
-# SoC
-ro.product.board=parrot
-
-# Tablet-specific
-ro.build.characteristics=tablet
+bluetooth.device_id.vendor_id=0x001D
+bluetooth.profile.a2dp.source.enabled=true
+bluetooth.profile.avrcp.controller.enabled=true
+bluetooth.profile.avrcp.target.enabled=true
+bluetooth.profile.bas.client.enabled=true
+bluetooth.profile.gatt.enabled=true
+bluetooth.profile.hfp.ag.enabled=true
+bluetooth.profile.hid.device.enabled=false
+bluetooth.profile.hid.host.enabled=true
+bluetooth.profile.map.server.enabled=true
+bluetooth.profile.opp.enabled=true
+bluetooth.profile.pan.nap.enabled=true
+bluetooth.profile.pan.panu.enabled=true
+bluetooth.profile.pbap.server.enabled=true

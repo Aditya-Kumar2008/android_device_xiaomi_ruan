@@ -1,0 +1,20 @@
+// SPDX-FileCopyrightText: The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+runtime_resource_overlay {
+    name: "SettingsProviderOverlayRuanRedmi",
+    manifest: "AndroidManifest-redmi.xml",
+    resource_dirs: ["res-redmi"],
+    sdk_version: "current",
+}
+runtime_resource_overlay {
+    name: "SettingsProviderOverlayRuanRedmiCn",
+    manifest: "AndroidManifest-redmiCn.xml",
+    resource_dirs: ["res-redmiCn"],
+    sdk_version: "current",
+}
+runtime_resource_overlay {
+    name: "SettingsProviderOverlayRuanPoco",
+    manifest: "AndroidManifest-poco.xml",
+    resource_dirs: ["res-poco"],
+    sdk_version: "current",
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<!-- ruan has no eSIM on any SKU (CN/GL/IN all use physical nano-SIM only) -->
+<permissions>
+    <unavailable-feature name="android.hardware.telephony.euicc" />
+</permissions>

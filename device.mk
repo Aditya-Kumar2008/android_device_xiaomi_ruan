@@ -1,65 +1,67 @@
 #
 # Copyright (C) 2024 The LineageOS Project
-# Copyright (C) 2024 The Android Open Source Project
 #
 # SPDX-License-Identifier: Apache-2.0
 #
 
-# Enable updating of APEXes
-$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+# Enable virtual A/B OTA
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk)
 
-# Include GSI keys
-$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
+# Enable project quotas and casefolding for emulated storage without sdcardfs
+$(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
+
+# Setup dalvik vm configs
+$(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
+
+# Qualcomm
+$(call inherit-product, hardware/qcom-caf/common/common.mk)
 
 # A/B
-$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
-
-# A/B OTA post-install
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
     POSTINSTALL_PATH_system=system/bin/otapreopt_script \
     FILESYSTEM_TYPE_system=ext4 \
     POSTINSTALL_OPTIONAL_system=true
 
-# Boot control HAL
+AB_OTA_POSTINSTALL_CONFIG += \
+    RUN_POSTINSTALL_vendor=true \
+    POSTINSTALL_PATH_vendor=bin/checkpoint_gc \
+    FILESYSTEM_TYPE_vendor=erofs \
+    POSTINSTALL_OPTIONAL_vendor=true
+
 PRODUCT_PACKAGES += \
-    android.hardware.boot@1.2-impl-qti \
-    android.hardware.boot@1.2-impl-qti.recovery \
-    android.hardware.boot@1.2-service
+    checkpoint_gc \
+    otapreopt_script
 
-PRODUCT_PACKAGES_DEBUG += \
-    bootctl
+# API
+BOARD_SHIPPING_API_LEVEL := 31
+PRODUCT_SHIPPING_API_LEVEL := $(BOARD_SHIPPING_API_LEVEL)
 
-# A/B OTA packages
-PRODUCT_PACKAGES += \
-    otapreopt_script \
-    cppreopts.sh \
-    update_engine \
-    update_verifier \
-    update_engine_sideload
+# Audio
+$(call soong_config_set_bool, android_hardware_audio, run_64bit, true)
+$(call soong_config_set, android_hardware_audio, skip_speaker_layout_channel_mask_field, true)
 
-# ANT+
-PRODUCT_PACKAGES += \
-    com.dsi.ant@1.0.vendor
-
-# Audio - Tablet with quad speakers
 PRODUCT_PACKAGES += \
     android.hardware.audio@7.0-impl \
     android.hardware.audio.effect@7.0-impl \
-    android.hardware.audio.service \
-    android.hardware.bluetooth.audio-impl \
+    android.hardware.audio.service
+
+PRODUCT_PACKAGES += \
     android.hardware.soundtrigger@2.3-impl
 
 PRODUCT_PACKAGES += \
-    audio.bluetooth.default \
-    audio.primary.parrot \
+    audioadsprpcd \
     audio.r_submix.default \
     audio.usb.default
 
 PRODUCT_PACKAGES += \
+    lib_bt_aptx \
+    lib_bt_ble \
+    lib_bt_bundle \
     libagm_compress_plugin \
     libagm_mixer_plugin \
     libagm_pcm_plugin \
+    libagmclient \
     libbatterylistener \
     libqcompostprocbundle \
     libqcomvisualizer \
@@ -67,155 +69,203 @@ PRODUCT_PACKAGES += \
     libsndcardparser \
     libvolumelistener
 
-# Audio configs
+AUDIO_HAL_DIR := hardware/qcom-caf/sm8450/audio/primary-hal
+
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/configs/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_parrot/audio_effects.xml \
-    $(DEVICE_PATH)/configs/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
-    $(DEVICE_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_parrot/audio_policy_configuration.xml \
-    $(DEVICE_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml
+    frameworks/native/data/etc/android.hardware.audio.low_latency.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.low_latency.xml \
+    frameworks/native/data/etc/android.hardware.audio.pro.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.pro.xml \
+    frameworks/native/data/etc/android.software.midi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.midi.xml
+
+PRODUCT_COPY_FILES += \
+    $(AUDIO_HAL_DIR)/configs/parrot/microphone_characteristics.xml:$(TARGET_COPY_OUT_VENDOR)/etc/microphone_characteristics.xml \
+    $(LOCAL_PATH)/configs/audio/backend_conf.xml:$(TARGET_COPY_OUT_VENDOR)/etc/backend_conf.xml \
+    $(LOCAL_PATH)/configs/audio/backend_conf_fs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/backend_conf_fs.xml \
+    $(LOCAL_PATH)/configs/audio/card-defs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/card-defs.xml \
+    $(LOCAL_PATH)/configs/audio/kvh2xml.xml:$(TARGET_COPY_OUT_VENDOR)/etc/kvh2xml.xml \
+    $(LOCAL_PATH)/configs/audio/usecaseKvManager.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usecaseKvManager.xml
+
+PRODUCT_COPY_FILES += \
+    $(AUDIO_HAL_DIR)/configs/parrot/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_parrot/audio_effects.conf \
+    $(LOCAL_PATH)/configs/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_parrot/audio_effects.xml \
+    $(LOCAL_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_parrot/audio_policy_configuration.xml \
+    $(LOCAL_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_parrot_qssi/audio_policy_configuration.xml \
+    $(LOCAL_PATH)/configs/audio/mixer_paths_overlay_dynamic.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_parrot/foursemi/mixer_paths_overlay_dynamic.xml \
+    $(LOCAL_PATH)/configs/audio/mixer_paths_overlay_dynamic.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_parrot/mixer_paths_overlay_dynamic.xml \
+    $(LOCAL_PATH)/configs/audio/mixer_paths_overlay_static.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_parrot/mixer_paths_overlay_static.xml \
+    $(LOCAL_PATH)/configs/audio/mixer_paths_overlay_static_foursemi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_parrot/foursemi/mixer_paths_overlay_static.xml \
+    $(LOCAL_PATH)/configs/audio/mixer_paths_parrot_qrd.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_parrot/foursemi/mixer_paths_parrot_qrd.xml \
+    $(LOCAL_PATH)/configs/audio/mixer_paths_parrot_qrd.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_parrot/mixer_paths_parrot_qrd.xml \
+    $(LOCAL_PATH)/configs/audio/resourcemanager_parrot_qrd.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_parrot/resourcemanager_parrot_qrd.xml \
+    $(LOCAL_PATH)/configs/audio/resourcemanager_parrot_qrd_foursemi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_parrot/foursemi/resourcemanager_parrot_qrd.xml
 
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
-    frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml
+    frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
+    frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml
 
 # Bluetooth
 PRODUCT_PACKAGES += \
-    android.hardware.bluetooth@1.1.vendor \
-    vendor.qti.hardware.bluetooth_audio@2.1.vendor \
-    vendor.qti.hardware.btconfigstore@1.0.vendor \
-    vendor.qti.hardware.btconfigstore@2.0.vendor
+    audio.bluetooth.default \
+    android.hardware.bluetooth.audio-impl
 
-# Camera - Single 8MP for tablet
-PRODUCT_PACKAGES += \
-    android.hardware.camera.provider@2.7.vendor \
-    camera.device@1.0-impl \
-    libcamera2ndk_vendor \
-    vendor.qti.hardware.camera.device@1.0.vendor \
-    vendor.qti.hardware.camera.postproc@1.0.vendor
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.bluetooth.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth.xml \
+    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml
 
-# Charger
+# Boot control
 PRODUCT_PACKAGES += \
-    libsuspend
+    android.hardware.boot-service.qti \
+    android.hardware.boot-service.qti.recovery
 
-# Consumer IR
+# Camera
 PRODUCT_PACKAGES += \
-    android.hardware.ir@1.0-impl \
-    android.hardware.ir@1.0-service
+    libcamera2ndk_vendor
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.flash-autofocus.xml \
+    frameworks/native/data/etc/android.hardware.camera.front.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.front.xml \
+    frameworks/native/data/etc/android.hardware.camera.full.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.full.xml \
+    frameworks/native/data/etc/android.hardware.camera.raw.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.raw.xml
 
 # Display
 PRODUCT_PACKAGES += \
     android.hardware.graphics.mapper@4.0-impl-qti-display \
-    init.qti.display_boot.sh \
-    libdisplayconfig.qti \
-    libdisplayconfig.system.qti \
-    libmemutils \
-    libqdMetaData \
-    libqdMetaData.system \
-    libsdmcore \
-    libsdmutils \
-    libtinyxml \
-    vendor.display.config@1.0 \
-    vendor.display.config@1.15.vendor \
-    vendor.display.config@2.0 \
     vendor.qti.hardware.display.allocator-service \
-    vendor.qti.hardware.display.composer-service \
-    vendor.qti.hardware.display.config \
-    vendor.qti.hardware.display.config-V2 \
-    vendor.qti.hardware.display.config-V2.vendor \
-    vendor.qti.hardware.display.config-V3 \
-    vendor.qti.hardware.display.config-V3.vendor \
-    vendor.qti.hardware.display.config-V4 \
-    vendor.qti.hardware.display.config-V4.vendor \
-    vendor.qti.hardware.display.config-V5 \
-    vendor.qti.hardware.display.config-V5.vendor \
-    vendor.qti.hardware.display.config-V6 \
-    vendor.qti.hardware.display.config-V6.vendor \
-    vendor.qti.hardware.display.demura-service \
-    vendor.qti.hardware.display.mapper@1.0.vendor \
-    vendor.qti.hardware.display.mapper@1.1.vendor \
-    vendor.qti.hardware.display.mapper@2.0.vendor \
-    vendor.qti.hardware.display.mapper@3.0.vendor \
-    vendor.qti.hardware.display.mapper@4.0.vendor
+    vendor.qti.hardware.display.composer-service
+
+PRODUCT_PACKAGES += \
+    init.qti.display_boot.rc \
+    init.qti.display_boot.sh
+
+PRODUCT_COPY_FILES += \
+    hardware/qcom-caf/sm8450/display/config/snapdragon_color_libs_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/snapdragon_color_libs_config.xml
 
 # DRM
 PRODUCT_PACKAGES += \
-    android.hardware.drm@1.4.vendor \
     android.hardware.drm-service.clearkey
+
+# Dynamic partitions
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # Fastbootd
 PRODUCT_PACKAGES += \
     fastbootd
 
-# GPS
-PRODUCT_PACKAGES += \
-    android.hardware.gnss@2.1.vendor \
-    android.hardware.power@1.2.vendor
+# Graphics
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml \
+    frameworks/native/data/etc/android.software.opengles.deqp.level-2021-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.opengles.deqp.level.xml
 
-# Gatekeeper
-PRODUCT_PACKAGES += \
-    android.hardware.gatekeeper@1.0.vendor
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.vulkan.compute-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.compute-0.xml \
+    frameworks/native/data/etc/android.hardware.vulkan.level-1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.level-1.xml \
+    frameworks/native/data/etc/android.hardware.vulkan.version-1_1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version-1_1.xml \
+    frameworks/native/data/etc/android.software.vulkan.deqp.level-2021-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml
+
+# GPS
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.location.gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.location.gps.xml
 
 # Health
 PRODUCT_PACKAGES += \
-    android.hardware.health@2.1.vendor \
     android.hardware.health-service.qti \
     android.hardware.health-service.qti_recovery
 
-# Hotword enrollment
-PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/configs/hotword/hotword-hiddenapi-package-allowlist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/hotword-hiddenapi-package-allowlist.xml \
-    $(DEVICE_PATH)/configs/hotword/privapp-permissions-hotword.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-hotword.xml
+# IFAA
+PRODUCT_PACKAGES += \
+    IFAAService
 
 # Init
 PRODUCT_PACKAGES += \
+    charger_fw_fstab.qti \
     fstab.qcom \
-    fstab.qcom.vendor_ramdisk \
-    init.class_main.sh \
-    init.qcom.early_boot.sh \
-    init.qcom.post_boot.sh \
+    init.ruan.rc \
     init.qcom.rc \
-    init.qcom.recovery.rc \
-    init.qcom.sh \
-    init.qti.dcvs.sh \
-    init.qti.kernel.rc \
-    init.qti.media.sh \
+    init.recovery.qcom.rc \
     init.target.rc \
-    init.xiaomi.rc \
+    ueventd-odm.rc \
     ueventd.qcom.rc
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.qcom
 
 # IPACM
 PRODUCT_PACKAGES += \
     ipacm \
-    IPACM_cfg.xml
+    IPACM_cfg.xml \
+    IPACM_Filter_cfg.xml
 
-# IR
+# IR blaster
 PRODUCT_PACKAGES += \
-    android.hardware.ir@1.0-impl \
-    android.hardware.ir@1.0-service
+    android.hardware.ir-service.lineage
 
-# Keymaster
-PRODUCT_PACKAGES += \
-    android.hardware.keymaster@4.1.vendor
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.consumerir.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.consumerir.xml
 
 # Keylayout
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/configs/keylayout/gpio-keys.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/gpio-keys.kl
+    $(LOCAL_PATH)/configs/keylayout/parrot-qrd-snd-card_Button_Jack.kl:$(TARGET_COPY_OUT_ODM)/usr/keylayout/parrot-qrd-snd-card_Button_Jack.kl
 
-# Media
-PRODUCT_PACKAGES += \
-    libmm-omxcore \
-    libOmxCore \
-    libstagefrighthw
-
+# Keymint
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/configs/media/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
-    $(DEVICE_PATH)/configs/media/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
-    $(DEVICE_PATH)/configs/media/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles.xml
+    frameworks/native/data/etc/android.hardware.keystore.app_attest_key.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.keystore.app_attest_key.xml
 
 # Lineage Health
 PRODUCT_PACKAGES += \
     vendor.lineage.health-service.default
+
+$(call soong_config_set,lineage_health,charging_control_supports_bypass,false)
+
+# Media
+PRODUCT_COPY_FILES += \
+    $(AUDIO_HAL_DIR)/configs/common/codec2/service/1.0/c2audio.vendor.base-arm.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/c2audio.vendor.base-arm.policy \
+    $(AUDIO_HAL_DIR)/configs/common/codec2/service/1.0/c2audio.vendor.base-arm64.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/c2audio.vendor.base-arm64.policy \
+    $(AUDIO_HAL_DIR)/configs/common/codec2/service/1.0/c2audio.vendor.ext-arm.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/c2audio.vendor.ext-arm.policy \
+    $(AUDIO_HAL_DIR)/configs/common/codec2/service/1.0/c2audio.vendor.ext-arm64.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/c2audio.vendor.ext-arm64.policy
+
+PRODUCT_COPY_FILES += \
+    $(AUDIO_HAL_DIR)/configs/common/codec2/media_codecs_c2_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_c2_audio.xml
+
+# Memtrack
+PRODUCT_PACKAGES += \
+    vendor.qti.hardware.memtrack-service
+
+# Network
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.software.ipsec_tunnels.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.ipsec_tunnels.xml
+
+# NFC — ruan has NO NFC hardware on any SKU
+# Not including NFC HAL or permissions
+
+# Overlay
+PRODUCT_PACKAGES += \
+    ApertureOverlayRuan \
+    CarrierConfigOverlayRuan \
+    FrameworkOverlayRuan \
+    LineageSDKOverlayRuan \
+    LineageSettingsOverlayRuan \
+    LineageSystemUIOverlayRuan \
+    SettingsOverlayRuan \
+    SettingsProviderOverlayRuanRedmi \
+    SettingsProviderOverlayRuanRedmiCn \
+    SettingsProviderOverlayRuanPoco \
+    SystemUIOverlayRuan \
+    TelephonyOverlayRuan \
+    WifiOverlayRuan \
+    WifiOverlayRuanRedmi \
+    WifiOverlayRuanRedmiCn \
+    WifiOverlayRuanPoco
+
+PRODUCT_PACKAGES += \
+    NcmTetheringOverlay
+
+# Partitions
+PRODUCT_PACKAGES += \
+    vendor_bt_firmware_mountpoint \
+    vendor_dsp_mountpoint \
+    vendor_firmware_mnt_mountpoint \
+    vendor_vm-system_mountpoint
 
 # Power
 PRODUCT_PACKAGES += \
@@ -223,59 +273,50 @@ PRODUCT_PACKAGES += \
     libqti-perfd-client
 
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/configs/power/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
+    $(LOCAL_PATH)/configs/power/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
 
-# Hotword enrollment
-PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/configs/hotword/hotword-hiddenapi-package-allowlist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/hotword-hiddenapi-package-allowlist.xml \
-    $(DEVICE_PATH)/configs/hotword/privapp-permissions-hotword.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-hotword.xml
-
-# Note: POCO Pad 5G does NOT have NFC hardware - NFC removed intentionally
-
-# Overlays
-PRODUCT_ENFORCE_RRO_TARGETS := *
+# Properties
 PRODUCT_PACKAGES += \
-    CarrierConfigResCommon \
-    FrameworksResCommon \
-    FrameworksResTarget \
-    SettingsResCommon \
-    SettingsProviderResCommon \
-    SystemUIResCommon \
-    TelephonyResCommon \
-    WifiResCommon \
-    WifiResTarget
-
-# Partitions
-PRODUCT_USE_DYNAMIC_PARTITIONS := true
+    ruan_sku_properties
 
 # QMI
 PRODUCT_PACKAGES += \
-    libjson \
-    libqti_vndfwk_detect \
-    libqti_vndfwk_detect.vendor \
-    libvndfwk_detect_jni.qti \
-    libvndfwk_detect_jni.qti.vendor
+    libvndfwk_detect_jni.qti_vendor
 
-# QTI service tracker
+# QCRIL database — ruan has 5G telephony, needs qcril db
 PRODUCT_PACKAGES += \
-    vendor.qti.hardware.servicetracker@1.2.vendor
+    qcrilNrDb_vendor
 
-# Recovery
+# Sensors
 PRODUCT_PACKAGES += \
-    init.recovery.qcom.rc
+    android.hardware.sensors-service.xiaomi-multihal \
+    sensors.xiaomi.v2
 
-# RIL - 5G specific packages
 PRODUCT_PACKAGES += \
-    android.hardware.radio@1.6.vendor \
-    android.hardware.radio.config@1.3.vendor \
-    android.hardware.radio.deprecated@1.0.vendor \
-    android.hardware.secure_element@1.2.vendor \
-    librmnetctl \
-    libsqlite.vendor \
-    libsysutils.vendor \
-    libxml2
+    sensor-notifier
 
-# Telephony - 5G
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.sensor.compass.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.compass.xml \
+    frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.gyroscope.xml \
+    frameworks/native/data/etc/android.hardware.sensor.light.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.light.xml \
+    frameworks/native/data/etc/android.hardware.sensor.proximity.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.proximity.xml \
+    frameworks/native/data/etc/android.hardware.sensor.stepcounter.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.stepcounter.xml \
+    frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.stepdetector.xml
+
+# Soong namespaces
+PRODUCT_SOONG_NAMESPACES += \
+    $(LOCAL_PATH) \
+    hardware/google/interfaces \
+    hardware/google/pixel \
+    hardware/lineage/interfaces/power-libperfmgr \
+    hardware/qcom-caf/common/libqti-perfd-client \
+    hardware/qcom-caf/wlan \
+    hardware/xiaomi
+
+# Telephony — ruan has 5G dual SIM
 PRODUCT_PACKAGES += \
     extphonelib \
     extphonelib-product \
@@ -291,81 +332,150 @@ PRODUCT_PACKAGES += \
     qti-telephony-utils-prd \
     qti_telephony_utils.xml \
     qti_telephony_utils_prd.xml \
-    telephony-ext
+    telephony-ext \
+    xiaomi-telephony-stub
 
 PRODUCT_BOOT_JARS += \
-    telephony-ext
+    telephony-ext \
+    xiaomi-telephony-stub
 
-# Sensors
-PRODUCT_PACKAGES += \
-    android.frameworks.sensorservice@1.0 \
-    android.frameworks.sensorservice@1.0.vendor \
-    android.hardware.sensors@2.1-service.xiaomi-multihal \
-    libsensorndkbridge
+# ruan has no eSIM on any SKU (all 3 models are physical SIM only)
+$(foreach sku, CN GL IN, \
+    $(eval PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/configs/permissions/android.hardware.telephony.exclude-euicc.xml:$(TARGET_COPY_OUT_ODM)/etc/permissions/sku_$(sku)/android.hardware.telephony.exclude-euicc.xml))
 
-# Shipping API level
-PRODUCT_SHIPPING_API_LEVEL := 33
-
-# Soong namespaces
-PRODUCT_SOONG_NAMESPACES += \
-    $(DEVICE_PATH) \
-    hardware/qcom-caf/sm8450 \
-    hardware/xiaomi \
-    hardware/lineage/interfaces/power-libperfmgr
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.telephony.cdma.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.cdma.xml \
+    frameworks/native/data/etc/android.hardware.telephony.gsm.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.gsm.xml \
+    frameworks/native/data/etc/android.hardware.telephony.ims.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.ims.xml \
+    frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.sip.voip.xml
 
 # Thermal
 PRODUCT_PACKAGES += \
-    android.hardware.thermal@2.0-service.qti
+    android.hardware.thermal-service.qti
 
-# Touch
+# Touchscreen
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml
+
+# Update engine
 PRODUCT_PACKAGES += \
-    vendor.lineage.touch@1.0-service.xiaomi
+    update_engine \
+    update_engine_sideload \
+    update_verifier
 
 # USB
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.3-service-qti
+    android.hardware.usb-service.qti \
+    android.hardware.usb.gadget-service.qti
+
+PRODUCT_PACKAGES += \
+    init.qcom.usb.rc \
+    init.qcom.usb.sh \
+    usb_compositions.conf
+
+PRODUCT_SOONG_NAMESPACES += \
+    vendor/qcom/opensource/usb/etc
 
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/configs/usb/usb_idc.rc:$(TARGET_COPY_OUT_VENDOR)/etc/usb_idc.rc
+    frameworks/native/data/etc/android.hardware.usb.accessory.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.accessory.xml \
+    frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml
 
 # Vendor service manager
 PRODUCT_PACKAGES += \
+    vndservice \
     vndservicemanager
 
+# Verified boot
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.software.verified_boot.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.verified_boot.xml
+
 # Vibrator
+$(call soong_config_set,qti_vibrator,effect_lib,libqtivibratoreffect.xiaomi)
+$(call soong_config_set,qti_vibrator,use_effect_stream,true)
+
 PRODUCT_PACKAGES += \
     vendor.qti.hardware.vibrator.service
 
+PRODUCT_COPY_FILES += \
+    vendor/qcom/opensource/vibrator/excluded-input-devices.xml:$(TARGET_COPY_OUT_VENDOR)/etc/excluded-input-devices.xml
+
 # WiFi
 PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service \
-    hostapd \
-    libwpa_client \
-    libwifi-hal-ctrl \
-    libwifi-hal-qcom \
+    android.hardware.wifi-service \
     wpa_cli \
     wpa_supplicant \
-    wpa_supplicant.conf
+    wpa_supplicant.conf \
+    hostapd \
+    hostapd_cli \
+    libwifi-hal-qcom
+
+PRODUCT_PACKAGES += \
+    firmware_wlan_mac.bin_symlink \
+    firmware_WCNSS_qcom_cfg.ini_symlink
+
+# ruan uses qca6750 — install config to qca6750 subdir
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/qca6750/WCNSS_qcom_cfg.ini \
+    $(LOCAL_PATH)/configs/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
+    $(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf
 
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/configs/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/WCNSS_qcom_cfg.ini \
-    $(DEVICE_PATH)/configs/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
-    $(DEVICE_PATH)/configs/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf
+    frameworks/native/data/etc/android.hardware.wifi.aware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.aware.xml \
+    frameworks/native/data/etc/android.hardware.wifi.direct.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.direct.xml \
+    frameworks/native/data/etc/android.hardware.wifi.passpoint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.passpoint.xml \
+    frameworks/native/data/etc/android.hardware.wifi.rtt.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.rtt.xml \
+    frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml
 
-# WiFi Display
-PRODUCT_PACKAGES += \
-    libnl \
-    libwfdaac_vendor
-
-PRODUCT_BOOT_JARS += \
-    WfdCommon
-
-# Boot animation
-TARGET_BOOT_ANIMATION_RES := 1600
-
-# Tablet-specific resource configs
-PRODUCT_AAPT_CONFIG := normal large xlarge
-PRODUCT_AAPT_PREF_CONFIG := xhdpi
-
-# Inherit the proprietary files
+# Vendor
 $(call inherit-product, vendor/xiaomi/ruan/ruan-vendor.mk)
+DEVICE_MATRIX_FILE += vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/compatibility_matrix.xml
+
+# VINTF manifests — from vendor tree (same as dizi structure)
+DEVICE_MANIFEST_FILE += \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.atrace@1.0-service.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.boot@1.2.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.cas@1.2-service.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.dumpstate@1.1-service.xiaomi.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.graphics.mapper-impl-qti-display.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.health@2.1.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.security.keymint-service-qti-rkp.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.sensors@2.1-multihal.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.thermal@2.0-service.qti.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.usb@1.2-service.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.usb.gadget@1.2-service.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.wifi@1.0-service.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.wifi.hostapd.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.wifi.supplicant.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/blackbox.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/c2_manifest_vendor_audio.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/c2_manifest_vendor_parrot.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/manifest_android.hardware.drm@1.4-service.clearkey.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/manifest_android.hardware.drm@1.4-service.widevine.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/manifest_non_qmaa_extn.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/manifest_vendor.xiaomi.hardware.cld.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/manifest_vendor.xiaomi.hardware.mfidoca.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/manifest_vendor.xiaomi.hardware.mlipay.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/manifest_vendor.xiaomi.hardware.mtdservice.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/manifest_vendor.xiaomi.hardware.tidaservice.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/manifest_vendor.xiaomi.hardware.vsimapp.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/mi-misight.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/power.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.dolby.hardware.dms.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.qti.diag.hal.service.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.qti.hardware.display.allocator-service.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.qti.hardware.display.composer-service.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.qti.hardware.display.demura-service.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.qti.hardware.lights.service.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.qti.hardware.limits-service.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.qti.hardware.perf.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.qti.hardware.power.powermodule.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.qti.hardware.servicetracker@1.2-service.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.qti.memory.pasrmanager@1.0-service.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.xiaomi.hardware.displayfeature@1.0-service.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.xiaomi.hardware.micharge@1.0.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.xiaomi.hardware.mimd@1.0-service.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.xiaomi.hardware.misys@1.0.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.xiaomi.hardware.misys@2.0.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.xiaomi.hardware.misys@3.0.xml \
+    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.xiaomi.hardware.misys@4.0.xml

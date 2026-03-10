@@ -1,0 +1,10 @@
+# Bluetooth
+bluetooth.device.default_name=Redmi Pad Pro
+
+# Device
+ro.product.odm.brand=Redmi
+ro.product.odm.model=24074RPD2C
+ro.product.odm.name=ruan_cn
+
+# USB
+vendor.usb.product_string=Redmi Pad Pro

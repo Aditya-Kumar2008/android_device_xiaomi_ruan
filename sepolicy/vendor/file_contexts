@@ -1,38 +1,67 @@
-# Vendor file contexts for Xiaomi Ruan
+# Audio
+/dev/socket/audio_us_socket_0 u:object_r:audio_socket:s0
+/dev/socket/audio_us_socket_1 u:object_r:audio_socket:s0
+
+# Batterysecret
+/(vendor|system/vendor)/bin/batterysecret u:object_r:batterysecret_exec:s0
 
 # Camera
-/vendor/bin/hw/android\.hardware\.camera\.provider@2\.7-service-google    u:object_r:hal_camera_default_exec:s0
-/vendor/lib64/hw/camera\.xiaomi\.so                                       u:object_r:same_process_hal_file:s0
-/vendor/lib64/hw/camera\.qcom\.so                                         u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libPlatformValidatorShared\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libQnnHtpPrepare\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libQnnHtpV69Stub\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libQnnHtpV69\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libQnnHtp\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libSNPE\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libSnpeDspV65Stub\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libSnpeDspV66Stub\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libSnpeHta\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libSnpeHtpPrepare\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libSnpeHtpV68Stub\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libSnpeHtpV69Stub\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libSnpeHtpV73Stub\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libc\+\+_shared\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libcalculator\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libcalculator_htp\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libhta_hexagon_runtime_snpe\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libmialgo_ai_vision\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libmialgo_utils\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libomp\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libxmi_slow_motion_mein\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/rfsa/adsp/libQnnHtpV69Skel\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/rfsa/adsp/libSnpeDspV65Skel\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/rfsa/adsp/libSnpeDspV66Skel\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/rfsa/adsp/libSnpeHtpV68Skel\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/rfsa/adsp/libSnpeHtpV69Skel\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/rfsa/adsp/libSnpeHtpV73Skel\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/rfsa/adsp/libcalculator_skel\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/rfsa/adsp/libmialgo_basic_cdsp_skel\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/rfsa/adsp/libmialgo_slow_motion_cdsp_skel\.so u:object_r:same_process_hal_file:s0
 
-# Display
-/vendor/bin/hw/vendor\.qti\.hardware\.display\.composer-service            u:object_r:hal_graphics_composer_default_exec:s0
-/vendor/bin/hw/vendor\.qti\.hardware\.display\.allocator-service           u:object_r:hal_graphics_allocator_default_exec:s0
+# Displayfeature
+/dev/mi_display/disp_feature u:object_r:vendor_displayfeature_device:s0
+/sys/devices/virtual/mi_display/disp_feature/disp-DSI-+[0-1](/.*)? u:object_r:vendor_sysfs_displayfeature:s0
 
-# Fingerprint (if applicable)
-/vendor/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.3-service\.xiaomi    u:object_r:hal_fingerprint_default_exec:s0
+# Fingerprint
 
-# IR
-/vendor/bin/hw/android\.hardware\.ir@1\.0-service                         u:object_r:hal_ir_default_exec:s0
-
-# NFC
-/vendor/bin/hw/android\.hardware\.nfc@1\.2-service                        u:object_r:hal_nfc_default_exec:s0
+# Mlipay
+/(vendor|system/vendor)/bin/mlipayd@1.1 u:object_r:hal_mlipay_default_exec:s0
 
 # Sensors
-/vendor/bin/hw/android\.hardware\.sensors@2\.1-service\.xiaomi-multihal    u:object_r:hal_sensors_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.sensors-service\.xiaomi-multihal u:object_r:hal_sensors_default_exec:s0
+/(vendor|system/vendor)/bin/sensor-notifier u:object_r:vendor_sensor_notifier_exec:s0
 
-# Touch
-/vendor/bin/hw/vendor\.lineage\.touch@1\.0-service\.xiaomi                 u:object_r:hal_lineage_touch_default_exec:s0
+# Thermal
+/(vendor|system/vendor)/bin/mi_thermald u:object_r:mi_thermald_exec:s0
+/data/vendor/thermal(/.*)? u:object_r:thermal_data_file:s0
+/sys/class/thermal/thermal_message/thermal_max_brightness u:object_r:sys_thermal_max_brightness:s0
+/sys/class/thermal/thermal_message/wifi_limit u:object_r:sys_thermal_wifi_limit:s0
+/sys/devices/virtual/thermal/thermal_message/thermal_max_brightness u:object_r:sys_thermal_max_brightness:s0
+/sys/devices/virtual/thermal/thermal_message/wifi_limit u:object_r:sys_thermal_wifi_limit:s0
 
-# Vibrator
-/vendor/bin/hw/vendor\.qti\.hardware\.vibrator\.service                    u:object_r:hal_vibrator_default_exec:s0
+# Touchfeature
+/dev/xiaomi-touch u:object_r:touchfeature_device:s0
 
-# WiFi
-/vendor/bin/hw/android\.hardware\.wifi@1\.0-service                       u:object_r:hal_wifi_default_exec:s0
-/vendor/bin/hostapd                                                      u:object_r:hostapd_exec:s0
-/vendor/bin/wpa_supplicant                                               u:object_r:wpa_exec:s0
-
-# Data files
-/vendor/etc/camera(/.*)?                                                 u:object_r:vendor_camera_data_file:s0
-/vendor/etc/wifi(/.*)?                                                   u:object_r:vendor_wifi_data_file:s0
-/vendor/firmware(/.*)?                                                   u:object_r:vendor_firmware_file:s0
+# Wifi
+/data/vendor/mac_addr(/.*)? u:object_r:vendor_mac_vendor_data_file:s0
+/data/vendor/wlan_logs(/.*)? u:object_r:vendor_wifi_vendor_data_file:s0
+/vendor/bin/nv_mac u:object_r:vendor_wcnss_service_exec:s0
