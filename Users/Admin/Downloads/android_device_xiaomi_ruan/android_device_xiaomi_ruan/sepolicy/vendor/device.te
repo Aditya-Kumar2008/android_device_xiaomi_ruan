@@ -1,0 +1,2 @@
+type touchfeature_device, dev_type;
+type vendor_displayfeature_device, dev_type;
