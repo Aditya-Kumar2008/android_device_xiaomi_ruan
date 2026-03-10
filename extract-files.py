@@ -1,0 +1,165 @@
+#!/usr/bin/env -S PYTHONPATH=../../../tools/extract-utils python3
+#
+# SPDX-FileCopyrightText: 2024 The LineageOS Project
+# SPDX-License-Identifier: Apache-2.0
+#
+
+from extract_utils.fixups_blob import (
+    blob_fixup,
+    blob_fixups_user_type,
+)
+from extract_utils.fixups_lib import (
+    lib_fixups,
+    lib_fixups_user_type,
+)
+from extract_utils.main import (
+    ExtractUtils,
+    ExtractUtilsModule,
+)
+
+namespace_imports = [
+    'hardware/qcom-caf/sm8450',
+    'hardware/qcom-caf/wlan',
+    'hardware/xiaomi',
+    'vendor/qcom/opensource/commonsys/display',
+    'vendor/qcom/opensource/commonsys-intf/display',
+    'vendor/qcom/opensource/dataservices',
+]
+
+def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
+    return f'{lib}_{partition}' if partition == 'vendor' else None
+
+lib_fixups: lib_fixups_user_type = {
+    **lib_fixups,
+    (
+        'vendor.qti.hardware.qccsyshal@1.0',
+        'vendor.qti.hardware.qccsyshal@1.1',
+        'vendor.qti.hardware.qccvndhal@1.0',
+        'vendor.qti.imsrtpservice@3.0',
+        'vendor.qti.diaghal@1.0',
+    ): lib_fixup_vendor_suffix,
+}
+
+blob_fixups: blob_fixups_user_type = {
+    'system_ext/lib64/vendor.qti.hardware.qccsyshal@1.2-halimpl.so': blob_fixup()
+        .replace_needed(
+            'libprotobuf-cpp-full.so',
+            'libprotobuf-cpp-full-21.7.so'
+        ),
+    (
+        'vendor/bin/hw/android.hardware.gnss-aidl-service-qti',
+        'vendor/lib64/hw/android.hardware.gnss-aidl-impl-qti.so',
+        'vendor/lib64/libgarden.so',
+        'vendor/lib64/libgarden_haltests_e2e.so'
+    ): blob_fixup()
+        .replace_needed(
+            'android.hardware.gnss-V1-ndk_platform.so',
+            'android.hardware.gnss-V1-ndk.so'
+        ),
+    'vendor/bin/qcc-trd': blob_fixup()
+        .replace_needed(
+            'libgrpc++_unsecure.so',
+            'libgrpc++_unsecure_prebuilt.so'
+        ),
+    'vendor/bin/qguard': blob_fixup()
+        .add_needed('libbase_shim.so'),
+    (
+        'vendor/bin/hw/vendor.qti.camera.provider@2.7-service_64',
+        'vendor/lib64/camx.device@3.4-ext-impl.so',
+        'vendor/lib64/camx.device@3.5-ext-impl.so',
+        'vendor/lib64/camx.device@3.6-ext-impl.so',
+        'vendor/lib64/camx.provider@2.4-external.so',
+        'vendor/lib64/camx.provider@2.4-impl.so',
+        'vendor/lib64/camx.provider@2.4-legacy.so',
+        'vendor/lib64/camx.provider@2.5-external.so',
+        'vendor/lib64/camx.provider@2.5-legacy.so',
+        'vendor/lib64/camx.provider@2.6-legacy.so',
+        'vendor/lib64/camx.provider@2.7-legacy.so',
+        'vendor/lib64/com.qti.feature2.anchorsync.so',
+        'vendor/lib64/libaudiocloudctrl.so',
+        'vendor/lib64/libdpps.so',
+        'vendor/lib64/libsnapdragoncolor-manager.so'
+    ): blob_fixup()
+        .replace_needed(
+            'libtinyxml2.so',
+            'libtinyxml2-v34.so'
+        ),
+    (
+        'vendor/etc/camera/pureView_parameter.xml',
+        'vendor/etc/camera/pureShot_parameter.xml'
+    ): blob_fixup()
+        .regex_replace(r'=(\d+)>', r'="\1">'),
+    'vendor/etc/media_codecs_parrot_v0.xml': blob_fixup()
+        .regex_replace('.+media_codecs_(google_audio|google_c2|google_telephony|vendor_audio).+\n', '')
+        .regex_replace(r'<MediaCodec name="c2\.dolby[\s\S]*?</MediaCodec>', ''),
+    'vendor/etc/vintf/manifest/c2_manifest_vendor.xml': blob_fixup()
+        .regex_replace('.+dolby.+\n', ''),
+    (
+        'vendor/lib64/libagm.so',
+        'vendor/lib64/libmcs.so',
+        'vendor/lib64/libkaraokepal.so',
+        'vendor/lib64/libar-pal.so',
+        'vendor/lib64/libaudioroute_ext.so'
+    ): blob_fixup()
+        .replace_needed(
+            'libaudioroute.so',
+            'libaudioroute-v34.so'
+        ),
+    (
+        'vendor/lib64/hw/camera.qcom.so',
+        'vendor/lib64/hw/com.qti.chi.override.so',
+        'vendor/lib64/libcamxcommonutils.so',
+        'vendor/lib64/libmialgoengine.so'
+    ): blob_fixup()
+        .add_needed('libprocessgroup_shim.so'),
+    'vendor/lib64/libQnnDspV65CalculatorStub.so': blob_fixup()
+        .add_needed('liblog.so'),
+    (
+        'odm/lib64/libMiVideoFilter.so',
+        'vendor/lib64/libalhLDC.so',
+        'vendor/lib64/libalLDC.so',
+        'vendor/lib64/libTrueSight.so'
+    ): blob_fixup()
+        .clear_symbol_version('AHardwareBuffer_allocate')
+        .clear_symbol_version('AHardwareBuffer_describe')
+        .clear_symbol_version('AHardwareBuffer_lock')
+        .clear_symbol_version('AHardwareBuffer_lockPlanes')
+        .clear_symbol_version('AHardwareBuffer_release')
+        .clear_symbol_version('AHardwareBuffer_unlock'),
+    'vendor/lib64/libcamximageformatutils.so': blob_fixup()
+        .replace_needed(
+            'vendor.qti.hardware.display.config-V2-ndk_platform.so',
+            'vendor.qti.hardware.display.config-V2-ndk.so'
+        ),
+    (
+        'vendor/lib64/libqtikeymint.so',
+        'vendor/bin/hw/android.hardware.security.keymint-service-qti',
+    ): blob_fixup()
+        .replace_needed(
+            'android.hardware.security.keymint-V1-ndk_platform.so',
+            'android.hardware.security.keymint-V1-ndk.so'
+        )
+        .replace_needed(
+            'android.hardware.security.secureclock-V1-ndk_platform.so',
+            'android.hardware.security.secureclock-V1-ndk.so'
+        )
+        .replace_needed(
+            'android.hardware.security.sharedsecret-V1-ndk_platform.so',
+            'android.hardware.security.sharedsecret-V1-ndk.so'
+        )
+        .add_needed('android.hardware.security.rkp-V1-ndk.so'),
+    'vendor/lib64/vendor.libdpmframework.so': blob_fixup()
+        .add_needed('libhidlbase_shim.so'),
+}  # fmt: skip
+
+module = ExtractUtilsModule(
+    'dizi',
+    'xiaomi',
+    blob_fixups=blob_fixups,
+    lib_fixups=lib_fixups,
+    namespace_imports=namespace_imports,
+)
+
+if __name__ == '__main__':
+    utils = ExtractUtils.device(module)
+    utils.run()

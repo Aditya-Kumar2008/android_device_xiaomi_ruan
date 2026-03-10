@@ -1,6 +1,2 @@
-# Device specific SELinux rules for ruan
-
-type device, domain;
-
-# Allow init to interact with device domain
-init_daemon_domain(device)
+type touchfeature_device, dev_type;
+type vendor_displayfeature_device, dev_type;

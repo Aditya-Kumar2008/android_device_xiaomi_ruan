@@ -1,0 +1,65 @@
+# SPDX-FileCopyrightText: 2024 The LineageOS Project
+# SPDX-License-Identifier: Apache-2.0
+#
+# init.ruan.rc — device init for Redmi Pad Pro 5G / POCO Pad 5G
+# ruan has NO fingerprint sensor and NO NFC — all related entries removed.
+
+# Display density override — ruan is a 12.1" tablet, density 280
+on boot
+    setprop ro.sf.lcd_density 280
+
+on post-fs-data
+    mkdir /data/vendor/misc 01771 system system
+    mkdir /data/vendor/misc/mi_fp 0770 system system
+
+# NFC/eSE — ruan has no NFC hardware on any SKU, keep services disabled
+service vendor.nfc_hal_service /vendor/bin/hw/android.hardware.nfc-service.nxp
+    class early_hal
+    user nfc
+    group nfc drmrpc system
+    override
+    disabled
+
+service secureelement-hal_1_2 /vendor/bin/hw/vendor.qti.secure_element@1.2-service
+    class early_hal
+    user system
+    group system
+    override
+    disabled
+
+service qti_esepowermanager_service_1_1 /vendor/bin/hw/vendor.qti.esepowermanager@1.1-service
+    class early_hal
+    user system
+    group nfc system
+    override
+    disabled
+
+# ruan: no NFC on CN/GL/IN SKUs — none of these property triggers enable NFC
+
+on property:sys.boot_completed=1
+    write /sys/devices/virtual/thermal/thermal_message/sconfig 20
+
+    # Enable PowerHAL hint processing
+    setprop vendor.powerhal.init 1
+
+service vendor.audio-hal /vendor/bin/hw/android.hardware.audio.service
+    override
+    class hal
+    user audioserver
+    group audio camera drmrpc inet media mediadrm net_bt net_bt_admin net_bw_acct oem_2901 wakelock context_hub
+    capabilities BLOCK_SUSPEND SYS_NICE
+    rlimit rtprio 10 10
+    ioprio rt 4
+    task_profiles ProcessCapacityHigh HighPerformance
+    onrestart restart audioserver
+    socket audio_us_socket_0 seqpacket 0666 system system
+
+service vendor.sensors-hal-multihal /vendor/bin/hw/android.hardware.sensors-service.xiaomi-multihal
+    override
+    class hal
+    user system
+    group system wakelock context_hub input uhid
+    writepid /dev/cpuset/system-background/tasks
+    socket audio_us_socket_1 seqpacket 0666 system system
+    capabilities BLOCK_SUSPEND
+    rlimit rtprio 10 10
