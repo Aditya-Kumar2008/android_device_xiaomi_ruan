@@ -277,7 +277,7 @@ PRODUCT_COPY_FILES += \
 
 # Properties
 PRODUCT_PACKAGES += \
-    ruan_sku_properties
+    #ruan_sku_properties
 
 # QMI
 PRODUCT_PACKAGES += \

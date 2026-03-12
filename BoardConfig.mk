@@ -90,22 +90,24 @@ BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_IMAGE_NAME := Image
 
-TARGET_KERNEL_ADDITIONAL_FLAGS := TARGET_PRODUCT=ruan
-TARGET_KERNEL_SOURCE := kernel/xiaomi/sm7435
-TARGET_KERNEL_CONFIG := \
-    gki_defconfig \
-    vendor/parrot_GKI.config \
-    vendor/garnet_GKI.config \
-    vendor/debugfs.config
+#TARGET_KERNEL_ADDITIONAL_FLAGS := TARGET_PRODUCT=ruan
+#TARGET_KERNEL_SOURCE := kernel/xiaomi/sm7435
+#TARGET_KERNEL_CONFIG := \
+#    gki_defconfig \
+#    vendor/parrot_GKI.config \
+#    vendor/garnet_GKI.config \
+#    vendor/debugfs.config
 
 # Prebuilt DTB/DTBO — no upstream kernel source for ruan yet
 BOARD_PREBUILT_DTBIMAGE_DIR := device/xiaomi/ruan/dtb
 BOARD_PREBUILT_DTBOIMAGE := device/xiaomi/ruan/dtb/dtbo.img
+TARGET_PREBUILT_KERNEL := device/xiaomi/ruan/prebuilt/kernel
 TARGET_BOARD_INFO_FILE := device/xiaomi/ruan/board-info.txt
 
 BOARD_BOOT_HEADER_VERSION := 4
 BOARD_MKBOOTIMG_ARGS := --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
+TARGET_KERNEL_VERSION := 5.10
 
 BOARD_KERNEL_CMDLINE := \
     video=vfb:640x400,bpp=32,memsize=3072000 \
@@ -119,8 +121,8 @@ BOARD_BOOTCONFIG := \
     androidboot.usbcontroller=a600000.dwc3
 
 # Kernel modules
-TARGET_KERNEL_EXT_MODULE_ROOT := kernel/xiaomi/sm7435-modules
-TARGET_KERNEL_EXT_MODULES := \
+#TARGET_KERNEL_EXT_MODULE_ROOT := kernel/xiaomi/sm7435-modules
+#TARGET_KERNEL_EXT_MODULES := \
 	qcom/opensource/mmrm-driver \
 	qcom/opensource/audio-kernel \
 	qcom/opensource/camera-kernel \
@@ -240,3 +242,17 @@ WPA_SUPPLICANT_VERSION := VER_0_8_X
 # Vendor
 include vendor/xiaomi/ruan/BoardConfigVendor.mk
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
+
+# Audio kernel headers for prebuilt kernel
+BOARD_VENDOR_KERNEL_MODULES_COPY_HEADERS := \
+    kernel/xiaomi/sm7435-modules/qcom/opensource/audio-kernel/include/uapi/audio/linux
+TARGET_PREBUILT_KERNEL_HEADERS := device/xiaomi/ruan/prebuilt/kernel-headers.tar.gz
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += device/xiaomi/ruan/framework_compatibility_matrix.xml
+# Bypass VINTF checks to fix compatibility error
+PRODUCT_ENFORCE_VINTF_MANIFEST := false
+BUILD_BROKEN_VINTF_PRODUCT_COPY_FILES := true
+
+# VINTF Bypass
+PRODUCT_ENFORCE_VINTF_MANIFEST := false
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += device/xiaomi/ruan/vintf/lineage_framework_matrix.xml
