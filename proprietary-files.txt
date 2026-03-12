@@ -3504,8 +3504,7 @@ vendor/lib/vendor.xiaomi.hw.touchfeature@1.0.so
 vendor/lib/vndk/libstagefright_foundation.so
 vendor/lib/vndk/libstagefright_omx.so
 
-# Other
-vendor/build.prop
+# Otherp
 vendor/gpu/kbc/sequence_manifest.bin
 vendor/gpu/kbc/unified_kbcs_32.bin
 vendor/gpu/kbc/unified_kbcs_64.bin
