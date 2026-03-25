@@ -1,0 +1,20 @@
+//
+// Copyright (C) 2024-2026 The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+cc_library_static {
+    name: "libinit_ruan",
+    recovery_available: true,
+    srcs: ["init_ruan.cpp"],
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+    include_dirs: ["system/core/init"],
+    shared_libs: [
+        "libbase",
+        "liblog",
+    ],
+    vendor_available: true,
+}
