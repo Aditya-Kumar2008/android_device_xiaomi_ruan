@@ -11,7 +11,7 @@
     </hal>
 
     <sepolicy>
-        <version>33.0</version>
+        <version>202404</version>
     </sepolicy>
 
     <kernel target-level="7"/>
