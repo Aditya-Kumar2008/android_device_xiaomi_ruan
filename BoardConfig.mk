@@ -152,10 +152,11 @@ ENABLE_VENDOR_RIL_SERVICE := true
 
 # VINTF
 DEVICE_MATRIX_FILE := hardware/qcom-caf/common/compatibility_matrix.xml
-DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
-    $(DEVICE_PATH)/configs/vintf/compatibility_matrix.xml \
-    hardware/qcom-caf/common/vendor_framework_compatibility_matrix.xml \
-    hardware/xiaomi/vintf/xiaomi_framework_compatibility_matrix.xml \
+# Keep framework compatibility matrices out of the device matrix list.
+# `assemble_vintf` expects only device matrices here; the framework-side
+# matrices are provided by the platform build itself.
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += \
+    $(DEVICE_PATH)/framework_compatibility_matrix.xml \
     $(DEVICE_PATH)/vintf/lineage_framework_matrix.xml
 
 DEVICE_MANIFEST_FILE += \

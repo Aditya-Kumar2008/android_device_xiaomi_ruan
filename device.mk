@@ -95,6 +95,12 @@ PRODUCT_PACKAGES += \
 
 $(call soong_config_set,lineage_health,charging_control_supports_bypass,false)
 
+PRODUCT_PACKAGES -= \
+    android.hardware.health@2.1-impl \
+    android.hardware.health@2.1-service \
+    android.hardware.health@2.1-service.rc \
+    android.hardware.health@2.1.xml
+
 # Camera
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.flash-autofocus.xml \
@@ -208,7 +214,6 @@ PRODUCT_PACKAGES += \
     extphonelib_product.xml \
     ims-ext-common \
     ims_ext_common.xml \
-    qcrilNrDb_vendor \
     qti-telephony-hidl-wrapper \
     qti-telephony-hidl-wrapper-prd \
     qti-telephony-utils \
