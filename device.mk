@@ -427,55 +427,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.rtt.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.rtt.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml
 
-# Vendor
-$(call inherit-product, vendor/xiaomi/ruan/ruan-vendor.mk)
-DEVICE_MATRIX_FILE += vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/compatibility_matrix.xml
 
-# VINTF manifests — from vendor tree (same as dizi structure)
-DEVICE_MANIFEST_FILE += \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.atrace@1.0-service.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.boot@1.2.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.cas@1.2-service.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.dumpstate@1.1-service.xiaomi.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.graphics.mapper-impl-qti-display.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.health@2.1.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.security.keymint-service-qti-rkp.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.sensors@2.1-multihal.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.thermal@2.0-service.qti.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.usb@1.2-service.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.usb.gadget@1.2-service.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.wifi@1.0-service.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.wifi.hostapd.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/android.hardware.wifi.supplicant.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/blackbox.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/c2_manifest_vendor_audio.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/c2_manifest_vendor_parrot.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/manifest_android.hardware.drm@1.4-service.clearkey.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/manifest_android.hardware.drm@1.4-service.widevine.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/manifest_non_qmaa_extn.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/manifest_vendor.xiaomi.hardware.cld.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/manifest_vendor.xiaomi.hardware.mfidoca.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/manifest_vendor.xiaomi.hardware.mlipay.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/manifest_vendor.xiaomi.hardware.mtdservice.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/manifest_vendor.xiaomi.hardware.tidaservice.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/manifest_vendor.xiaomi.hardware.vsimapp.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/mi-misight.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/power.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.dolby.hardware.dms.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.qti.diag.hal.service.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.qti.hardware.display.allocator-service.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.qti.hardware.display.composer-service.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.qti.hardware.display.demura-service.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.qti.hardware.lights.service.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.qti.hardware.limits-service.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.qti.hardware.perf.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.qti.hardware.power.powermodule.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.qti.hardware.servicetracker@1.2-service.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.qti.memory.pasrmanager@1.0-service.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.xiaomi.hardware.displayfeature@1.0-service.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.xiaomi.hardware.micharge@1.0.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.xiaomi.hardware.mimd@1.0-service.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.xiaomi.hardware.misys@1.0.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.xiaomi.hardware.misys@2.0.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.xiaomi.hardware.misys@3.0.xml \
-    vendor/xiaomi/ruan/proprietary/vendor/etc/vintf/manifest/vendor.xiaomi.hardware.misys@4.0.xml
+# Get non-open-source specific aspects
+
+$(call inherit-product, vendor/xiaomi/ruan/ruan-vendor.mk)

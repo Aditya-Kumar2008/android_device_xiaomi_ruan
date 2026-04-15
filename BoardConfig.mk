@@ -99,15 +99,17 @@ BOARD_KERNEL_IMAGE_NAME := Image
 #    vendor/debugfs.config
 
 # Prebuilt DTB/DTBO — no upstream kernel source for ruan yet
-BOARD_PREBUILT_DTBIMAGE_DIR := device/xiaomi/ruan/dtb
-BOARD_PREBUILT_DTBOIMAGE := device/xiaomi/ruan/dtb/dtbo.img
+
+BOARD_PREBUILT_DTBIMAGE := device/xiaomi/ruan/prebuilt/dtb.img
+BOARD_PREBUILT_DTBOIMAGE := device/xiaomi/ruan/prebuilt/dtbo.img
+TARGET_NO_KERNEL_OVERRIDE := true
 TARGET_PREBUILT_KERNEL := device/xiaomi/ruan/prebuilt/kernel
 TARGET_BOARD_INFO_FILE := device/xiaomi/ruan/board-info.txt
 
 BOARD_BOOT_HEADER_VERSION := 4
 BOARD_MKBOOTIMG_ARGS := --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
-TARGET_KERNEL_VERSION := 5.10
+TARGET_KERNEL_VERSION := 5.15
 
 BOARD_KERNEL_CMDLINE := \
     video=vfb:640x400,bpp=32,memsize=3072000 \
@@ -141,11 +143,13 @@ BOARD_BOOTCONFIG := \
 	qcom/opensource/video-driver \
 	qcom/opensource/wlan/qcacld-3.0/.qca6750
 
+BOARD_VENDOR_KERNEL_MODULES := $(wildcard $(DEVICE_PATH)/modules/dlkm/*.ko)
 BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(DEVICE_PATH)/modules/dlkm/modules.blocklist
-BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules/dlkm/modules.load))
+BOARD_VENDOR_KERNEL_MODULES_LOAD := $(patsubst %,$(DEVICE_PATH)/modules/dlkm/%,$(shell cat $(DEVICE_PATH)/modules/dlkm/modules.load))
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(wildcard $(DEVICE_PATH)/modules/ramdisk/*.ko)
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES_BLOCKLIST_FILE := $(DEVICE_PATH)/modules/ramdisk/modules.blocklist
-BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules/ramdisk/modules.load))
-BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules/ramdisk/modules.load.recovery))
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(patsubst %,$(DEVICE_PATH)/modules/ramdisk/%,$(shell cat $(DEVICE_PATH)/modules/ramdisk/modules.load))
+BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(patsubst %,$(DEVICE_PATH)/modules/ramdisk/%,$(shell cat $(DEVICE_PATH)/modules/ramdisk/modules.load.recovery))
 BOOT_KERNEL_MODULES := $(BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD)
 
 # Partitions — sizes from ruan stock partition table (same super partition as dizi WiFi variant)
@@ -241,8 +245,6 @@ WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # Vendor
 include vendor/xiaomi/ruan/BoardConfigVendor.mk
-BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
-BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
 
 # Audio kernel headers for prebuilt kernel
 BOARD_VENDOR_KERNEL_MODULES_COPY_HEADERS := \
@@ -250,9 +252,8 @@ BOARD_VENDOR_KERNEL_MODULES_COPY_HEADERS := \
 TARGET_PREBUILT_KERNEL_HEADERS := device/xiaomi/ruan/prebuilt/kernel-headers.tar.gz
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += device/xiaomi/ruan/framework_compatibility_matrix.xml
 # Bypass VINTF checks to fix compatibility error
-PRODUCT_ENFORCE_VINTF_MANIFEST := false
-BUILD_BROKEN_VINTF_PRODUCT_COPY_FILES := true
+#PRODUCT_ENFORCE_VINTF_MANIFEST := false
 
 # VINTF Bypass
-PRODUCT_ENFORCE_VINTF_MANIFEST := false
+#PRODUCT_ENFORCE_VINTF_MANIFEST := false
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += device/xiaomi/ruan/vintf/lineage_framework_matrix.xml
