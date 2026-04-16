@@ -39,9 +39,6 @@ void set_ro_build_prop(const std::string &prop, const std::string &value) {
 }
 
 void vendor_load_properties() {
-    std::string hw_rev = GetProperty("ro.boot.hwrev", "");
-    std::string sku = GetProperty("ro.boot.product.hardware.sku", "");
-    std::string region = GetProperty("ro.boot.hwc", "");
     std::string variant = GetProperty("ro.boot.hardware.variant", "");
 
     // Set device properties
