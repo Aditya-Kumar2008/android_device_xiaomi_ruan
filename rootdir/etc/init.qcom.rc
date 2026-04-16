@@ -256,7 +256,8 @@ on post-fs-data
 
 
     #logturbo
-    chmod 0666 /dev/mi_exception_log
+    chown system system /dev/mi_exception_log
+    chmod 0660 /dev/mi_exception_log
     chown system system /proc/mi_log/binder_delay
     chown system system /proc/mi_log/delay
 
