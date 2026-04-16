@@ -1,53 +1,61 @@
+soong_namespace {}
+
 prebuilt_etc {
-    name: "charger_fw_fstab.qti",
+    name: "ruan_charger_fw_fstab.qti",
+    filename: "charger_fw_fstab.qti",
     src: "etc/charger_fw_fstab.qti",
     vendor: true,
 }
 
 prebuilt_etc {
-    name: "fstab.qcom",
-    src: "etc/fstab.qcom",
+    name: "ruan_fstab.default",
+    filename: "fstab.default",
+    src: "etc/fstab.default",
     vendor: true,
 }
 
 prebuilt_etc {
-    name: "init.qcom.rc",
+    name: "ruan_init.qcom.rc",
+    filename: "init.qcom.rc",
     src: "etc/init.qcom.rc",
     sub_dir: "init/hw",
     vendor: true,
 }
 
 prebuilt_etc {
-    name: "init.recovery.qcom.rc",
+    name: "ruan_init.recovery.qcom.rc",
+    filename: "init.recovery.qcom.rc",
     src: "etc/init.recovery.qcom.rc",
     sub_dir: "init",
     recovery: true,
 }
 
 prebuilt_etc {
-    name: "init.target.rc",
+    name: "ruan_init.ruan.rc",
+    filename: "init.ruan.rc",
+    src: "etc/init.ruan.rc",
+    sub_dir: "init",
+    vendor: true,
+}
+
+prebuilt_etc {
+    name: "ruan_init.target.rc",
+    filename: "init.target.rc",
     src: "etc/init.target.rc",
     sub_dir: "init/hw",
     vendor: true,
 }
 
 prebuilt_etc {
-    name: "ueventd-odm.rc",
+    name: "ruan_ueventd.odm.rc",
     filename: "ueventd.rc",
     src: "etc/ueventd-odm.rc",
     device_specific: true,
 }
 
 prebuilt_etc {
-    name: "ueventd.qcom.rc",
+    name: "ruan_ueventd.qcom.rc",
     filename: "ueventd.rc",
     src: "etc/ueventd.qcom.rc",
-    vendor: true,
-}
-
-prebuilt_etc {
-    name: "init.ruan.rc",
-    src: "etc/init.ruan.rc",
-    sub_dir: "init",
     vendor: true,
 }

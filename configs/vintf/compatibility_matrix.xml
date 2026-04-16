@@ -1,7 +1,3 @@
-<!--
-    Input:
-        compatibility_matrix.xml
--->
 <compatibility-matrix version="4.0" type="device">
     <hal format="hidl" optional="false">
         <name>android.frameworks.sensorservice</name>
@@ -11,14 +7,7 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl" optional="false">
-        <name>android.hidl.allocator</name>
-        <version>1.0</version>
-        <interface>
-            <name>IAllocator</name>
-            <instance>ashmem</instance>
-        </interface>
-    </hal>
+
     <hal format="hidl" optional="false">
         <name>android.hidl.manager</name>
         <version>1.0</version>
@@ -27,22 +16,7 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl" optional="false">
-        <name>android.hidl.memory</name>
-        <version>1.0</version>
-        <interface>
-            <name>IMapper</name>
-            <instance>ashmem</instance>
-        </interface>
-    </hal>
-    <hal format="hidl" optional="false">
-        <name>android.hidl.token</name>
-        <version>1.0</version>
-        <interface>
-            <name>ITokenManager</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
+
     <hal format="hidl" optional="false">
         <name>android.system.wifi.keystore</name>
         <version>1.0</version>
@@ -51,35 +25,192 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl" optional="true">
-        <name>vendor.qti.hardware.qccsyshal</name>
-        <version>1.0-1</version>
+
+    <hal format="aidl" optional="true">
+        <name>android.hardware.bluetooth.audio</name>
+        <version>4</version>
         <interface>
-            <name>IQccsyshal</name>
-            <instance>qccsyshal</instance>
-        </interface>
-    </hal>
-    <hal format="hidl" optional="true">
-        <name>vendor.qti.hardware.sigma_miracast</name>
-        <version>1.0</version>
-        <interface>
-            <name>Isigma_miracast</name>
-            <instance>sigmahal</instance>
-            <instance>sigmahal64</instance>
-        </interface>
-    </hal>
-    <hal format="hidl" optional="true">
-        <name>vendor.qti.hardware.wifi.keystore</name>
-        <version>1.0</version>
-        <interface>
-            <name>IKeystoreExt</name>
+            <name>IBluetoothAudioProviderFactory</name>
             <instance>default</instance>
         </interface>
     </hal>
+
+    <hal format="hidl" optional="true">
+        <name>android.hardware.cas</name>
+        <version>1.2</version>
+        <interface>
+            <name>IMediaCasService</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <hal format="aidl" optional="true">
+        <name>android.hardware.health</name>
+        <version>3</version>
+        <interface>
+            <name>IHealth</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <hal format="aidl" optional="true">
+        <name>android.hardware.power</name>
+        <version>5</version>
+        <interface>
+            <name>IPower</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <hal format="aidl" optional="true">
+        <name>android.hardware.sensors</name>
+        <version>2</version>
+        <interface>
+            <name>ISensors</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <hal format="aidl" optional="true">
+        <name>android.hardware.thermal</name>
+        <version>1</version>
+        <interface>
+            <name>IThermal</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <hal format="aidl" optional="true">
+        <name>android.hardware.usb.gadget</name>
+        <version>1</version>
+        <interface>
+            <name>IUsbGadget</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <hal format="aidl" optional="true">
+        <name>android.hardware.wifi</name>
+        <version>2</version>
+        <interface>
+            <name>IWifi</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <hal format="aidl" optional="true">
+        <name>android.hardware.wifi.hostapd</name>
+        <version>2</version>
+        <interface>
+            <name>IHostapd</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <hal format="aidl" optional="true">
+        <name>android.hardware.wifi.supplicant</name>
+        <version>3</version>
+        <interface>
+            <name>ISupplicant</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <hal format="hidl" optional="true">
+        <name>vendor.display.color</name>
+        <version>1.7</version>
+        <interface>
+            <name>IDisplayColor</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <hal format="hidl" optional="true">
+        <name>vendor.display.config</name>
+        <version>2.0</version>
+        <interface>
+            <name>IDisplayConfig</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <hal format="hidl" optional="true">
+        <name>vendor.display.postproc</name>
+        <version>1.0</version>
+        <interface>
+            <name>IDisplayPostproc</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <hal format="aidl" optional="true">
+        <name>vendor.lineage.health</name>
+        <version>1</version>
+        <interface>
+            <name>IChargingControl</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <hal format="hidl" optional="true">
+        <name>vendor.qti.hardware.ListenSoundModel</name>
+        <version>1.0</version>
+        <interface>
+            <name>IListenSoundModel</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <hal format="hidl" optional="true">
+        <name>vendor.qti.hardware.display.allocator</name>
+        <version>4.0</version>
+        <interface>
+            <name>IQtiAllocator</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <hal format="hidl" optional="true">
+        <name>vendor.qti.hardware.display.composer</name>
+        <version>3.1</version>
+        <interface>
+            <name>IQtiComposer</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <hal format="aidl" optional="true">
+        <name>vendor.qti.hardware.display.config</name>
+        <version>5</version>
+        <interface>
+            <name>IDisplayConfig</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <hal format="hidl" optional="true">
+        <name>vendor.qti.hardware.display.demura</name>
+        <version>2.0</version>
+        <interface>
+            <name>IDemuraFileFinder</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <hal format="hidl" optional="true">
+        <name>vendor.qti.hardware.display.mapper</name>
+        <version>4.0</version>
+        <interface>
+            <name>IQtiMapper</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
     <vendor-ndk>
-        <version>32</version>
+        <version>35</version>
     </vendor-ndk>
+
     <system-sdk>
-        <version>31</version>
+        <version>35</version>
     </system-sdk>
 </compatibility-matrix>

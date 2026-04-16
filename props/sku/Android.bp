@@ -2,7 +2,9 @@ prebuilt_etc {
     name: "ruan_sku_properties",
     srcs: [
         "GL_ruan_build.prop",
+        "GL_ruanp_build.prop",
         "IN_ruan_build.prop",
+        "IN_ruanp_build.prop",
         "CN_ruan_build.prop",
     ],
     device_specific: true,

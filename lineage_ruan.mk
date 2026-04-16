@@ -1,34 +1,27 @@
 #
-# Copyright (C) 2024 The LineageOS Project
+# Copyright (C) 2024-2026 The LineageOS Project
 #
 # SPDX-License-Identifier: Apache-2.0
 #
 
-# Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-TARGET_SUPPORTS_OMX_SERVICE := false
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
-
-# Inherit some common Lineage stuff.
-$(call inherit-product, vendor/lineage/config/common_full_tablet_wifionly.mk)
-
-# Inherit from ruan device
+$(call inherit-product, vendor/lineage/config/common_full_tablet.mk)
 $(call inherit-product, device/xiaomi/ruan/device.mk)
+
+TARGET_SUPPORTS_OMX_SERVICE := false
 
 PRODUCT_NAME := lineage_ruan
 PRODUCT_DEVICE := ruan
 PRODUCT_MANUFACTURER := Xiaomi
-PRODUCT_BRAND := Redmi
-PRODUCT_MODEL := 24074RPD2G
-
-# System name/device follows the GL SKU (international)
-PRODUCT_SYSTEM_NAME := ruan_global
+PRODUCT_BRAND := POCO
+PRODUCT_MODEL := POCO Pad 5G
 PRODUCT_SYSTEM_DEVICE := ruan
+PRODUCT_SYSTEM_NAME := ruan_global
 
-# Build fingerprint from HyperOS stock (GL SKU)
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    BuildDesc="ruan_global-user 14 UKQ1.231003.002 OS1.0.5.0.UNAEUXM release-keys" \
-    BuildFingerprint=Redmi/ruan_global/ruan:14/UKQ1.231003.002/OS1.0.5.0.UNAEUXM:user/release-keys \
+    BuildDesc="ruan_global-user 15 AP3A.240905.015.A2 OS2.0.208.0.VFSMIXM release-keys" \
+    BuildFingerprint=POCO/ruan_global/ruan:15/AP3A.240905.015.A2/OS2.0.208.0.VFSMIXM:user/release-keys \
     DeviceName=$(PRODUCT_SYSTEM_DEVICE) \
     DeviceProduct=$(PRODUCT_SYSTEM_NAME)
 
