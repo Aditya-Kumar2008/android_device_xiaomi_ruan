@@ -8,9 +8,9 @@ prebuilt_etc {
 }
 
 prebuilt_etc {
-    name: "ruan_fstab.qcom",
-    filename: "fstab.qcom",
-    src: "etc/fstab.qcom",
+    name: "ruan_fstab.default",
+    filename: "fstab.default",
+    src: "etc/fstab.default",
     vendor: true,
 }
 
