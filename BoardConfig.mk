@@ -76,10 +76,8 @@ BOARD_USES_GENERIC_KERNEL_IMAGE := true
 TARGET_KERNEL_VERSION := 5.10
 
 BOARD_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
-BOARD_PREBUILT_DTB := $(DEVICE_PATH)/dtb/dtb.img
-BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/dtb/dtbo.img
-TARGET_PREBUILT_KERNEL := $(BOARD_PREBUILT_KERNEL)
-TARGET_PREBUILT_DTB := $(BOARD_PREBUILT_DTB)
+BOARD_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
+BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
 TARGET_BOARD_INFO_FILE := $(DEVICE_PATH)/board-info.txt
 
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
@@ -142,7 +140,6 @@ TARGET_COPY_OUT_VENDOR := vendor
 TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm
 
 # Recovery
-BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE := true
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.default
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_USERIMAGES_USE_F2FS := true
@@ -156,7 +153,6 @@ DEVICE_MATRIX_FILE := hardware/qcom-caf/common/compatibility_matrix.xml
 # `assemble_vintf` expects only device matrices here; the framework-side
 # matrices are provided by the platform build itself.
 DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += \
-    $(DEVICE_PATH)/framework_compatibility_matrix.xml \
     $(DEVICE_PATH)/vintf/lineage_framework_matrix.xml
 
 DEVICE_MANIFEST_FILE += \
