@@ -478,11 +478,11 @@ on post-fs-data
     restorecon /sys/module/migt/parameters/migt_thresh
     chmod 0777 /sys/module/migt/parameters/boost_policy
     restorecon /sys/module/migt/parameters/boost_policy
-    chmod 0777 /sys/module/migt/parameters/fps_variance_ratio
+    chmod 0664 /sys/module/migt/parameters/fps_variance_ratio
     restorecon /sys/module/migt/parameters/fps_variance_ratio
-    chmod 0777 /sys/module/migt/parameters/super_task_max_num
+    chmod 0664 /sys/module/migt/parameters/super_task_max_num
     restorecon /sys/module/migt/parameters/super_task_max_num
-    chmod 0777 /sys/module/migt/parameters/migt_ceiling_freq
+    chmod 0664 /sys/module/migt/parameters/migt_ceiling_freq
     restorecon /sys/module/migt/parameters/migt_ceiling_freq
     chmod 0777 /sys/module/migt/parameters/stask_candidate_num
     restorecon /sys/module/migt/parameters/stask_candidate_num
