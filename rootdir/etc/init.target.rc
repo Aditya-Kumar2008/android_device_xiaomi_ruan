@@ -486,25 +486,25 @@ on post-fs-data
     restorecon /sys/module/migt/parameters/migt_ceiling_freq
     chmod 0664 /sys/module/migt/parameters/stask_candidate_num
     restorecon /sys/module/migt/parameters/stask_candidate_num
-    chmod 0666 /sys/module/migt/parameters/glk_disable
+    chmod 0664 /sys/module/migt/parameters/glk_disable
     restorecon /sys/module/migt/parameters/glk_disable
-    chmod 0666 /sys/module/migt/parameters/glk_fbreak_enable
+    chmod 0664 /sys/module/migt/parameters/glk_fbreak_enable
     restorecon /sys/module/migt/parameters/glk_fbreak_enable
-    chmod 0666 /sys/module/migt/parameters/glk_freq_limit_walt
+    chmod 0664 /sys/module/migt/parameters/glk_freq_limit_walt
     restorecon /sys/module/migt/parameters/glk_freq_limit_walt
-    chmod 0666 /sys/module/migt/parameters/glk_minfreq
+    chmod 0664 /sys/module/migt/parameters/glk_minfreq
     restorecon /sys/module/migt/parameters/glk_minfreq
-    chmod 0666 /sys/module/migt/parameters/glk_maxfreq
+    chmod 0664 /sys/module/migt/parameters/glk_maxfreq
     restorecon /sys/module/migt/parameters/glk_maxfreq
-    chmod 0666 /sys/module/migt/parameters/force_stask_to_big
+    chmod 0664 /sys/module/migt/parameters/force_stask_to_big
     restorecon /sys/module/migt/parameters/force_stask_to_big
-    chmod 0666 /sys/module/migt/parameters/force_reset_runtime
+    chmod 0664 /sys/module/migt/parameters/force_reset_runtime
     restorecon /sys/module/migt/parameters/force_reset_runtime
     chmod 0664 /sys/module/metis/parameters/minor_window_app
     restorecon /sys/module/metis/parameters/minor_window_app
-    chmod 0666 /sys/module/migt/parameters/mi_viptask
+    chmod 0664 /sys/module/migt/parameters/mi_viptask
     restorecon /sys/module/migt/parameters/mi_viptask
-    chmod 0666 /sys/module/migt/parameters/mi_freq_enable
+    chmod 0664 /sys/module/migt/parameters/mi_freq_enable
     restorecon /sys/module/migt/parameters/mi_freq_enable
 
     chmod 0666 /dev/metis
@@ -540,31 +540,31 @@ on post-fs-data
 
     chmod 0666 /dev/metis
     restorecon /dev/metis
-    chmod 0666 /sys/module/metis/parameters/mi_viptask
+    chmod 0664 /sys/module/metis/parameters/mi_viptask
     restorecon /sys/module/metis/parameters/mi_viptask
-    chmod 0666 /sys/module/metis/parameters/mi_boost_duration
+    chmod 0664 /sys/module/metis/parameters/mi_boost_duration
     restorecon /sys/module/metis/parameters/mi_boost_duration
-    chmod 0666 /sys/class/thermal/thermal_message/boost
+    chmod 0664 /sys/class/thermal/thermal_message/boost
     restorecon /sys/class/thermal/thermal_message/boost
-    chmod 0666 /sys/module/metis/parameters/vip_link_enable
+    chmod 0664 /sys/module/metis/parameters/vip_link_enable
     restorecon /sys/module/metis/parameters/vip_link_enable
-    chmod 0666 /sys/module/metis/parameters/mi_fboost_enable
+    chmod 0664 /sys/module/metis/parameters/mi_fboost_enable
     restorecon /sys/module/metis/parameters/mi_fboost_enable
-    chmod 0666 /sys/module/metis/parameters/add_mi_viptask_enqueue_boost
+    chmod 0664 /sys/module/metis/parameters/add_mi_viptask_enqueue_boost
     restorecon /sys/module/metis/parameters/add_mi_viptask_enqueue_boost
-    chmod 0666 /sys/module/metis/parameters/del_mi_viptask_enqueue_boost
+    chmod 0664 /sys/module/metis/parameters/del_mi_viptask_enqueue_boost
     restorecon /sys/module/metis/parameters/del_mi_viptask_enqueue_boost
-    chmod 0666 /sys/module/metis/parameters/add_mi_viptask_sched_priority
+    chmod 0664 /sys/module/metis/parameters/add_mi_viptask_sched_priority
     restorecon /sys/module/metis/parameters/add_mi_viptask_sched_priority
-    chmod 0666 /sys/module/metis/parameters/del_mi_viptask_sched_priority
+    chmod 0664 /sys/module/metis/parameters/del_mi_viptask_sched_priority
     restorecon /sys/module/metis/parameters/del_mi_viptask_sched_priority
-    chmod 0666 /sys/module/metis/parameters/add_mi_viptask_sched_lit_core
+    chmod 0664 /sys/module/metis/parameters/add_mi_viptask_sched_lit_core
     restorecon /sys/module/metis/parameters/add_mi_viptask_sched_lit_core
-    chmod 0666 /sys/module/metis/parameters/del_mi_viptask_sched_lit_core
+    chmod 0664 /sys/module/metis/parameters/del_mi_viptask_sched_lit_core
     restorecon /sys/module/metis/parameters/del_mi_viptask_sched_lit_core
-    chmod 0666 /sys/module/metis/parameters/is_break_enable
+    chmod 0664 /sys/module/metis/parameters/is_break_enable
     restorecon /sys/module/metis/parameters/is_break_enable
-    chmod 0666 /sys/module/metis/parameters/binder_from_pid
+    chmod 0664 /sys/module/metis/parameters/binder_from_pid
     restorecon /sys/module/metis/parameters/binder_from_pid
 
     chmod 0662 /dev/miev
