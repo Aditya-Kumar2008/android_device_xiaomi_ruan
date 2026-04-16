@@ -1,8 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2024 The LineageOS Project
-# Copyright (C) 2024 The Android Open Source Project
-#
+# Copyright (C) 2024-2026 The LineageOS Project
 # SPDX-License-Identifier: Apache-2.0
 #
 
@@ -11,62 +9,59 @@ set -e
 DEVICE=ruan
 VENDOR=xiaomi
 
-# Load extract_utils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"
-if [[ ! -d "${MY_DIR}" ]]; then MY_DIR="${PWD}"; fi
+if [[ ! -d "${MY_DIR}" ]]; then
+    MY_DIR="${PWD}"
+fi
 
 ANDROID_ROOT="${MY_DIR}/../../.."
-
 HELPER="${ANDROID_ROOT}/tools/extract-utils/extract_utils.sh"
-if [ ! -f "${HELPER}" ]; then
+
+if [[ ! -f "${HELPER}" ]]; then
     echo "Unable to find helper script at ${HELPER}"
     exit 1
 fi
+
 source "${HELPER}"
 
-# Default to sanitizing the vendor folder before extraction
 CLEAN_VENDOR=true
-
-ONLY_COMMON=
-ONLY_TARGET=
 KANG=
 SECTION=
+SRC=
 
-while [ "${#}" -gt 0 ]; do
+while [[ "${#}" -gt 0 ]]; do
     case "${1}" in
-        --only-common )
-                ONLY_COMMON=true
-                ;;
-        --only-target )
-                ONLY_TARGET=true
-                ;;
-        -n | --no-cleanup )
-                CLEAN_VENDOR=false
-                ;;
-        -k | --kang )
-                KANG="--kang"
-                ;;
-        -s | --section )
-                SECTION="${2}"; shift
-                CLEAN_VENDOR=false
-                ;;
-        * )
-                SRC="${1}"
-                ;;
+        -n|--no-cleanup)
+            CLEAN_VENDOR=false
+            ;;
+        -k|--kang)
+            KANG="--kang"
+            ;;
+        -s|--section)
+            SECTION="${2}"
+            shift
+            CLEAN_VENDOR=false
+            ;;
+        *)
+            SRC="${1}"
+            ;;
     esac
     shift
 done
 
-if [ -z "${SRC}" ]; then
+if [[ -z "${SRC}" ]]; then
     SRC="adb"
 fi
 
 function blob_fixup() {
     case "${1}" in
-        vendor/etc/camera/pureShot_parameter.xml)
-            sed -i 's/="100"/="0"/g' "${2}"
+        vendor/etc/init/hw/init.qcom.rc)
+            sed -i '/^import \/vendor\/etc\/init\/hw\/init\.qcom\.test\.rc$/d' "${2}"
             ;;
-        vendor/etc/camera/pureView_parameter.xml)
+        vendor/etc/init/hw/init.target.rc)
+            sed -i '/^on property:vendor.post_boot.parsed=1$/,+2d' "${2}"
+            ;;
+        vendor/etc/camera/pureShot_parameter.xml|vendor/etc/camera/pureView_parameter.xml)
             sed -i 's/="100"/="0"/g' "${2}"
             ;;
         vendor/lib64/hw/camera.qcom.so)
@@ -81,9 +76,23 @@ function blob_fixup() {
     esac
 }
 
-# Initialize the helper for device
+FILTERED_LIST="$(mktemp)"
+trap 'rm -f "${FILTERED_LIST}"' EXIT
+
+python3 "${MY_DIR}/extract-files.py" \
+    --proprietary-list "${MY_DIR}/proprietary-files.txt" \
+    --write-filtered-list "${FILTERED_LIST}"
+
 setup_vendor "${DEVICE}" "${VENDOR}" "${ANDROID_ROOT}" false "${CLEAN_VENDOR}"
 
-extract "${MY_DIR}/proprietary-files.txt" "${SRC}" "${KANG}" --section "${SECTION}"
+extract_args=()
+if [[ -n "${KANG}" ]]; then
+    extract_args+=("${KANG}")
+fi
+if [[ -n "${SECTION}" ]]; then
+    extract_args+=(--section "${SECTION}")
+fi
 
-"${MY_DIR}/setup-makefiles.sh"
+extract "${FILTERED_LIST}" "${SRC}" "${extract_args[@]}"
+
+bash "${MY_DIR}/setup-makefiles.sh"

@@ -1,0 +1,10 @@
+# Bluetooth
+bluetooth.device.default_name=POCO Pad 5G
+
+# Device
+ro.product.odm.brand=POCO
+ro.product.odm.model=POCO Pad 5G
+ro.product.odm.name=ruan_global
+
+# USB
+vendor.usb.product_string=POCO Pad 5G

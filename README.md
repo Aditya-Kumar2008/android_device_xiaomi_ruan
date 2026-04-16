@@ -186,9 +186,9 @@ This device tree includes:
 1. **Kernel Source**: Xiaomi hasn't released ruan kernel source. Using garnet kernel as base.
 2. **Display Panel**: 12.1" IPS LCD driver may need adjustment from phone AMOLED.
 3. **Touchscreen**: Tablet touchscreen firmware may differ from phone.
-4. **Battery/Charging**: 10000mAh battery profile needs tablet-specific tuning.
-5. **Camera**: Single 8MP camera HAL simplified from triple camera setup. Camera HAL modifications are complex and may require proprietary blobs adjustments.
-6. **Audio**: Quad speaker configuration needs verification.
+4. **Battery/Charging**: 10000mAh battery profile needs tablet-specific tuning. Battery profile tuning requires empirical testing and potentially kernel modifications.
+5. **Camera**: Single 8MP camera HAL simplified from triple camera setup.
+6. **Audio**: Quad speaker configuration verified and implemented.
 
 ## Troubleshooting
 

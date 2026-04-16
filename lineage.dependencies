@@ -1,22 +1,27 @@
 [
   {
-    "repository": "android_hardware_xiaomi",
-    "target_path": "hardware/xiaomi"
+    "repository": "https://github.com/Aditya-Kumar2008/android_hardware_xiaomi.git",
+    "target_path": "hardware/xiaomi",
+    "branch": "lineage-22.1"
   },
   {
-    "repository": "android_kernel_xiaomi_sm7435",
-    "target_path": "kernel/xiaomi/sm7435"
+    "repository": "https://github.com/Aditya-Kumar2008/android_kernel_xiaomi_sm7435.git",
+    "target_path": "kernel/xiaomi/sm7435",
+    "branch": "lineage-22.1"
   },
   {
-    "repository": "android_kernel_xiaomi_sm7435-devicetrees",
-    "target_path": "kernel/xiaomi/sm7435-devicetrees"
+    "repository": "https://github.com/Aditya-Kumar2008/android_kernel_xiaomi_sm7435-devicetrees.git",
+    "target_path": "kernel/xiaomi/sm7435-devicetrees",
+    "branch": "lineage-22.1"
   },
   {
-    "repository": "android_kernel_xiaomi_sm7435-modules",
-    "target_path": "kernel/xiaomi/sm7435-modules"
+    "repository": "https://github.com/Aditya-Kumar2008/android_kernel_xiaomi_sm7435-modules.git",
+    "target_path": "kernel/xiaomi/sm7435-modules",
+    "branch": "lineage-22.1"
   },
   {
-    "repository": "android_vendor_xiaomi_ruan",
-    "target_path": "vendor/xiaomi/ruan"
+    "repository": "https://github.com/Aditya-Kumar2008/android_vendor_xiaomi_ruan.git",
+    "target_path": "vendor/xiaomi/ruan",
+    "branch": "lineage-22.1"
   }
 ]
