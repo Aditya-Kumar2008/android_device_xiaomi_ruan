@@ -1,0 +1,21 @@
+//
+// Copyright (C) 2024 The LineageOS Project
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+
+cc_test {
+    name: "sensor-notifier-utils-tests",
+    srcs: [
+        "test_SensorNotifierUtils.cpp",
+        "../sensors/utils/SensorNotifierUtils.cpp",
+    ],
+    shared_libs: [
+        "libbase",
+        "liblog",
+    ],
+    header_libs: [
+        "xiaomi_ruan_sensor_notifier_headers",
+    ],
+    vendor: true,
+}
