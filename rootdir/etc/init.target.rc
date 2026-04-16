@@ -470,21 +470,21 @@ on property:sys.boot_completed=1
 on post-fs-data
     chmod 0666 /dev/migt
     restorecon /dev/migt
-    chmod 0777 /sys/module/migt/parameters/migt_freq
+    chmod 0664 /sys/module/migt/parameters/migt_freq
     restorecon /sys/module/migt/parameters/migt_freq
-    chmod 0777 /sys/module/migt/parameters/migt_ms
+    chmod 0664 /sys/module/migt/parameters/migt_ms
     restorecon /sys/module/migt/parameters/migt_ms
-    chmod 0777 /sys/module/migt/parameters/migt_thresh
+    chmod 0664 /sys/module/migt/parameters/migt_thresh
     restorecon /sys/module/migt/parameters/migt_thresh
-    chmod 0777 /sys/module/migt/parameters/boost_policy
+    chmod 0664 /sys/module/migt/parameters/boost_policy
     restorecon /sys/module/migt/parameters/boost_policy
-    chmod 0777 /sys/module/migt/parameters/fps_variance_ratio
+    chmod 0664 /sys/module/migt/parameters/fps_variance_ratio
     restorecon /sys/module/migt/parameters/fps_variance_ratio
-    chmod 0777 /sys/module/migt/parameters/super_task_max_num
+    chmod 0664 /sys/module/migt/parameters/super_task_max_num
     restorecon /sys/module/migt/parameters/super_task_max_num
-    chmod 0777 /sys/module/migt/parameters/migt_ceiling_freq
+    chmod 0664 /sys/module/migt/parameters/migt_ceiling_freq
     restorecon /sys/module/migt/parameters/migt_ceiling_freq
-    chmod 0777 /sys/module/migt/parameters/stask_candidate_num
+    chmod 0664 /sys/module/migt/parameters/stask_candidate_num
     restorecon /sys/module/migt/parameters/stask_candidate_num
     chmod 0666 /sys/module/migt/parameters/glk_disable
     restorecon /sys/module/migt/parameters/glk_disable
@@ -500,7 +500,7 @@ on post-fs-data
     restorecon /sys/module/migt/parameters/force_stask_to_big
     chmod 0666 /sys/module/migt/parameters/force_reset_runtime
     restorecon /sys/module/migt/parameters/force_reset_runtime
-    chmod 0777 /sys/module/metis/parameters/minor_window_app
+    chmod 0664 /sys/module/metis/parameters/minor_window_app
     restorecon /sys/module/metis/parameters/minor_window_app
     chmod 0666 /sys/module/migt/parameters/mi_viptask
     restorecon /sys/module/migt/parameters/mi_viptask

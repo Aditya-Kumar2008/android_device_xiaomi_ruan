@@ -126,9 +126,9 @@ on boot
     chown media audio /sys/kernel/snd_card/card_state
 
     # modem
-    chmod 0777 /dev/smd8
+    chmod 0660 /dev/smd8
     chown radio radio /dev/smd8
-    mkdir /data/vendor/modem 0777 radio radio
+    mkdir /data/vendor/modem 0770 radio radio
 
     # This location is used by QCRIL to host UNIX domain
     # socket files used for internal IPC within QCRIL
