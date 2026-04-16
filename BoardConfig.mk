@@ -70,10 +70,29 @@ BOARD_BOOT_HEADER_VERSION := 4
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_IMAGE_NAME := Image
-BOARD_RAMDISK_USE_LZ4 := true
-BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+
+#TARGET_KERNEL_ADDITIONAL_FLAGS := TARGET_PRODUCT=ruan
+#TARGET_KERNEL_SOURCE := kernel/xiaomi/sm7435
+#TARGET_KERNEL_CONFIG := \
+#    gki_defconfig \
+#    vendor/parrot_GKI.config \
+#    vendor/garnet_GKI.config \
+#    vendor/debugfs.config
+
+# Prebuilt DTB/DTBO — no upstream kernel source for ruan yet
+
+BOARD_PREBUILT_DTBIMAGE := device/xiaomi/ruan/prebuilt/dtb.img
+BOARD_PREBUILT_DTBOIMAGE := device/xiaomi/ruan/prebuilt/dtbo.img
+TARGET_NO_KERNEL_OVERRIDE := true
+TARGET_PREBUILT_KERNEL := device/xiaomi/ruan/prebuilt/kernel
+PRODUCT_COPY_FILES += \
+    $(TARGET_PREBUILT_KERNEL):kernel
+TARGET_BOARD_INFO_FILE := device/xiaomi/ruan/board-info.txt
+
+BOARD_BOOT_HEADER_VERSION := 4
+BOARD_MKBOOTIMG_ARGS := --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
-TARGET_KERNEL_VERSION := 5.10
+TARGET_KERNEL_VERSION := 5.15
 
 BOARD_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
 BOARD_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
@@ -93,17 +112,34 @@ BOARD_BOOTCONFIG += \
     androidboot.memcg=1 \
     androidboot.usbcontroller=a600000.dwc3
 
-DLKM_MODULES_PATH := $(DEVICE_PATH)/modules/dlkm
-RAMDISK_MODULES_PATH := $(DEVICE_PATH)/modules/ramdisk
+# Kernel modules
+#TARGET_KERNEL_EXT_MODULE_ROOT := kernel/xiaomi/sm7435-modules
+#TARGET_KERNEL_EXT_MODULES := \
+	qcom/opensource/mmrm-driver \
+	qcom/opensource/audio-kernel \
+	qcom/opensource/camera-kernel \
+	qcom/opensource/cvp-kernel \
+	qcom/opensource/dataipa/drivers/platform/msm \
+	qcom/opensource/datarmnet/core \
+	qcom/opensource/datarmnet-ext/aps \
+	qcom/opensource/datarmnet-ext/offload \
+	qcom/opensource/datarmnet-ext/shs \
+	qcom/opensource/datarmnet-ext/perf \
+	qcom/opensource/datarmnet-ext/perf_tether \
+	qcom/opensource/datarmnet-ext/sch \
+	qcom/opensource/datarmnet-ext/wlan \
+	qcom/opensource/display-drivers/msm \
+	qcom/opensource/eva-kernel \
+	qcom/opensource/video-driver \
+	qcom/opensource/wlan/qcacld-3.0/.qca6750
 
-BOARD_VENDOR_KERNEL_MODULES := $(wildcard $(DLKM_MODULES_PATH)/*.ko)
-BOARD_VENDOR_KERNEL_MODULES_LOAD := $(patsubst %,$(DLKM_MODULES_PATH)/%,$(shell cat $(DLKM_MODULES_PATH)/modules.load))
-BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(DLKM_MODULES_PATH)/modules.blocklist
-
-BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(wildcard $(RAMDISK_MODULES_PATH)/*.ko)
-BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(patsubst %,$(RAMDISK_MODULES_PATH)/%,$(shell cat $(RAMDISK_MODULES_PATH)/modules.load))
-BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(patsubst %,$(RAMDISK_MODULES_PATH)/%,$(shell cat $(RAMDISK_MODULES_PATH)/modules.load.recovery))
-BOARD_VENDOR_RAMDISK_KERNEL_MODULES_BLOCKLIST_FILE := $(RAMDISK_MODULES_PATH)/modules.blocklist
+BOARD_VENDOR_KERNEL_MODULES := $(wildcard $(DEVICE_PATH)/modules/dlkm/*.ko)
+BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(DEVICE_PATH)/modules/dlkm/modules.blocklist
+BOARD_VENDOR_KERNEL_MODULES_LOAD := $(patsubst %,$(DEVICE_PATH)/modules/dlkm/%,$(shell cat $(DEVICE_PATH)/modules/dlkm/modules.load))
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(wildcard $(DEVICE_PATH)/modules/ramdisk/*.ko)
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_BLOCKLIST_FILE := $(DEVICE_PATH)/modules/ramdisk/modules.blocklist
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(patsubst %,$(DEVICE_PATH)/modules/ramdisk/%,$(shell cat $(DEVICE_PATH)/modules/ramdisk/modules.load))
+BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(patsubst %,$(DEVICE_PATH)/modules/ramdisk/%,$(shell cat $(DEVICE_PATH)/modules/ramdisk/modules.load.recovery))
 BOOT_KERNEL_MODULES := $(BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD)
 
 # Partitions
