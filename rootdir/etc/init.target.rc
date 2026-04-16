@@ -500,7 +500,7 @@ on post-fs-data
     restorecon /sys/module/migt/parameters/force_stask_to_big
     chmod 0666 /sys/module/migt/parameters/force_reset_runtime
     restorecon /sys/module/migt/parameters/force_reset_runtime
-    chmod 0777 /sys/module/metis/parameters/minor_window_app
+    chmod 0664 /sys/module/metis/parameters/minor_window_app
     restorecon /sys/module/metis/parameters/minor_window_app
     chmod 0666 /sys/module/migt/parameters/mi_viptask
     restorecon /sys/module/migt/parameters/mi_viptask
