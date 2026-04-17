@@ -149,8 +149,10 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.rc \
     init.qcom.usb.sh \
     ruan_charger_fw_fstab.qti \
-    ruan_fstab.qcom \
+    ruan_fstab.default \
     ruan_init.recovery.qcom.rc \
+    ruan_init.qcom.rc \
+    ruan_init.target.rc \
     ruan_init.ruan.rc \
     ruan_ueventd.odm.rc \
     ruan_ueventd.qcom.rc \
@@ -160,7 +162,7 @@ PRODUCT_PACKAGES += \
     vendor_vm-system_mountpoint
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.qcom
+    $(LOCAL_PATH)/rootdir/etc/fstab.default:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.default
 
 # Keylayout and keymint
 PRODUCT_COPY_FILES += \
@@ -222,10 +224,12 @@ PRODUCT_PACKAGES += \
     qti_telephony_hidl_wrapper_prd.xml \
     qti_telephony_utils.xml \
     qti_telephony_utils_prd.xml \
+    qcrilNrDb_vendor \
     telephony-ext \
     xiaomi-telephony-stub
 
 PRODUCT_BOOT_JARS += \
+    qcrilNrDb_vendor \
     telephony-ext \
     xiaomi-telephony-stub
 

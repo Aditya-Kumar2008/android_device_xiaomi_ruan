@@ -31,14 +31,14 @@ TARGET_ARCH_VARIANT := armv8-a-branchprot
 TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 :=
 TARGET_CPU_VARIANT := generic
-TARGET_CPU_VARIANT_RUNTIME := kryo300
+TARGET_CPU_VARIANT_RUNTIME := cortex-a78
 
 TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv8-2a
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := generic
-TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a75
+TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a55
 
 # Audio
 AUDIO_FEATURE_ENABLED_DLKM := true
@@ -76,10 +76,9 @@ BOARD_USES_GENERIC_KERNEL_IMAGE := true
 TARGET_KERNEL_VERSION := 5.10
 
 BOARD_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
-BOARD_PREBUILT_DTB := $(DEVICE_PATH)/dtb/dtb.img
-BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/dtb/dtbo.img
-TARGET_PREBUILT_KERNEL := $(BOARD_PREBUILT_KERNEL)
-TARGET_PREBUILT_DTB := $(BOARD_PREBUILT_DTB)
+TARGET_FORCE_PREBUILT_KERNEL := true
+BOARD_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
+BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
 TARGET_BOARD_INFO_FILE := $(DEVICE_PATH)/board-info.txt
 
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
@@ -142,8 +141,7 @@ TARGET_COPY_OUT_VENDOR := vendor
 TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm
 
 # Recovery
-BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE := true
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.default
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_USERIMAGES_USE_F2FS := true
 
@@ -155,9 +153,6 @@ DEVICE_MATRIX_FILE := hardware/qcom-caf/common/compatibility_matrix.xml
 # Keep framework compatibility matrices out of the device matrix list.
 # `assemble_vintf` expects only device matrices here; the framework-side
 # matrices are provided by the platform build itself.
-DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += \
-    $(DEVICE_PATH)/framework_compatibility_matrix.xml \
-    $(DEVICE_PATH)/vintf/lineage_framework_matrix.xml
 
 DEVICE_MANIFEST_FILE += \
     $(DEVICE_PATH)/configs/vintf/manifest.xml \

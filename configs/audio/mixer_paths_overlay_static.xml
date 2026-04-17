@@ -25,6 +25,10 @@
     <ctl name="aw_dev_0_prof"  value="Music" />
     <ctl name="aw_dev_1_switch" value="Disable" />
     <ctl name="aw_dev_1_prof"  value="Music" />
+    <ctl name="aw_dev_2_switch" value="Disable" />
+    <ctl name="aw_dev_2_prof"  value="Music" />
+    <ctl name="aw_dev_3_switch" value="Disable" />
+    <ctl name="aw_dev_3_prof"  value="Music" />
     <ctl name="aw882xx_spk_sw_gpio_switch" value="0"/>
     <!-- awinic controls end -->
 
@@ -35,6 +39,8 @@
     <path name="speaker">
         <ctl name="aw_dev_0_switch" value="Enable" />
         <ctl name="aw_dev_1_switch" value="Enable" />
+        <ctl name="aw_dev_2_switch" value="Enable" />
+        <ctl name="aw_dev_3_switch" value="Enable" />
     </path>
 
     <path name="speaker-mono">
@@ -46,6 +52,10 @@
         <ctl name="aw_dev_0_switch" value="Enable" />
         <ctl name="aw_dev_1_prof"  value="Voice" />
         <ctl name="aw_dev_1_switch" value="Enable" />
+        <ctl name="aw_dev_2_prof"  value="Voice" />
+        <ctl name="aw_dev_2_switch" value="Enable" />
+        <ctl name="aw_dev_3_prof"  value="Voice" />
+        <ctl name="aw_dev_3_switch" value="Enable" />
     </path>
 
    <path name="speaker-mono-vbat">
@@ -216,11 +226,15 @@
     <path name="speaker-top">
         <ctl name="aw_dev_0_prof"  value="Music" />
         <ctl name="aw_dev_0_switch" value="Enable" />
+        <ctl name="aw_dev_1_prof"  value="Music" />
+        <ctl name="aw_dev_1_switch" value="Enable" />
     </path>
 
     <path name="speaker-bot">
-        <ctl name="aw_dev_1_prof"  value="Music" />
-        <ctl name="aw_dev_1_switch" value="Enable" />
+        <ctl name="aw_dev_2_prof"  value="Music" />
+        <ctl name="aw_dev_2_switch" value="Enable" />
+        <ctl name="aw_dev_3_prof"  value="Music" />
+        <ctl name="aw_dev_3_switch" value="Enable" />
     </path>
     <!--ultrasound end-->
 
