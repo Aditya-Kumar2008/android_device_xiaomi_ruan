@@ -224,10 +224,12 @@ PRODUCT_PACKAGES += \
     qti_telephony_hidl_wrapper_prd.xml \
     qti_telephony_utils.xml \
     qti_telephony_utils_prd.xml \
+    qcrilNrDb_vendor \
     telephony-ext \
     xiaomi-telephony-stub
 
 PRODUCT_BOOT_JARS += \
+    qcrilNrDb_vendor \
     telephony-ext \
     xiaomi-telephony-stub
 
