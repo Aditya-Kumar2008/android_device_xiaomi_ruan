@@ -29,19 +29,6 @@ Key differences:
 | OS | Android 15, HyperOS 2.0 |
 | Codename | ruan |
 
-## Partition Layout (Accurate for ruan)
-
-| Partition | Size | Notes |
-|-----------|------|-------|
-| boot | 8 MB | Kernel + ramdisk |
-| vendor_boot | 64 MB | Vendor ramdisk |
-| dtbo | 8 MB | Device Tree Blob |
-| md1img | 128 MB | **5G MODEM - Critical for ruan** |
-| super | ~8.5 GB | Dynamic partitions |
-| vbmeta | 8 MB | Verified Boot metadata |
-| vbmeta_system | 8 MB | System VB metadata |
-| vbmeta_vendor | 8 MB | Vendor VB metadata |
-
 ## Building Instructions
 
 ### Prerequisites
