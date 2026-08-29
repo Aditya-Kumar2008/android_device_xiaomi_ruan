@@ -21,13 +21,21 @@ PRODUCT_MANUFACTURER := Xiaomi
 PRODUCT_BRAND := Redmi
 PRODUCT_MODEL := Redmi Pad Pro 5G
 
-PRODUCT_SYSTEM_NAME := ruan_global
+PRODUCT_SYSTEM_NAME := ruan
 PRODUCT_SYSTEM_DEVICE := ruan
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    BuildDesc="ruan_in_global-user 15 AQ3A.240912.001 OS2.0.207.0.VFSINXM release-keys" \
-    BuildFingerprint=Redmi/ruan_in_global/ruan:15/AQ3A.240912.001/OS2.0.207.0.VFSINXM:user/release-keys \
+    BuildDesc="ruan-user 15 AQ3A.240912.001 OS2.0.207.0.VFSINXM release-keys" \
+    BuildFingerprint=Redmi/ruan/ruan:15/AQ3A.240912.001/OS2.0.207.0.VFSINXM:user/release-keys \
     DeviceName=$(PRODUCT_SYSTEM_DEVICE) \
     DeviceProduct=$(PRODUCT_SYSTEM_NAME)
+
+# Eng/debug: ensure ADB works during boot
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.adb.secure=0 \
+    persist.sys.usb.config=adb \
+    persist.service.adb.enable=1 \
+    ro.debuggable=1 \
+    ro.secure=0
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi

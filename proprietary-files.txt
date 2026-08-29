@@ -1020,7 +1020,7 @@ vendor/etc/vintf/manifest/android.hardware.boot@1.2.xml
 vendor/etc/vintf/manifest/android.hardware.cas@1.2-service.xml
 vendor/etc/vintf/manifest/android.hardware.dumpstate@1.1-service.xiaomi.xml
 vendor/etc/vintf/manifest/android.hardware.graphics.mapper-impl-qti-display.xml
-vendor/etc/vintf/manifest/android.hardware.health@2.1.xml
+#vendor/etc/vintf/manifest/android.hardware.health@2.1.xml
 vendor/etc/vintf/manifest/android.hardware.security.keymint-service-qti-rkp.xml
 vendor/etc/vintf/manifest/android.hardware.sensors@2.1-multihal.xml
 vendor/etc/vintf/manifest/android.hardware.thermal@2.0-service.qti.xml
