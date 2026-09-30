@@ -1,0 +1,31 @@
+From c96203e6e68890780c0f0a0812e788322c61369a Mon Sep 17 00:00:00 2001
+From: Alexander Gurov <aliogu23@gmail.com>
+Date: Sun, 27 Sep 2026 19:00:03 +0300
+Subject: [PATCH] init: Keep /data/resource-cache on upgrade
+
+Deleting it from the persist.sys.is_upgrade=1 trigger races with
+OverlayManagerService: on the first boot after an update every static
+overlay (device, Pixel config, recents component) ends up STATE_NO_IDMAP
+until the next reboot. idmap2 already verifies and regenerates stale
+idmaps, so the wipe is not needed.
+
+Claude-Session: https://claude.ai/code/session_01YZrxbgb9k1nNzQwMqEHGyo
+---
+ rootdir/init.rc | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/rootdir/init.rc b/rootdir/init.rc
+index d269236..884b0f4 100644
+--- a/rootdir/init.rc
++++ b/rootdir/init.rc
+@@ -1405,4 +1405,6 @@ on property:sys.snapshotctl.unmap=requested
+   
+ on property:persist.sys.is_upgrade=1
+   exec - system system -- /bin/rm -rf /data/system/package_cache
+-  exec - system system -- /bin/rm -rf /data/resource-cache
++  # Do not wipe /data/resource-cache here: this runs while OverlayManagerService
++  # is already creating idmaps, which leaves every static overlay in
++  # STATE_NO_IDMAP until the next boot. idmap2 regenerates stale idmaps itself.
+-- 
+2.47.3
+

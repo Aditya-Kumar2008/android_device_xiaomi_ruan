@@ -1,0 +1,8 @@
+allow vendor_qti_init_shell proc_walt:dir search;
+allow vendor_qti_init_shell proc_walt:file rw_file_perms;
+allow vendor_qti_init_shell vendor_sysfs_qdss_dev:file { setattr write };
+# init.ruan.usb_attach.sh re-attaches the USB controller when it misses the attach at boot.
+allow vendor_qti_init_shell vendor_sysfs_usb_device:file w_file_perms;
+# Coresight STM policy setup in init.qcom.sh (debug tracing only).
+dontaudit vendor_qti_init_shell configfs:dir { add_name create setattr write };
+dontaudit vendor_qti_init_shell self:capability dac_read_search;

@@ -1,0 +1,26 @@
+//
+// SPDX-FileCopyrightText: The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+android_app {
+    name: "RuanPen",
+    certificate: "platform",
+    srcs: ["src/**/*.java"],
+    resource_dirs: ["res"],
+    platform_apis: true,
+    privileged: true,
+    system_ext_specific: true,
+    required: ["xiaomi-pen"],
+
+    optimize: {
+        proguard_flags_files: ["proguard.flags"],
+    },
+}
+
+cc_binary {
+    name: "xiaomi-pen",
+    vendor: true,
+    srcs: ["xiaomi-pen.cpp"],
+    shared_libs: ["libbase"],
+}

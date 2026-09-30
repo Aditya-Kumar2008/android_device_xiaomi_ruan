@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ruan is Wi-Fi only: drop the telephony features that GMS
+     (android.hardware.telephony.satellite.xml, features-verizon.xml) declare,
+     otherwise setup asks for a SIM. -->
+<permissions>
+    <unavailable-feature name="android.hardware.telephony" />
+    <unavailable-feature name="android.hardware.telephony.calling" />
+    <unavailable-feature name="android.hardware.telephony.cdma" />
+    <unavailable-feature name="android.hardware.telephony.data" />
+    <unavailable-feature name="android.hardware.telephony.euicc" />
+    <unavailable-feature name="android.hardware.telephony.gsm" />
+    <unavailable-feature name="android.hardware.telephony.ims" />
+    <unavailable-feature name="android.hardware.telephony.messaging" />
+    <unavailable-feature name="android.hardware.telephony.radio.access" />
+    <unavailable-feature name="android.hardware.telephony.satellite" />
+    <unavailable-feature name="android.hardware.telephony.subscription" />
+    <unavailable-feature name="com.verizon.hardware.telephony.ehrpd" />
+    <unavailable-feature name="com.verizon.hardware.telephony.lte" />
+</permissions>

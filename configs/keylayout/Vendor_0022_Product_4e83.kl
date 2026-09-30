@@ -1,0 +1,4 @@
+# Redmi Smart Pen (Bluetooth HID "Redmi Smart Pen Keyboard").
+# The two barrel buttons report KEY_PAGEUP / KEY_PAGEDOWN.
+key 104   STYLUS_BUTTON_PRIMARY
+key 109   STYLUS_BUTTON_SECONDARY

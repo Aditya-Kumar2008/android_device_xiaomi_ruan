@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/pen_title">
+
+    <Preference
+        android:key="pen_status"
+        android:title="@string/pen_status_title"
+        android:selectable="false" />
+
+    <PreferenceCategory
+        android:title="@string/pen_buttons_category">
+
+        <ListPreference
+            android:key="ruan_pen_button_up_action"
+            android:title="@string/pen_button_up_title"
+            android:entries="@array/pen_action_entries"
+            android:entryValues="@array/pen_action_values"
+            android:defaultValue="default"
+            android:summary="%s" />
+
+        <ListPreference
+            android:key="ruan_pen_button_up_app"
+            android:title="@string/pen_button_app_title"
+            android:summary="%s" />
+
+        <ListPreference
+            android:key="ruan_pen_button_down_action"
+            android:title="@string/pen_button_down_title"
+            android:entries="@array/pen_action_entries"
+            android:entryValues="@array/pen_action_values"
+            android:defaultValue="default"
+            android:summary="%s" />
+
+        <ListPreference
+            android:key="ruan_pen_button_down_app"
+            android:title="@string/pen_button_app_title"
+            android:summary="%s" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/pen_advanced_category">
+
+        <SwitchPreferenceCompat
+            android:key="pen_force_enable"
+            android:title="@string/pen_force_title"
+            android:summary="@string/pen_force_summary" />
+
+        <Preference
+            android:key="pen_forget"
+            android:title="@string/pen_forget_title"
+            android:summary="@string/pen_forget_summary" />
+
+    </PreferenceCategory>
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="pen_footer"
+        android:title="@string/pen_pairing_help"
+        android:selectable="false" />
+
+</PreferenceScreen>

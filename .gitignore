@@ -1,0 +1,4 @@
+*.apk
+*.img
+*.ko
+out/

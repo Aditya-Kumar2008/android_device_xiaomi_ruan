@@ -1,0 +1,2 @@
+# Marker installed by ruan_no_flex_clock, whose only job is to override
+# SystemUIClocks-Flex (see Android.bp).
