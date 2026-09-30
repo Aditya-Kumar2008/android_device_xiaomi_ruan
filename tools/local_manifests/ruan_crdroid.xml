@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Redmi Pad Pro 5G (ruan, SM7435 "parrot") for crDroid Android 17.
+  Drop into .repo/local_manifests/ and run: repo sync -c -j8
+-->
+<manifest>
+  <remote name="aditya" fetch="https://github.com/Aditya-Kumar2008" revision="17.0" />
+  <remote name="crdroid" fetch="https://github.com/crdroidandroid" revision="17.0" />
+
+  <project name="android_device_xiaomi_ruan" path="device/xiaomi/ruan" remote="aditya" />
+  <project name="device_xiaomi_ruan-kernel" path="device/xiaomi/ruan-kernel" remote="aditya" />
+  <project name="android_vendor_xiaomi_ruan" path="vendor/xiaomi/ruan" remote="aditya" />
+
+  <!-- Shared Xiaomi HALs: sensors, vibrator, fingerprint, telephony, vintf -->
+  <project name="android_hardware_xiaomi" path="hardware/xiaomi" remote="crdroid" />
+</manifest>
