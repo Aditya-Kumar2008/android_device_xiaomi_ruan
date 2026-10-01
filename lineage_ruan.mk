@@ -14,9 +14,22 @@ $(call inherit-product, device/xiaomi/ruan/device.mk)
 # ROM common config. InfinityX ships vendor/infinity, crDroid ships
 # vendor/crdroid plus vendor/lineage (its LineageOS fork). Only the one that
 # exists is pulled in, so the same tree builds both.
+#
+# INFINITY_MAINTAINER is read by vendor/infinity/config/version.mk, which
+# common.mk includes, so it has to be set before the inherit below.
+INFINITY_MAINTAINER := Aditya
+
 $(call inherit-product-if-exists, vendor/lineage/config/common_full_tablet.mk)
 $(call inherit-product-if-exists, vendor/infinity/config/common_full_tablet.mk)
 $(call inherit-product-if-exists, vendor/crdroid/config/common_full_tablet.mk)
+
+# Maintainer branding. crDroid has no maintainer variable of its own, so these
+# are set directly and read the same on either ROM.
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.ruan.maintainer=Aditya \
+    ro.ruan.builder=Aditya \
+    ro.adityarohilla.build=true \
+    ro.adityarohilla.rom=$(PRODUCT_NAME)
 
 TARGET_BOOT_ANIMATION_RES := 1600
 TARGET_BUILD_APERTURE_CAMERA := true
