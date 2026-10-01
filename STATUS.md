@@ -5,14 +5,14 @@
 SSH to the build server is not working.
 
 ```
-ssh openhands-build-agent@34.125.168.122
+ssh adityarohilla2023@34.125.168.122
 -> Permission denied (publickey)
 ```
 
 The server is up (`OpenSSH 9.6p1 Ubuntu-3ubuntu13.19`) and offers publickey
-authentication only. The key below is rejected for every account tried
-(`openhands-build-agent`, `ubuntu`, `openhands`, `aditya`, `root`, `admin`,
-`gcpuser`, `user`, `openhands_build`).
+authentication only. The key below is rejected for the account
+`adityarohilla2023` and for every other name tried (`ubuntu`, `openhands`,
+`aditya`, `root`, `admin`, `gcpuser`, `user`, `openhands_build`).
 
 The key was working earlier. The agent sandbox is recycled between sessions and
 the GCP instance metadata entry did not survive it. Re-adding the key to the
@@ -27,7 +27,7 @@ Add it under Compute Engine -> VM instance -> Edit -> SSH Keys, or:
 
 ```bash
 gcloud compute instances add-metadata INSTANCE \
-  --metadata ssh-keys="openhands-build-agent:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICwQkqqHD2pfkIX2vdBEqeusn0NQ5pNG5hfayXXfmr4J openhands-build-agent"
+  --metadata ssh-keys="adityarohilla2023:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICwQkqqHD2pfkIX2vdBEqeusn0NQ5pNG5hfayXXfmr4J openhands-build-agent"
 ```
 
 Once it is in, everything else is ready to run:
@@ -36,11 +36,14 @@ Once it is in, everything else is ready to run:
 git clone https://github.com/Aditya-Kumar2008/android_device_xiaomi_ruan -b 17.0
 cd android_device_xiaomi_ruan
 
-tools/server_bootstrap.sh --dry-run    # see what would be freed
+tools/server_bootstrap.sh --dry-run    # see what would be freed, deletes nothing
 tools/server_bootstrap.sh --yes        # clean the disk, install deps
 
-tools/build_rom.sh infinityx           # sync, build, upload to 2 hosts
-tools/build_rom.sh crdroid             # only after the first uploads
+tools/build_rom.sh space               # check free space
+tools/build_rom.sh infinityx           # free space, sync, build, upload
+
+tools/build_rom.sh clean               # reclaim space
+tools/build_rom.sh crdroid             # free space, sync, build, upload
 ```
 
 ## Done
