@@ -84,7 +84,11 @@ BOARD_RAMDISK_USE_LZ4 := true
 
 # The sm7435 (garnet) kernel source only provides UAPI headers for the
 # QTI HALs; the stock GKI Image and ruan modules are what actually boot.
+# TARGET_KERNEL_VERSION must be set explicitly: the tree ships no kernel
+# source to read it from, and InfinityX's kernel task passes it straight to
+# is-version-greater-or-equal, which aborts on an empty argument.
 TARGET_KERNEL_SOURCE := kernel/xiaomi/sm7435
+TARGET_KERNEL_VERSION := 5.10
 TARGET_KERNEL_CONFIG := \
     gki_defconfig \
     vendor/parrot_GKI.config
