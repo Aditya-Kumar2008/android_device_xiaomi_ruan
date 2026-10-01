@@ -2,3 +2,7 @@
 *.img
 *.ko
 out/
+
+# The ruan stock dtbo is required to build; it carries camera nodes that
+# the kernel repo copy does not. *.img above would otherwise drop it.
+!prebuilts/dtbo.img
