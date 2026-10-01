@@ -1,109 +1,58 @@
-# ruan — Android 17 (InfinityX + crDroid)
+# ruan build tooling
 
-Build tooling for the Redmi Pad Pro 5G / Poco Pad 5G (`ruan`, SM7435 "parrot").
+For the Redmi Pad Pro 5G / Poco Pad 5G (`ruan`, SM7435 "parrot").
+Runs on the build host, not in the agent sandbox.
 
-Everything below runs on the build server (`34.125.168.122`), not in the agent
-sandbox — the sandbox is 4 cores / 72G and is recycled, so nothing built there
-survives.
+## Flow
 
-## What is in this repository
+```bash
+./server_bootstrap.sh --dry-run     # see what would be freed, deletes nothing
+./server_bootstrap.sh --yes         # clean the disk, install build deps
 
-| Path | Purpose |
+./build_rom.sh space                # check free space
+./build_rom.sh infinityx            # free space, sync, build, upload
+
+./build_rom.sh clean                # reclaim space
+./build_rom.sh crdroid              # free space, sync, build, upload
+```
+
+One ROM at a time. `build_rom.sh <rom>` removes the other ROM's tree before it
+starts, so the two builds never compete for disk. A build only counts as
+finished once the zip has uploaded to two independent hosts; if fewer than two
+uploads succeed the script exits non-zero and tells you to upload by hand before
+starting the next ROM.
+
+`clean` deletes build trees and repo/bazel caches. It keeps `~/.ccache`,
+because rebuilding that from scratch costs hours. It never touches `~/.ssh`.
+
+## Commands
+
+| Command | Effect |
 | --- | --- |
-| `tools/local_manifests/ruan_infinityx.xml` | `repo` overlay for InfinityX |
-| `tools/local_manifests/ruan_crdroid.xml` | `repo` overlay for crDroid |
-| `server_bootstrap.sh` | Disk clean, build dependencies, `repo`, ccache |
-| `build_rom.sh` | Sync, build and upload one ROM |
+| `build_rom.sh space` | Free space, size of each tree, ccache size |
+| `build_rom.sh clean` | Delete all build trees and caches, keep ccache |
+| `build_rom.sh infinityx` | InfinityX Android 17 |
+| `build_rom.sh crdroid` | crDroid Android 17 |
 
-Device, kernel and vendor trees live in their own repositories:
+Environment: `ANDROID_ROOT` (default `$HOME/android`), `JOBS` (default `nproc`).
 
-- `android_device_xiaomi_ruan` — branch `17.0`
-- `device_xiaomi_ruan-kernel` — branch `17.0`
-- `android_vendor_xiaomi_ruan` — branch `17.0`
+Artifacts are copied to `$ANDROID_ROOT/artifacts/<rom>/` before upload, so a
+later clean cannot lose them. Build logs land in `$ANDROID_ROOT/artifacts/`.
 
-## First run
+## Requirements
 
-Copy this repository to the server, then:
+250G free before a build starts; the script refuses below that. `repo` must be
+on `PATH` (`server_bootstrap.sh` installs it to `~/bin`).
 
-```bash
-# 1. See what would be freed. Deletes nothing.
-tools/server_bootstrap.sh --dry-run
+## Repositories
 
-# 2. Clean the disk and install everything.
-tools/server_bootstrap.sh --yes
+| Path in tree | Repository | Branch |
+| --- | --- | --- |
+| `device/xiaomi/ruan` | `Aditya-Kumar2008/android_device_xiaomi_ruan` | `17.0` |
+| `device/xiaomi/ruan-kernel` | `Aditya-Kumar2008/device_xiaomi_ruan-kernel` | `17.0` |
+| `vendor/xiaomi/ruan` | `Aditya-Kumar2008/android_vendor_xiaomi_ruan` | `17.0` |
+| `hardware/xiaomi` | `LineageOS/android_hardware_xiaomi` | `lineage-24.0` |
+| `hardware/xiaomi` (crDroid) | `crdroidandroid/android_hardware_xiaomi` | `17.0` |
 
-# 3. Build InfinityX.
-tools/build_rom.sh infinityx
-```
-
-`build_rom.sh` uploads to two independent hosts before it exits. Only start the
-second ROM once the first has uploaded successfully:
-
-```bash
-tools/build_rom.sh crdroid
-```
-
-## Why the device tree was rebuilt
-
-The previous tree (`android_device_xiaomi_ruan`, branch `ruan_device_tree`) was
-built for minimum time-to-boot and carries the compromises that implies:
-`ALLOW_MISSING_DEPENDENCIES := true`, SELinux permissive, stub audio, and no
-telephony, pen or XiaomiParts.
-
-This tree starts from the dizi Android 17 base that is known to boot on this
-hardware, and keeps full hardware support. The ruan-specific pieces were carried
-across from the stock vendor tree rather than re-derived.
-
-## ruan versus dizi
-
-`ruan` is the 5G model; `dizi` is the Wi-Fi only one. The two share almost all
-hardware. The differences this tree handles:
-
-- **Telephony** — `full_base_telephony.mk`, the RIL vendor service
-  (`ENABLE_VENDOR_RIL_SERVICE`), `TelephonyOverlayRuan`, `CarrierConfigOverlayRuan`,
-  and the `privapp-permissions-ruanpen.xml` system_ext copy.
-- **GNSS** — `android.hardware.location.gps.xml`; dizi has no GPS.
-- **Device manifest** — `configs/hidl/manifest_ruan.xml` is added alongside the
-  shared one, so the RIL and GNSS HALs are declared.
-- **Device tree blob** — the ruan stock `dtbo.img` carries entries for both
-  boards and is used verbatim. The dizi dtbo has no camera nodes in its ruan
-  entry, so using it would leave the camera dead.
-- **Sensor configs** — `dizi_hx903x_2_0.json` and `dizi_sar_algo.json` keep their
-  original filenames, because the sensor HAL looks them up by that exact name.
-  They are not renamed.
-
-## Both ROMs from one tree
-
-`lineage_ruan.mk` inherits the ROM common config conditionally:
-
-```make
-$(call inherit-product-if-exists, vendor/lineage/config/common_full_tablet.mk)
-$(call inherit-product-if-exists, vendor/infinity/config/common_full_tablet.mk)
-$(call inherit-product-if-exists, vendor/crdroid/config/common_full_tablet.mk)
-```
-
-InfinityX ships `vendor/infinity`, crDroid ships `vendor/crdroid` plus its
-`vendor/lineage` fork. Only the one that exists is pulled in, so the same device
-tree serves both builds.
-
-The product is `lineage_ruan` on both ROMs — crDroid names its products
-`lineage_<device>` too, so no renaming is needed.
-
-## Updating the trees
-
-After editing any of the three trees locally:
-
-```bash
-cd android_device_xiaomi_ruan
-git add -A && git commit -m "..." && git push origin HEAD:refs/heads/17.0
-```
-
-Then re-run `build_rom.sh`. The local manifest pins the `17.0` branch of each
-repository, so a sync picks the change up.
-
-## Notes
-
-- Builds are `userdebug`. Switch to `user` in `build_rom.sh` for a release build.
-- `build_rom.sh` refuses to start with less than 250G free.
-- `server_bootstrap.sh` only removes build trees and caches. It never touches
-  `~/.ssh`.
+Local manifests are in `local_manifests/`. Both were checked against the full
+InfinityX and crDroid manifests - no path collisions.
