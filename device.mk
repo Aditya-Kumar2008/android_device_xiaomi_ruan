@@ -147,7 +147,9 @@ PRODUCT_COPY_FILES += \
 # Before the inherit: the first PRODUCT_COPY_FILES entry for a destination wins.
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/dolby/vendor.dolbyvision.media.c2@1.0-service.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/vendor.dolbyvision.media.c2@1.0-service.rc
-$(call inherit-product, hardware/dolby/dolby.mk)
+# hardware/dolby is not in the InfinityX manifest, and crDroid's fork has no
+# 17.0 branch yet, so it is pulled in only when present.
+$(call inherit-product-if-exists, hardware/dolby/dolby.mk)
 
 # DRM
 PRODUCT_PACKAGES += \
