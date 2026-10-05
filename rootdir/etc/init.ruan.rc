@@ -1,0 +1,127 @@
+# Device init for Redmi Pad Pro 5G / POCO Pad 5G (ruan)
+# Combines base device setup (touch, pen, thermal, USB) with modem/telephony init.
+
+on boot
+    # Touchscreen / stylus (NT36532 + xiaomi_touch)
+    chown system system /dev/xiaomi-touch
+    chmod 0660 /dev/xiaomi-touch
+    chown system system /dev/mipp_pen0
+    chmod 0660 /dev/mipp_pen0
+    chown system system /sys/class/touch/touch_dev/palm_sensor
+    chmod 0664 /sys/class/touch/touch_dev/palm_sensor
+    chown system system /sys/class/touch/touch_dev/pen_connect_strategy
+    chmod 0664 /sys/class/touch/touch_dev/pen_connect_strategy
+
+    # QCRIL socket directory for modem IPC
+    mkdir /dev/socket/qmux_radio 0770 radio radio
+    chmod 2770 /dev/socket/qmux_radio
+
+on property:sys.boot_completed=1
+    write /sys/devices/virtual/thermal/thermal_message/sconfig 20
+
+    # Enable PowerHAL hint processing
+    setprop vendor.powerhal.init 1
+
+on property:vendor.post_boot.parsed=1
+    # Set restricted cpuset to the same CPUs as system-background
+    copy /dev/cpuset/system-background/cpus /dev/cpuset/restricted/cpus
+
+    # Set background cpuset
+    write /dev/cpuset/background/cpus 0-1
+
+    # Setup foreground cpuset for display composer.
+    write /dev/cpuset/foreground/cpus 0-6
+
+on post-fs-data
+    # Create directory for radio
+    mkdir /data/vendor/radio 0770 system radio
+    rm /data/vendor/radio/shmbus
+
+    # Create directory for modem_config
+    mkdir /data/vendor/modem_config 0570 radio root
+
+    mkdir /data/vendor/secure_element 0777 system system
+
+    # Mark the copy complete flag to not completed
+    write /data/vendor/radio/copy_complete 0
+    chown radio radio /data/vendor/radio/copy_complete
+    chmod 0660 /data/vendor/radio/copy_complete
+
+    # Copy prebuilt qcril.db files always
+    copy /vendor/etc/qcril_database/qcrilNr.db /data/vendor/radio/qcrilNr_prebuilt.db
+    chown radio radio /data/vendor/radio/qcrilNr_prebuilt.db
+    chmod 0660 /data/vendor/radio/qcrilNr_prebuilt.db
+
+    # File flags for prebuilt ril db file
+    write /data/vendor/radio/prebuilt_db_support 1
+    chown radio radio /data/vendor/radio/prebuilt_db_support
+    chmod 0400 /data/vendor/radio/prebuilt_db_support
+    write /data/vendor/radio/db_check_done 0
+    chown radio radio /data/vendor/radio/db_check_done
+    chmod 0660 /data/vendor/radio/db_check_done
+
+# Audio HAL override: run as audioserver with high priority
+service vendor.audio-hal /vendor/bin/hw/android.hardware.audio.service
+    override
+    class hal
+    user audioserver
+    # media gid needed for /dev/fm (radio) and for /data/misc/media (tee)
+    group audio camera drmrpc inet media mediadrm net_bt net_bt_admin net_bw_acct oem_2901 wakelock context_hub
+    capabilities BLOCK_SUSPEND SYS_NICE
+    # setting RLIMIT_RTPRIO allows binder RT priority inheritance
+    rlimit rtprio 10 10
+    ioprio rt 4
+    task_profiles ProcessCapacityHigh HighPerformance
+    onrestart restart audioserver
+
+# QTI thermal HAL: needs system group for GameBar's thermal zone nodes
+service vendor.thermal-hal /vendor/bin/hw/android.hardware.thermal-service.qti
+    override
+    interface aidl android.hardware.thermal.IThermal/default
+    class hal
+    user root
+    group root system
+
+service vendor.sensors-hal-multihal /vendor/bin/hw/android.hardware.sensors-service.xiaomi-multihal
+    override
+    class hal
+    user system
+    group system wakelock context_hub input uhid
+    writepid /dev/cpuset/system-background/tasks
+    capabilities BLOCK_SUSPEND
+    rlimit rtprio 10 10
+
+# Redmi / POCO Smart Pen: DiziPen reports Bluetooth pen transitions via
+# vendor.pen.state; xiaomi-pen forwards them to the touch IC. Reset the
+# driver's connect counter on every boot so it cannot drift.
+on boot
+    exec_background u:r:xiaomi_pen:s0 system system -- /vendor/bin/xiaomi-pen reset
+
+on property:vendor.pen.state=*
+    exec_background u:r:xiaomi_pen:s0 system system -- /vendor/bin/xiaomi-pen ${vendor.pen.state}
+
+# Recover USB (MTP, adb) when the controller misses the attach at boot
+service vendor.usb_attach /vendor/bin/init.ruan.usb_attach.sh
+    class late_start
+    user root
+    group root
+    oneshot
+    disabled
+    seclabel u:r:vendor_qti_init_shell:s0
+
+on property:init.svc.adbd=running && property:ro.debuggable=1
+    start vendor.usb_attach
+
+on property:sys.boot_completed=1
+    start vendor.usb_attach
+
+# zram: lz4 instead of the kernel default lzo-rle
+on boot
+    write /sys/block/zram0/comp_algorithm lz4
+
+# ATFWD daemon control
+on property:persist.vendor.radio.atfwd.start=false
+    stop vendor.atfwd
+
+on property:vendor.radio.atfwd.start=false
+    stop vendor.atfwd

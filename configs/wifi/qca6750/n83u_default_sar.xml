@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<WCN_VenTool>
+    <VendorCmd name="SAR_SET_1" ID="146">
+        <Attribute name="ENABLE" ID="1" TYPE="u32" value="6"/>
+        <Attribute name="NUM_SPECS" ID="2" TYPE="u32" value="6"/>
+        <Attribute name="CHANNELS" ID="3" TYPE="u32" value="2">
+            <subAttribute name="BAND" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="CHAIN" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="MOD" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="POW" subID="1" TYPE="u32" value="3"/>
+            <subAttribute name="POW_IDX" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="BAND" subID="2" TYPE="u32" value="0"/>
+            <subAttribute name="CHAIN" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="MOD" subID="2" TYPE="u32" value="0"/>
+            <subAttribute name="POW" subID="2" TYPE="u32" value="3"/>
+            <subAttribute name="POW_IDX" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="BAND" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="CHAIN" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="MOD" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="POW" subID="1" TYPE="u32" value="3"/>
+            <subAttribute name="POW_IDX" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="BAND" subID="2" TYPE="u32" value="0"/>
+            <subAttribute name="CHAIN" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="MOD" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="POW" subID="2" TYPE="u32" value="3"/>
+            <subAttribute name="POW_IDX" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="BAND" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="CHAIN" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="MOD" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="POW" subID="1" TYPE="u32" value="3"/>
+            <subAttribute name="POW_IDX" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="BAND" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="CHAIN" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="MOD" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="POW" subID="2" TYPE="u32" value="3"/>
+            <subAttribute name="POW_IDX" subID="2" TYPE="u32" value="1"/>
+        </Attribute>
+    </VendorCmd>
+    <VendorCmd name="SAR_SET_2" ID="146">
+        <Attribute name="ENABLE" ID="1" TYPE="u32" value="6"/>
+        <Attribute name="NUM_SPECS" ID="2" TYPE="u32" value="6"/>
+        <Attribute name="CHANNELS" ID="3" TYPE="u32" value="2">
+            <subAttribute name="BAND" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="CHAIN" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="MOD" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="POW" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="POW_IDX" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="BAND" subID="2" TYPE="u32" value="0"/>
+            <subAttribute name="CHAIN" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="MOD" subID="2" TYPE="u32" value="0"/>
+            <subAttribute name="POW" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="POW_IDX" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="BAND" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="CHAIN" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="MOD" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="POW" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="POW_IDX" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="BAND" subID="2" TYPE="u32" value="0"/>
+            <subAttribute name="CHAIN" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="MOD" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="POW" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="POW_IDX" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="BAND" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="CHAIN" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="MOD" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="POW" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="POW_IDX" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="BAND" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="CHAIN" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="MOD" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="POW" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="POW_IDX" subID="2" TYPE="u32" value="1"/>
+        </Attribute>
+    </VendorCmd>
+    <VendorCmd name="SAR_SET_3" ID="146">
+        <Attribute name="ENABLE" ID="1" TYPE="u32" value="6"/>
+        <Attribute name="NUM_SPECS" ID="2" TYPE="u32" value="6"/>
+        <Attribute name="CHANNELS" ID="3" TYPE="u32" value="2">
+            <subAttribute name="BAND" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="CHAIN" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="MOD" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="POW" subID="1" TYPE="u32" value="2"/>
+            <subAttribute name="POW_IDX" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="BAND" subID="2" TYPE="u32" value="0"/>
+            <subAttribute name="CHAIN" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="MOD" subID="2" TYPE="u32" value="0"/>
+            <subAttribute name="POW" subID="2" TYPE="u32" value="2"/>
+            <subAttribute name="POW_IDX" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="BAND" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="CHAIN" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="MOD" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="POW" subID="1" TYPE="u32" value="2"/>
+            <subAttribute name="POW_IDX" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="BAND" subID="2" TYPE="u32" value="0"/>
+            <subAttribute name="CHAIN" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="MOD" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="POW" subID="2" TYPE="u32" value="2"/>
+            <subAttribute name="POW_IDX" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="BAND" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="CHAIN" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="MOD" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="POW" subID="1" TYPE="u32" value="2"/>
+            <subAttribute name="POW_IDX" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="BAND" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="CHAIN" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="MOD" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="POW" subID="2" TYPE="u32" value="2"/>
+            <subAttribute name="POW_IDX" subID="2" TYPE="u32" value="1"/>
+        </Attribute>
+    </VendorCmd>
+	<VendorCmd name="SAR_SET_4" ID="146">
+        <Attribute name="ENABLE" ID="1" TYPE="u32" value="6"/>
+        <Attribute name="NUM_SPECS" ID="2" TYPE="u32" value="6"/>
+        <Attribute name="CHANNELS" ID="3" TYPE="u32" value="2">
+            <subAttribute name="BAND" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="CHAIN" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="MOD" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="POW" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="POW_IDX" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="BAND" subID="2" TYPE="u32" value="0"/>
+            <subAttribute name="CHAIN" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="MOD" subID="2" TYPE="u32" value="0"/>
+            <subAttribute name="POW" subID="2" TYPE="u32" value="0"/>
+            <subAttribute name="POW_IDX" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="BAND" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="CHAIN" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="MOD" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="POW" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="POW_IDX" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="BAND" subID="2" TYPE="u32" value="0"/>
+            <subAttribute name="CHAIN" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="MOD" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="POW" subID="2" TYPE="u32" value="0"/>
+            <subAttribute name="POW_IDX" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="BAND" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="CHAIN" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="MOD" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="POW" subID="1" TYPE="u32" value="0"/>
+            <subAttribute name="POW_IDX" subID="1" TYPE="u32" value="1"/>
+            <subAttribute name="BAND" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="CHAIN" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="MOD" subID="2" TYPE="u32" value="1"/>
+            <subAttribute name="POW" subID="2" TYPE="u32" value="0"/>
+            <subAttribute name="POW_IDX" subID="2" TYPE="u32" value="1"/>
+        </Attribute>
+    </VendorCmd>
+</WCN_VenTool>

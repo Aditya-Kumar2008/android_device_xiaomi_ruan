@@ -1,0 +1,24 @@
+# Harmless probes by prebuilt or platform code.
+# The QTI camera HAL enumerates every property it can see.
+dontaudit hal_camera_default property_type:file { getattr map open read };
+dontaudit priv_app device:dir { open read };
+dontaudit priv_app proc_version:file { getattr open read };
+dontaudit vendor_modprobe self:key write;
+dontaudit vendor_agmservice_qti debugfs:dir r_dir_perms;
+# hwui and SurfaceFlinger probe QTI's QSPM HAL; qcom only dontaudits some callers.
+dontaudit { appdomain bootanim surfaceflinger } vendor_hal_qspmhal_default:binder call;
+dontaudit vendor_poweroffalarm_app default_android_service:service_manager find;
+# Vendor GL/media code in app processes enumerates all properties.
+dontaudit appdomain property_type:file { getattr map open read };
+# EvoX init.rc clears its /data/adb leftovers; system_server stats the dir.
+dontaudit system_server adb_data_file:dir getattr;
+dontaudit toolbox adb_data_file:dir search;
+# Xiaomi's BT and WLAN HALs publish the MACs in ril.oem props for MIUI apps only;
+# stock leaves them unlabeled too.
+dontaudit hal_bluetooth_default default_prop:file { getattr map open read };
+dontaudit hal_bluetooth_default default_prop:property_service set;
+dontaudit vendor_wcnss_service radio_prop:property_service set;
+dontaudit vendor_wcnss_service init:unix_stream_socket connectto;
+dontaudit vendor_wcnss_service property_socket:sock_file write;
+# modprobe probes CAP_SYS_ADMIN under enforcing; all 373 modules still load (b24).
+dontaudit vendor_modprobe self:capability sys_admin;

@@ -1,0 +1,2 @@
+# Loaded by reflection from system_server (config_deviceKeyHandlerClasses).
+-keep class org.evolution.dizipen.KeyHandler { public <init>(android.content.Context); *; }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Default for Settings.Global.DEVICE_NAME $1=MODEL-->
+    <string name="def_device_name_simple">Redmi Pad Pro</string>
+
+    <!-- Double-tap to wake keeps the touch IC scanning with the screen off; off until its
+         standby drain is measured. -->
+    <bool name="def_double_tap_to_wake">false</bool>
+</resources>

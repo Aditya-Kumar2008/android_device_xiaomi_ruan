@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Defines the actions shown in advanced reboot submenu -->
+    <string-array name="config_restartActionsList">
+        <item>restart</item>
+        <item>restart_systemui</item>
+        <item>restart_recovery</item>
+        <item>restart_bootloader</item>
+    </string-array>
+
+    <!-- Redmi Smart Pen button remapping (DiziPen KeyHandler) -->
+    <string-array name="config_deviceKeyHandlerLibs" translatable="false">
+        <item>/system_ext/priv-app/DiziPen/DiziPen.apk</item>
+    </string-array>
+    <string-array name="config_deviceKeyHandlerClasses" translatable="false">
+        <item>org.evolution.dizipen.KeyHandler</item>
+    </string-array>
+</resources>

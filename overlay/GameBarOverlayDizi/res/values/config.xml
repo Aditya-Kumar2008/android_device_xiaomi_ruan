@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- thermal_zone27 is cpu-1-4 on dizi; the DDR sensor is zone 43 ("ddr"). -->
+    <string name="config_ram_temp_path" translatable="false">/sys/class/thermal/thermal_zone43/temp</string>
+</resources>

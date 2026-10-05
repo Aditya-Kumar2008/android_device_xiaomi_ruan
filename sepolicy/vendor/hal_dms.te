@@ -1,0 +1,2 @@
+# Dolby DMS reads the vendor audio props.
+get_prop(hal_dms_default, vendor_audio_prop)

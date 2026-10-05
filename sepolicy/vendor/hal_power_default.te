@@ -1,0 +1,15 @@
+allow hal_power_default proc_walt:dir search;
+allow hal_power_default proc_walt:file rw_file_perms;
+allow hal_power_default vendor_sysfs_msm_perf:file rw_file_perms;
+
+# ADPF hint sessions: the power HAL sets uclamp.min on the session threads of apps
+# (and, if enabled, system_server/SurfaceFlinger). App threads carry per-app MLS
+# levels, hence mlstrustedsubject.
+typeattribute hal_power_default mlstrustedsubject;
+allow hal_power_default self:capability sys_nice;
+allow hal_power_default { appdomain system_server surfaceflinger }:process { getsched setsched };
+
+# Double-tap to wake: the power HAL writes the gesture-mode event to the touchscreen's
+# input device (power/power-mode.cpp).
+allow hal_power_default input_device:dir r_dir_perms;
+allow hal_power_default input_device:chr_file rw_file_perms;

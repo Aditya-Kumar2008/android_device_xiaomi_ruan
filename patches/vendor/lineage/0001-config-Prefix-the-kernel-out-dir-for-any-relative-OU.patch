@@ -1,0 +1,32 @@
+From 3c727712790d7ddb0b0d4b838886d82005a38cac Mon Sep 17 00:00:00 2001
+From: Alexander Gurov <aliogu23@gmail.com>
+Date: Mon, 28 Sep 2026 11:05:25 +0300
+Subject: [PATCH] config: Prefix the kernel out dir for any relative OUT_DIR
+
+KERNEL_BUILD_OUT_PREFIX was only set when OUT_DIR is "out". With another
+relative OUT_DIR (e.g. out-release) the kernel header generation ran
+from the kernel tree with a relative O=, wrote the headers into the
+kernel checkout, and cc modules failed to find them.
+
+Claude-Session: https://claude.ai/code/session_01YZrxbgb9k1nNzQwMqEHGyo
+---
+ config/BoardConfigKernel.mk | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/config/BoardConfigKernel.mk b/config/BoardConfigKernel.mk
+index 42389fc..73c8d19 100644
+--- a/config/BoardConfigKernel.mk
++++ b/config/BoardConfigKernel.mk
+@@ -301,7 +301,8 @@ KERNEL_MAKE_FLAGS += LIBCLANG_PATH=$(TARGET_KERNEL_CLANG_PATH)/lib
+ # This needs to be an absolute path, so only set this if the standard out dir isn't used
+ OUT_DIR_PREFIX := $(shell echo $(OUT_DIR) | sed -e 's|/target/.*$$||g')
+ KERNEL_BUILD_OUT_PREFIX :=
+-ifeq ($(OUT_DIR_PREFIX),out)
++# Any relative OUT_DIR (not only "out"): the kernel commands run from the kernel tree.
++ifeq ($(filter /%,$(OUT_DIR_PREFIX)),)
+     KERNEL_BUILD_OUT_PREFIX := $(BUILD_TOP)/
+ endif
+ 
+-- 
+2.47.3
+

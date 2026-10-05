@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2020 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Xiaomi Settings -->
+    <string name="app_title">Xiaomi Settings</string>
+    <string name="tile_add">Add tile</string>
+    <string name="tile_added">Tile added</string>
+    <string name="tile_not_added">Tile not added</string>
+    <string name="tile_already_added">Tile already added</string>
+    <string name="tile_on">On</string>
+    <string name="tile_off">Off</string>
+
+    <!-- Thermal Profiles -->
+    <string name="thermal_title">Thermal profiles</string>
+    <string name="thermal_enable">Use thermal profiles</string>
+    <string name="thermal_summary">Per-app thermal profile configuration</string>
+    <string name="thermal_apps_title">Apps</string>
+    <string name="thermal_loading">Loading...</string>
+    <string name="thermal_default">Default</string>
+    <string name="thermal_benchmark">Benchmark</string>
+    <string name="thermal_browser">Browser</string>
+    <string name="thermal_camera">Camera</string>
+    <string name="thermal_dialer">Dialer</string>
+    <string name="thermal_gaming">Gaming</string>
+    <string name="thermal_navigation">Navigation</string>
+    <string name="thermal_streaming">Streaming</string>
+    <string name="thermal_video">Video</string>
+    <string name="thermal_reset">Reset to defaults</string>
+    <string name="thermal_reset_message">Are you sure you want to reset thermal profile for all apps?</string>
+
+    <!-- Clear Speaker -->
+    <string name="clear_speaker_title">Clear speaker</string>
+    <string name="clear_speaker_summary">Play a 30-second audio to clear the speaker</string>
+    <string name="clear_speaker_description">Run this feature once or twice if you find that your
+          speaker is lightly blocked by dust. Set media volume to maximum.\n\nIf the speaker is
+          blocked heavily, run this feature 2-5 times while shaking your device with the speaker
+          facing downwards.</string>
+
+    <!-- Saturation -->
+    <string name="saturation_title">Display Saturation</string>
+    <string name="saturation_summary">Control the saturation level of the display</string>
+    <string name="saturation_footer_summary">Changing the color mode in display settings will
+          override the saturation level, requiring it to be reapplied.</string>
+
+    <!-- Image preview -->
+    <string name="image_preview_content_description">Preview</string>
+    <string name="image_preview_next_page_content_description">Next</string>
+    <string name="image_preview_previous_page_content_description">Previous</string>
+
+    <!-- Custom seekbar -->
+    <string name="custom_seekbar_value">Value: <xliff:g id="v">%s</xliff:g></string>
+    <string name="custom_seekbar_default_value">by default</string>
+    <string name="custom_seekbar_default_value_to_set">Default value: <xliff:g id="v">%s</xliff:g>\nLong
+          tap to set</string>
+    <string name="custom_seekbar_default_value_is_set">Default value is set</string>
+
+    <!-- Redmi Smart Pen -->
+    <string name="pen_title">Redmi Smart Pen</string>
+    <string name="pen_summary">Pen buttons, battery and pairing</string>
+    <string name="pen_status_title">Status</string>
+    <string name="pen_status_not_paired">Not paired</string>
+    <string name="pen_status_paired">Paired, not connected</string>
+    <string name="pen_status_connected">Connected</string>
+    <string name="pen_status_connected_battery">Connected, battery %1$d%%</string>
+    <string name="pen_buttons_category">Buttons</string>
+    <string name="pen_button_up_title">Upper button</string>
+    <string name="pen_button_down_title">Lower button</string>
+    <string name="pen_button_app_title">App to open</string>
+    <string name="pen_advanced_category">Advanced</string>
+    <string name="pen_force_title">Always enable pen input</string>
+    <string name="pen_force_summary">Keep the touch panel in pen mode even when the pen is not connected over Bluetooth</string>
+    <string name="pen_forget_title">Forget pen</string>
+    <string name="pen_forget_summary">Remove the pairing. Hold the pen buttons to pair it again.</string>
+    <string name="pen_pairing_help">To pair, hold both pen buttons until the light flashes. The tablet pairs it automatically, without opening Bluetooth settings.</string>
+
+    <string-array name="pen_action_entries" translatable="false">
+        <item>Stylus button, handled by the app (default)</item>
+        <item>Do nothing</item>
+        <item>Back</item>
+        <item>Home</item>
+        <item>Recent apps</item>
+        <item>Screenshot</item>
+        <item>Play / pause</item>
+        <item>New note</item>
+        <item>Open app</item>
+    </string-array>
+    <string-array name="pen_action_values" translatable="false">
+        <item>default</item>
+        <item>none</item>
+        <item>back</item>
+        <item>home</item>
+        <item>recents</item>
+        <item>screenshot</item>
+        <item>play_pause</item>
+        <item>notes</item>
+        <item>app</item>
+    </string-array>
+
+    <!-- Launcher effects -->
+    <string name="launcher_effects_title">Blur effects</string>
+    <string name="launcher_effects_summary">Notification shade blur</string>
+    <string name="shade_blur_title">Notification shade blur</string>
+    <string name="shade_blur_summary">Blur behind the notification shade and quick settings. Off makes pulling them down smoother</string>
+</resources>
