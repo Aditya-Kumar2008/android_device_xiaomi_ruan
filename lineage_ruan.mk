@@ -16,8 +16,8 @@ $(call inherit-product, vendor/lineage/config/common_full_tablet.mk)
 $(call inherit-product, device/xiaomi/ruan/device.mk)
 
 # AxionOS Config
-AXION_MAINTAINER := nobleactual
-AXION_PROCESSOR := Snapdragon_7s_Gen_2
+AXION_MAINTAINER := 4-8-2-1-1-7
+AXION_PROCESSOR := Snapdragon®_7s_Gen_2
 AXION_CAMERA_REAR_INFO := 10MP
 AXION_CAMERA_FRONT_INFO := 8MP
 AXION_CPU_SMALL_CORES := 0,1,2,3

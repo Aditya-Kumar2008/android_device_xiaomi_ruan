@@ -8,6 +8,7 @@
   <remote name="ruan-dev" fetch="https://github.com/noble6/" />
   <remote name="evo-devices" fetch="https://github.com/Evolution-X-Devices/" />
   <remote name="github-non-los" fetch="https://github.com/" />
+  <remote name="nekoshirro" fetch="https://github.com/nekoshirro/" />
 
   <!-- Device tree -->
   <project path="device/xiaomi/ruan" name="device_xiaomi_ruan" remote="ruan-dev" revision="axion" />
@@ -24,7 +25,7 @@
 
   <!-- Hardware -->
   <project path="hardware/xiaomi" name="Evolution-X-Devices/hardware_xiaomi" remote="github-non-los" revision="bka-no-dolby" />
-  <project path="hardware/dolby" name="Evolution-X-Devices/hardware_dolby" remote="github-non-los" revision="bka-aospa" />
+  <project path="hardware/dolby" name="android_hardware_dolby" remote="nekoshirro" revision="lunaris" />
 
   <!-- GameBar -->
   <project path="packages/apps/GameBar" name="packages_apps_GameBar" remote="evo-devices" revision="bka" />

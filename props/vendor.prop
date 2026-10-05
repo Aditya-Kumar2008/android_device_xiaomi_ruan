@@ -75,7 +75,8 @@ persist.vendor.camera.logLevel=0
 persist.vendor.camera.sensor=0
 
 # Chipset
-ro.soc.manufacturer=QTI
+ro.soc.manufacturer=Qualcomm
+ro.soc.model=SM7435
 
 # Dalvik
 # Stock dizi's app heap limit. garnet's init.qcom.rc used to set 512m at
