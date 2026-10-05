@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Device : Redmi Pad Pro 5G / POCO Pad 5G (ruan) -->
+<!-- Put this in .repo/local_manifests/ after repo init, then repo sync -->
+
+<manifest>
+  <!-- Remotes -->
+  <remote name="ruan-dev" fetch="https://github.com/noble6/" />
+  <remote name="evo-devices" fetch="https://github.com/Evolution-X-Devices/" />
+  <remote name="github-non-los" fetch="https://github.com/" />
+
+  <!-- Device tree -->
+  <project path="device/xiaomi/ruan" name="device_xiaomi_ruan" remote="ruan-dev" revision="axion" />
+
+  <!-- Kernel (prebuilt GKI Image + vendor modules) -->
+  <project path="device/xiaomi/ruan-kernel" name="device_xiaomi_ruan-kernel" remote="ruan-dev" revision="axion" />
+
+  <!-- Vendor blobs (from ruan HyperOS OS3.0.303.0.WFSMIXM) -->
+  <project path="vendor/xiaomi/ruan" name="vendor_xiaomi_ruan-" remote="ruan-dev" revision="axion" />
+
+  <!-- Kernel headers for QTI HALs -->
+  <project path="kernel/xiaomi/sm7435" name="kernel_xiaomi_garnet" remote="evo-devices" revision="bka" clone-depth="1" />
+  <project path="kernel/xiaomi/sm7435-modules" name="kernel_xiaomi_garnet-modules" remote="evo-devices" revision="bka" clone-depth="1" />
+
+  <!-- Hardware -->
+  <project path="hardware/xiaomi" name="Evolution-X-Devices/hardware_xiaomi" remote="github-non-los" revision="bka-no-dolby" />
+  <project path="hardware/dolby" name="Evolution-X-Devices/hardware_dolby" remote="github-non-los" revision="bka-aospa" />
+
+  <!-- GameBar -->
+  <project path="packages/apps/GameBar" name="packages_apps_GameBar" remote="evo-devices" revision="bka" />
+</manifest>
