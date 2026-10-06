@@ -7,10 +7,15 @@
 set -u
 
 DEVICE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TOP="$(cd "$DEVICE_DIR/../../../.." && pwd)"
 
-if [ ! -d "$TOP/build/make" ]; then
-    echo "error: $TOP does not look like an Android source tree" >&2
+# Walk up to the source tree root (the directory that holds .repo).
+TOP="$DEVICE_DIR"
+while [ "$TOP" != "/" ] && [ ! -d "$TOP/.repo" ]; do
+    TOP="$(dirname "$TOP")"
+done
+
+if [ ! -d "$TOP/.repo" ]; then
+    echo "error: could not find the Android source root above $DEVICE_DIR" >&2
     exit 1
 fi
 
