@@ -41,6 +41,24 @@ cp device/xiaomi/ruan/manifest/ruan.xml .repo/local_manifests/
 repo sync -c --force-sync --no-clone-bundle
 ```
 
+## Platform patches
+
+The platform repos need three patches to build and run correctly on `ruan`. They live under
+`patches/` and are applied by `apply-patches.sh` after `repo sync`:
+
+| Patch | Repo | Purpose |
+|---|---|---|
+| `0001-renderengine-Force-realtime-Vulkan-queue-priority-wh.patch` | `frameworks/native` | Adreno driver exposes `VK_EXT_global_priority` but not the query extension, leaving the Vulkan RenderEngine queue at MEDIUM behind app GPU work. Retries device creation at REALTIME/HIGH/MEDIUM. |
+| `0001-releasetools-accept-target-files-zips-in-PartitionMa.patch` | `build/make` | `PartitionMapFromTargetFiles` assumed an extracted directory, so signing/OTA on a target-files zip crashed. Looks the subdirs up in the zip name list. |
+| `0001-config-Prefix-the-kernel-out-dir-for-any-relative-OU.patch` | `vendor/infinity` | `KERNEL_BUILD_OUT_PREFIX` was only set for `OUT_DIR=out`; any other relative out dir made the kernel write headers into its own checkout. |
+
+```bash
+./device/xiaomi/ruan/apply-patches.sh
+```
+
+The patches are authored by Alexander Gurov (`aliogu23@gmail.com`) and are redistributed here
+unchanged.
+
 ## Building (InfinityX)
 
 ```bash
