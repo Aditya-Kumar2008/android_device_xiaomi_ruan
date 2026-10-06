@@ -28,3 +28,9 @@ power.saving.mode=1
 
 # Device name, as stock
 ro.product.marketname=Redmi Pad Pro 5G
+
+# Force Vulkan rendering (HWUI + SurfaceFlinger). RenderEngine must be
+# *threaded; the non-threaded backends are rejected at runtime.
+debug.hwui.renderer=skiavk
+debug.renderengine.backend=skiavkthreaded
+ro.hwui.use_vulkan=1
