@@ -6,4 +6,11 @@
 <resources>
     <dimen name="keyguard_indication_margin_bottom">145dp</dimen>
 
+    <!-- Tablet control centre: tighter tiles and a larger label so the
+         notifications shade reads well at arm's length. -->
+    <dimen name="qs_tile_height">64dp</dimen>
+    <dimen name="qs_tile_text_size">16sp</dimen>
+    <dimen name="qs_tile_margin_horizontal">8dp</dimen>
+    <dimen name="qs_tile_margin_vertical">8dp</dimen>
+
 </resources>

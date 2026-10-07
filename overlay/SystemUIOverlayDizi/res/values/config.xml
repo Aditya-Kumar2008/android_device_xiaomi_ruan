@@ -15,4 +15,9 @@
 
     <!-- Whether to play turbulence noise after clicking the play button -->
     <bool name="config_turbulenceNoise">false</bool>
+    <!-- Tablet control centre. The stock 2-column landscape layout
+         (values-sw600dp-land) renders the tiles oversized on this 12.7in
+         1600x2560 panel at 320dpi. Start from 4 columns. -->
+    <integer name="quick_settings_num_columns">4</integer>
+
 </resources>
