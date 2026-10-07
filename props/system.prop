@@ -34,3 +34,7 @@ ro.product.marketname=Redmi Pad Pro 5G
 debug.hwui.renderer=skiavk
 debug.renderengine.backend=skiavkthreaded
 ro.hwui.use_vulkan=1
+
+# Dual physical SIM slots; framework default is 1, which makes UiccController
+# index mUiccSlots[slotId] past the end when the modem reports slot_id 1.
+ro.telephony.sim_slots.count=2
