@@ -1,0 +1,8 @@
+# n83upin SKU identity, from the stock HyperOS odm partition.
+
+ro.product.odm.brand=POCO
+ro.product.odm.model=24074PCD2I
+ro.product.odm.name=ruan_p_global
+ro.product.odm.marketname=POCO Pad 5G
+ro.product.marketname=POCO Pad 5G
+ro.product.mod_device=ruan_p_global

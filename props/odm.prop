@@ -6,4 +6,7 @@ ro.vendor.qti.va_odm.support=1
 
 # SKU properties
 ro.product.property_source_order=odm,product,vendor,system_ext,system
-import /odm/etc/${ro.boot.hwc}_${ro.boot.hardware.sku}_build.prop
+# Per-SKU identity (brand/model/name/marketname) selected at boot from the
+# bootloader-reported SKU, exactly as stock does. The filenames are
+# <sku>_build.prop, so the key is ro.boot.product.hardware.sku.
+import /odm/etc/${ro.boot.product.hardware.sku}_build.prop

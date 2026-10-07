@@ -1,8 +1,7 @@
 # CNE
 persist.vendor.cne.feature=1
 
-# Device
-ro.product.mod_device=ruan_global
+# ro.product.mod_device is set per-SKU in props/odm/<sku>_build.prop.
 
 # QTI
 ro.vendor.qti.va_aosp.support=1
@@ -26,8 +25,10 @@ ro.vendor.use_data_netmgrd=true
 ro.vold.umsdirtyratio=20
 power.saving.mode=1
 
-# Device name, as stock
-ro.product.marketname=Redmi Pad Pro 5G
+# Device name is set per-SKU in props/odm/<sku>_build.prop (imported by
+# odm.prop), because ruan ships as both "Redmi Pad Pro 5G" and "POCO Pad 5G".
+# Do not set it here: system/build.prop loads first and ro.* is write-once, so
+# a value here would shadow the SKU-specific one.
 
 # Force Vulkan rendering (HWUI + SurfaceFlinger). RenderEngine must be
 # *threaded; the non-threaded backends are rejected at runtime.

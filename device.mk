@@ -403,3 +403,13 @@ PRODUCT_COPY_FILES += \
 
 # Vendor blobs
 $(call inherit-product, vendor/xiaomi/ruan/ruan-vendor.mk)
+
+
+# Per-SKU identity props, imported by odm.prop based on the bootloader SKU.
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/props/odm/n83ucn_build.prop:$(TARGET_COPY_OUT_ODM)/etc/n83ucn_build.prop \
+    $(LOCAL_PATH)/props/odm/n83ucnes_build.prop:$(TARGET_COPY_OUT_ODM)/etc/n83ucnes_build.prop \
+    $(LOCAL_PATH)/props/odm/n83ugl_build.prop:$(TARGET_COPY_OUT_ODM)/etc/n83ugl_build.prop \
+    $(LOCAL_PATH)/props/odm/n83uin_build.prop:$(TARGET_COPY_OUT_ODM)/etc/n83uin_build.prop \
+    $(LOCAL_PATH)/props/odm/n83uja_build.prop:$(TARGET_COPY_OUT_ODM)/etc/n83uja_build.prop \
+    $(LOCAL_PATH)/props/odm/n83upin_build.prop:$(TARGET_COPY_OUT_ODM)/etc/n83upin_build.prop

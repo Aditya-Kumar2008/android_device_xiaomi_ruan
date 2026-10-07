@@ -1,0 +1,8 @@
+# n83ucn SKU identity, from the stock HyperOS odm partition.
+
+ro.product.odm.brand=Redmi
+ro.product.odm.model=24074RPD2C
+ro.product.odm.name=ruan_global
+ro.product.odm.marketname=Redmi Pad Pro 5G
+ro.product.marketname=Redmi Pad Pro 5G
+ro.product.mod_device=ruan_global
