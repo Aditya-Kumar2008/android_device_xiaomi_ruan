@@ -9,6 +9,12 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 TARGET_SUPPORTS_OMX_SERVICE := false
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
+# Must be set before the common config is inherited: vendor/pixel-style gates
+# ro.setupwizard.rotation_locked on PRODUCT_CHARACTERISTICS at inherit time.
+# device.mk sets this too, but too late for that conditional to see it, which
+# left the setup wizard rotation-locked on this landscape tablet.
+PRODUCT_CHARACTERISTICS := tablet
+
 # Inherit some common LineageOS stuff.
 $(call inherit-product, vendor/lineage/config/common_full_tablet.mk)
 
