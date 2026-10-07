@@ -1,0 +1,20 @@
+diff --git a/config/common.mk b/config/common.mk
+index a13eb1a..c958f89 100644
+--- a/config/common.mk
++++ b/config/common.mk
+@@ -50,11 +50,10 @@ PRODUCT_PRODUCT_PROPERTIES += \
+     setupwizard.personal_safety_suw_enabled=true \
+     setupwizard.theme=glif_expressive
+ 
+-ifeq ($(PRODUCT_CHARACTERISTICS),tablet)
+-PRODUCT_PRODUCT_PROPERTIES += ro.setupwizard.rotation_locked=false
+-else
+-PRODUCT_PRODUCT_PROPERTIES += ro.setupwizard.rotation_locked=true
+-endif
++# ruan: make this an optional assignment so a device can pin the value. The
++# ifeq below never sees PRODUCT_CHARACTERISTICS=tablet in this tree, so the
++# else branch always won and shipped rotation_locked=true on a landscape tablet.
++PRODUCT_PRODUCT_PROPERTIES += ro.setupwizard.rotation_locked?=false
+ 
+ # StorageManager configuration
+ PRODUCT_PRODUCT_PROPERTIES += \

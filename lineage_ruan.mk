@@ -19,10 +19,11 @@ $(call inherit-product, vendor/lineage/config/common_full_tablet.mk)
 $(call inherit-product, device/xiaomi/ruan/device.mk)
 
 # vendor/pixel-style sets ro.setupwizard.rotation_locked from
-# PRODUCT_CHARACTERISTICS inside its own makefile; on this tree that branch
-# resolves to "true" and survives into product/etc/build.prop, which locks the
-# Set-Up Wizard to portrait and makes it unscrollable/stuck on this landscape
-# tablet. Pin the landscape-friendly value after all inherits so it wins.
+# PRODUCT_CHARACTERISTICS inside its own makefile. That conditional never sees
+# PRODUCT_CHARACTERISTICS=tablet in this tree, so it emits rotation_locked=true,
+# which locks the Set-Up Wizard to portrait and strands it (no scroll/Continue)
+# on this landscape tablet. Drop whatever pixel-style emitted and pin the
+# landscape-friendly value so exactly one assignment reaches build.prop.
 PRODUCT_PRODUCT_PROPERTIES += ro.setupwizard.rotation_locked=false
 
 TARGET_BOOT_ANIMATION_RES := 1600

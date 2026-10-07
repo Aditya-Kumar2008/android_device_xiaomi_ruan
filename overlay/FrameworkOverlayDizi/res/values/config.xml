@@ -570,6 +570,11 @@
          turned off and the screen off animation has been performed. -->
     <bool name="config_dozeAfterScreenOffByDefault">true</bool>
 
+    <!-- AOD: the framework default is false, which hides the Always-on
+         display toggle and makes alwaysOnAvailable() false, so AOD can never
+         turn on. This panel supports it, so enable it. -->
+    <bool name="config_dozeAlwaysOnDisplayAvailable">true</bool>
+
 
 
 
