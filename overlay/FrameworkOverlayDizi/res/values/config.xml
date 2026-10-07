@@ -741,4 +741,12 @@
     <!-- Double-tap to wake: the power HAL (power/power-mode.cpp) switches the touch IC's
          gesture mode. Shows "Tap to wake" in Settings > Display. -->
     <bool name="config_supportDoubleTapWake">true</bool>
+
+    <!-- Large-screen windowing: this is a tablet panel, so expose the
+         multi-window / split-screen options the stock config hides. Desktop
+         windowing itself is already declared above. -->
+    <bool name="config_supportsMultiWindow">true</bool>
+    <bool name="config_supportsSplitScreenMultiWindow">true</bool>
+    <bool name="config_enterDesktopByDefaultOnFreeformDisplay">false</bool>
+
 </resources>

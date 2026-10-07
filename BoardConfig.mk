@@ -78,7 +78,10 @@ DEVICE_MANIFEST_FILE += \
 
 DEVICE_FRAMEWORK_MANIFEST_FILE += $(DEVICE_PATH)/configs/hidl/framework_manifest.xml
 
-# Kernel (prebuilt stock GKI and vendor modules)
+# Kernel: build the GKI image from source (kernel/xiaomi/sm7435) by default.
+# The prebuilt kernel image is no longer supported; the stock DTB/DTBO and the
+# vendor module load lists are still taken from $(KERNEL_PATH) because the
+# parrot device trees are not part of the GKI source tree.
 KERNEL_PATH := $(DEVICE_PATH)-kernel
 
 BOARD_KERNEL_BASE := 0x00000000
@@ -90,8 +93,8 @@ TARGET_KERNEL_SOURCE := kernel/xiaomi/sm7435
 TARGET_KERNEL_CONFIG := \
     gki_defconfig \
     vendor/parrot_GKI.config
-TARGET_FORCE_PREBUILT_KERNEL := true
-TARGET_PREBUILT_KERNEL := $(KERNEL_PATH)/Image
+# Built from TARGET_KERNEL_SOURCE. TARGET_FORCE_PREBUILT_KERNEL and
+# TARGET_PREBUILT_KERNEL are intentionally unset so a full kernel build runs.
 
 # ruan ships its own dtbo.img (the dizi ROM's ruan entry lacked camera nodes)
 BOARD_PREBUILT_DTBIMAGE_DIR := $(KERNEL_PATH)/dtb

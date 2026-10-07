@@ -1,0 +1,98 @@
+From: ruan maintainers <maintainers@example.invalid>
+Subject: [PATCH] UiModeManagerService: apply accessibility color contrast to the display
+
+The Color contrast accessibility setting (Settings > Display > Color contrast,
+backed by Settings.Secure.CONTRAST_LEVEL / UiModeManager.getContrast) is stored
+and reported but never applied to the screen, so changing it has no visible
+effect. Push the 0..1 contrast value to a dedicated DisplayTransformManager
+color-matrix level so the panel actually changes.
+
+---
+diff --git a/services/core/java/com/android/server/UiModeManagerService.java b/services/core/java/com/android/server/UiModeManagerService.java
+index 9c391c84badf..c595c94fd6e8 100644
+--- a/services/core/java/com/android/server/UiModeManagerService.java
++++ b/services/core/java/com/android/server/UiModeManagerService.java
+@@ -108,6 +108,7 @@ import com.android.internal.app.DisableCarModeActivity;
+ import com.android.internal.messages.nano.SystemMessageProto.SystemMessage;
+ import com.android.internal.notification.SystemNotificationChannels;
+ import com.android.internal.util.DumpUtils;
++import com.android.server.LocalServices;
+ import com.android.server.twilight.TwilightListener;
+ import com.android.server.twilight.TwilightManager;
+ import com.android.server.twilight.TwilightState;
+@@ -262,6 +263,8 @@ final class UiModeManagerService extends SystemService {
+ 
+     @GuardedBy("mLock")
+     private final SparseArray<Float> mContrasts = new SparseArray<>();
++    // Applies the accessibility color-contrast setting to the display.
++    private final ContrastMatrixApplier mContrastMatrixApplier = new ContrastMatrixApplier();
+ 
+     @GuardedBy("mLock")
+     private final SparseIntArray mForceInvertStates = new SparseIntArray();
+@@ -454,11 +457,44 @@ final class UiModeManagerService extends SystemService {
+                     mUiModeManagerCallbacks.get(mCurrentUser, new RemoteCallbackList<>())
+                             .broadcast(ignoreRemoteException(
+                                     callback -> callback.notifyContrastChanged(contrast)));
++                    mContrastMatrixApplier.apply(contrast);
+                 }
+             }
+         }
+     };
+ 
++    /**
++     * Pushes the accessibility color-contrast value (0..1, see
++     * {@link android.app.UiModeManager.ContrastUtils}) to the display color matrix.
++     * A value of 0 removes the transform.
++     */
++    private static final class ContrastMatrixApplier {
++        void apply(float contrast) {
++            final com.android.server.display.color.DisplayTransformManager dtm =
++                    LocalServices.getService(
++                            com.android.server.display.color.DisplayTransformManager.class);
++            if (dtm == null) {
++                return;
++            }
++            final int level =
++                    com.android.server.display.color.DisplayTransformManager
++                            .LEVEL_COLOR_MATRIX_CONTRAST;
++            if (contrast <= 0f) {
++                dtm.setColorMatrix(level, null);
++                return;
++            }
++            // Linear contrast around mid-grey: out = (in - 0.5) * scale + 0.5.
++            final float scale = 1f + contrast;
++            final float offset = 0.5f * (1f - scale);
++            dtm.setColorMatrix(level, new float[] {
++                    scale, 0f, 0f, 0f,
++                    0f, scale, 0f, 0f,
++                    0f, 0f, scale, 0f,
++                    offset, offset, offset, 1f
++            });
++        }
++    }
++
+     private void updateSystemProperties() {
+         int mode = Secure.getIntForUser(getContext().getContentResolver(), Secure.UI_NIGHT_MODE,
+                 mNightMode.get(), 0);
+@@ -536,6 +572,7 @@ final class UiModeManagerService extends SystemService {
+                 context.getContentResolver().registerContentObserver(
+                         Secure.getUriFor(Secure.CONTRAST_LEVEL), false,
+                         mContrastObserver, UserHandle.USER_ALL);
++                mContrastMatrixApplier.apply(getContrastLocked());
+                 context.registerReceiver(mDockModeReceiver,
+                         new IntentFilter(Intent.ACTION_DOCK_EVENT));
+                 IntentFilter batteryFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+diff --git a/services/core/java/com/android/server/display/color/DisplayTransformManager.java b/services/core/java/com/android/server/display/color/DisplayTransformManager.java
+index cb7b1773e47e..2eca95bc1155 100644
+--- a/services/core/java/com/android/server/display/color/DisplayTransformManager.java
++++ b/services/core/java/com/android/server/display/color/DisplayTransformManager.java
+@@ -59,6 +59,9 @@ public class DisplayTransformManager {
+      * Color transform level used by A11y services to make the display monochromatic.
+      */
+     public static final int LEVEL_COLOR_MATRIX_GRAYSCALE = 200;
++
++    // Applies the accessibility "color contrast" adjustment (UiModeManager contrast).
++    public static final int LEVEL_COLOR_MATRIX_CONTRAST = 225;
+     /**
+      * Color transform level used by A11y services to reduce bright colors.
+      */

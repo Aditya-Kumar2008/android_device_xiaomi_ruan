@@ -9,10 +9,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 TARGET_SUPPORTS_OMX_SERVICE := false
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Must be set before the common config is inherited: vendor/pixel-style gates
-# ro.setupwizard.rotation_locked on PRODUCT_CHARACTERISTICS at inherit time.
-# device.mk sets this too, but too late for that conditional to see it, which
-# left the setup wizard rotation-locked on this landscape tablet.
+# Tablet characteristics (also set in device.mk; kept here for aapt).
 PRODUCT_CHARACTERISTICS := tablet
 
 # Inherit some common LineageOS stuff.
@@ -20,6 +17,13 @@ $(call inherit-product, vendor/lineage/config/common_full_tablet.mk)
 
 # Inherit from ruan device
 $(call inherit-product, device/xiaomi/ruan/device.mk)
+
+# vendor/pixel-style sets ro.setupwizard.rotation_locked from
+# PRODUCT_CHARACTERISTICS inside its own makefile; on this tree that branch
+# resolves to "true" and survives into product/etc/build.prop, which locks the
+# Set-Up Wizard to portrait and makes it unscrollable/stuck on this landscape
+# tablet. Pin the landscape-friendly value after all inherits so it wins.
+PRODUCT_PRODUCT_PROPERTIES += ro.setupwizard.rotation_locked=false
 
 TARGET_BOOT_ANIMATION_RES := 1600
 TARGET_BUILD_APERTURE_CAMERA := true
