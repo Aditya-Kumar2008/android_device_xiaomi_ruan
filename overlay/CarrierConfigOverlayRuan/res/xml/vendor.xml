@@ -8,6 +8,11 @@
         vendor.xml
     -->
     <carrier_config>
+        <!-- The Pixel framework RRO sets config_qualified_networks_service_package
+             to com.android.qns, which this build does not ship. The Qualcomm
+             IWlanService APK supplies QualifiedNetworksService, and carrier
+             config takes precedence over the framework resource. -->
+        <string name="carrier_qualified_networks_service_package_override_string">vendor.qti.iwlan</string>
         <boolean name="apn_expand_bool" value="true" />
         <boolean name="world_phone_bool" value="false" />
         <boolean name="allow_adding_apns_bool" value="true" />
