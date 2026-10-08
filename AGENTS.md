@@ -35,3 +35,26 @@
    toggle never appeared. overlay/FrameworkOverlayDizi now pins
    config_dozeAlwaysOnDisplayAvailable=true and config_dozeAfterScreenOffByDefault=true.
    The maintainer credit lives in overlay/SettingsOverlayDizi (build_maintainer_summary).
+
+## Kernel: keep the prebuilt GKI image (bootloop hazard)
+
+Do NOT remove `TARGET_FORCE_PREBUILT_KERNEL` / `TARGET_PREBUILT_KERNEL` from
+`BoardConfig.mk`. Building the GKI from `kernel/xiaomi/sm7435` produces a
+kernel (5.10.269-gki) that pairs with the stock Qualcomm vendor modules, which
+are prebuilt against the stock vendor KMI (5.10.198). Only modules present in
+the GKI source tree get rebuilt; `msm_drm`, audio and every `vendor_ramdisk`
+module keep the stock vermagic. With `CONFIG_MODVERSIONS=y` and
+`CONFIG_MODULE_FORCE_LOAD` unset, the mismatched modules refuse to load, and
+`vendor_ramdisk` modules load in first-stage init, so the device bootloops
+before userspace.
+
+InfinityX booted because it used the prebuilt image: kernel 5.10.246 with the
+same stock modules, sharing the stock vendor KMI.
+
+When flipping the kernel source/prebuilt setting, also clear the module
+staging or stale objects survive: `out/target/product/ruan/vendor_dlkm`,
+`vendor_dlkm.img`, `obj/PACKAGING/vendor_dlkm_intermediates`,
+`obj/PACKAGING/depmod_vendor*_stripped_intermediates`, `obj/KERNEL_OBJ`,
+`boot.img`, `vendor_boot.img`. A stale `vendor_dlkm_intermediates/file_list.txt`
+will otherwise reference modules that no longer belong there
+(e.g. `arm_smmu.ko`, a ramdisk module) and fail `vendor_dlkm.img`.
