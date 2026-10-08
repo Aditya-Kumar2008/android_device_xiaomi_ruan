@@ -93,8 +93,12 @@ TARGET_KERNEL_SOURCE := kernel/xiaomi/sm7435
 TARGET_KERNEL_CONFIG := \
     gki_defconfig \
     vendor/parrot_GKI.config
-# Built from TARGET_KERNEL_SOURCE. TARGET_FORCE_PREBUILT_KERNEL and
-# TARGET_PREBUILT_KERNEL are intentionally unset so a full kernel build runs.
+# Prebuilt stock GKI image. Building the GKI from source pairs a locally-built
+# kernel with the stock Qualcomm vendor modules, whose symbol versions do not
+# match, so vendor_ramdisk modules fail to load in first-stage init and the
+# device bootloops. Keep the prebuilt image.
+TARGET_FORCE_PREBUILT_KERNEL := true
+TARGET_PREBUILT_KERNEL := $(KERNEL_PATH)/Image
 
 # ruan ships its own dtbo.img (the dizi ROM's ruan entry lacked camera nodes)
 BOARD_PREBUILT_DTBIMAGE_DIR := $(KERNEL_PATH)/dtb
