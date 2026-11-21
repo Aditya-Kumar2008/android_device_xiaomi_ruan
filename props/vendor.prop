@@ -207,7 +207,7 @@ ro.vendor.extension_library=libqti-perfd-client.so
 vendor.perf.framepacing.enable=1
 
 # Qcomd
-persist.vendor.qcomsysd.enabled=1
+persist.vendor.qcomsysd.enabled=0
 
 # Radio
 persist.dbg.volte_avail_ovr=1
