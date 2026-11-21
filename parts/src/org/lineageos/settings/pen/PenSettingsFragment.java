@@ -154,7 +154,8 @@ public class PenSettingsFragment extends PreferenceFragment implements
             return null;
         }
         for (BluetoothDevice device : mAdapter.getBondedDevices()) {
-            if (PEN_NAMES.contains(device.getName())) {
+            String name = device.getName();
+            if (name != null && PEN_NAMES.contains(name)) {
                 return device;
             }
         }
