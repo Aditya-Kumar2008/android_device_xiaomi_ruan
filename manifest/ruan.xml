@@ -26,17 +26,14 @@
   <project path="kernel/xiaomi/sm7435" name="kernel_xiaomi_garnet" remote="evo-devices" revision="bka" clone-depth="1" />
   <project path="kernel/xiaomi/sm7435-modules" name="kernel_xiaomi_garnet-modules" remote="evo-devices" revision="bka" clone-depth="1" />
 
-  <!-- Lineage qcom-caf common (device.mk inherits hardware/qcom-caf/common/common.mk) -->
-  <project path="hardware/qcom-caf/common" name="LineageOS/android_hardware_qcom-caf_common" remote="github-non-los" revision="lineage-24.0" />
-
   <!-- Xiaomi hardware (touch, pen, sensors interfaces) -->
   <project path="hardware/xiaomi" name="LineageOS/android_hardware_xiaomi" remote="github-non-los" revision="lineage-24.0" />
 
-  <!-- Lineage power HAL inputs (device.mk ships android.hardware.power-service.lineage-libperfmgr) -->
+  <!-- Lineage SDK interfaces (parts app, Lineage health HAL) -->
   <project path="hardware/lineage/interfaces" name="LineageOS/android_hardware_lineage_interfaces" remote="github-non-los" revision="lineage-24.0" />
   <project path="hardware/google/pixel" name="LineageOS/android_hardware_google_pixel" remote="github-non-los" revision="lineage-24.0" />
 
-  <!-- Lineage libperfmgr power HAL policy (BoardConfig includes device/lineage/sepolicy/libperfmgr/sepolicy.mk) -->
+  <!-- Lineage sepolicy (Lineage health HAL) -->
   <project path="device/lineage/sepolicy" name="LineageOS/android_device_lineage_sepolicy" remote="github-non-los" revision="lineage-24.0" />
 
   <!-- Dolby -->
