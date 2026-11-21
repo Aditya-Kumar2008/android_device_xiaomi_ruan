@@ -59,3 +59,13 @@ prebuilt_etc {
     sub_dir: "permissions",
     system_ext_specific: true,
 }
+
+android_library {
+    name: "org.lineageos.settings.resources",
+    resource_dirs: ["res"],
+    static_libs: [
+        "androidx.core_core",
+        "androidx.preference_preference",
+    ],
+    sdk_version: "current",
+}
