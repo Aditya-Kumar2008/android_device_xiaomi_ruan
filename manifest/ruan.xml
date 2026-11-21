@@ -32,6 +32,10 @@
   <!-- Xiaomi hardware (touch, pen, sensors interfaces) -->
   <project path="hardware/xiaomi" name="LineageOS/android_hardware_xiaomi" remote="github-non-los" revision="lineage-24.0" />
 
+  <!-- Lineage power HAL inputs (device.mk ships android.hardware.power-service.lineage-libperfmgr) -->
+  <project path="hardware/lineage/interfaces" name="LineageOS/android_hardware_lineage_interfaces" remote="github-non-los" revision="lineage-24.0" />
+  <project path="hardware/google/pixel" name="LineageOS/android_hardware_google_pixel" remote="github-non-los" revision="lineage-24.0" />
+
   <!-- Dolby -->
   <project path="hardware/dolby" name="android_hardware_dolby" remote="nekoshirro" revision="lunaris" />
 </manifest>
