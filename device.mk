@@ -17,6 +17,13 @@ PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 
+# Platform for the Qualcomm common trees (PenguinOS device/qcom/common requires it
+# to be set in the product config).
+TARGET_BOARD_PLATFORM := parrot
+
+# PenguinOS device/qcom/common/dlkm expects the prebuilt kernel tree here.
+KERNEL_PREBUILT_DIR := device/xiaomi/ruan-kernel
+
 # Qualcomm
 $(call inherit-product, hardware/qcom-caf/common/common.mk)
 
