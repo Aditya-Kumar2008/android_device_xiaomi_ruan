@@ -27,6 +27,4 @@
   <project path="hardware/xiaomi" name="Evolution-X-Devices/hardware_xiaomi" remote="github-non-los" revision="bka-no-dolby" />
   <project path="hardware/dolby" name="android_hardware_dolby" remote="nekoshirro" revision="lunaris" />
 
-  <!-- GameBar -->
-  <project path="packages/apps/GameBar" name="packages_apps_GameBar" remote="evo-devices" revision="bka" />
 </manifest>
