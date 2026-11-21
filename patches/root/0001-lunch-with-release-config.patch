@@ -1,0 +1,11 @@
+--- /home/builder/rom-build.sh.orig	2026-11-21 19:54:26.822462634 +0000
++++ rom-build.sh	2026-11-21 19:54:26.831462698 +0000
+@@ -187,7 +187,7 @@
+ # Lunch-time!
+ echo -e "${CLR_BLD_BLU}Lunching $DEVICE${CLR_RST} ${CLR_CYA}(Including dependencies sync)${CLR_RST}"
+ echo -e ""
+-lunch "aospa_$DEVICE-$BUILD_TYPE"
++lunch "aospa_$DEVICE-${AOSPA_RELEASE:-cp2a}-$BUILD_TYPE"
+ AOSPA_VERSION="$(get_build_var AOSPA_VERSION)"
+ AOSPA_BUILD_VARIANT="$(get_build_var AOSPA_BUILD_VARIANT)"
+ 
