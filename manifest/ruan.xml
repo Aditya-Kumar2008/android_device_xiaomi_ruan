@@ -20,7 +20,7 @@
   <project path="device/xiaomi/ruan-kernel" name="device_xiaomi_ruan-kernel" remote="ruan-dev" revision="infinityx" />
 
   <!-- Vendor blobs (from ruan HyperOS OS3.0.303.0.WFSMIXM) -->
-  <project path="vendor/xiaomi/ruan" name="android_vendor_xiaomi_ruan" remote="ruan-dev" revision="infinityx-16" />
+  <project path="vendor/xiaomi/ruan" name="android_vendor_xiaomi_ruan" remote="ruan-dev" revision="penguinos-16" />
 
   <!-- Kernel source for techpack UAPI headers (headers-only usage) -->
   <project path="kernel/xiaomi/sm7435" name="kernel_xiaomi_garnet" remote="evo-devices" revision="bka" clone-depth="1" />
