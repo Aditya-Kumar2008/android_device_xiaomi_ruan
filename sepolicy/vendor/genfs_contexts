@@ -44,3 +44,7 @@ genfscon proc /last_kmsg u:object_r:vendor_proc_last_kmsg:s0
 
 # UFS LUN 0 (userdata) request queue: init.rc and init.qcom.rc set discard_max_bytes
 genfscon sysfs /devices/platform/soc/1d84000.ufshc/host0/target0:0:0/0:0:0:0/block/sda/queue/discard_max_bytes u:object_r:vendor_sysfs_ufs_queue:s0
+
+# Torch strength
+genfscon sysfs /devices/platform/soc/c42d000.qcom,spmi/spmi-0/0-05/c42d000.qcom,spmi:qcom,pm6150l@5:qcom,leds@d300/leds/led:torch_0/brightness u:object_r:sysfs_torch:s0
+genfscon sysfs /devices/platform/soc/c42d000.qcom,spmi/spmi-0/0-05/c42d000.qcom,spmi:qcom,pm6150l@5:qcom,leds@d300/leds/led:switch_0/brightness u:object_r:sysfs_torch:s0
