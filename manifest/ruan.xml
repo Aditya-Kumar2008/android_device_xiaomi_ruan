@@ -36,6 +36,9 @@
   <project path="hardware/lineage/interfaces" name="LineageOS/android_hardware_lineage_interfaces" remote="github-non-los" revision="lineage-24.0" />
   <project path="hardware/google/pixel" name="LineageOS/android_hardware_google_pixel" remote="github-non-los" revision="lineage-24.0" />
 
+  <!-- Lineage libperfmgr power HAL policy (BoardConfig includes device/lineage/sepolicy/libperfmgr/sepolicy.mk) -->
+  <project path="device/lineage/sepolicy" name="LineageOS/android_device_lineage_sepolicy" remote="github-non-los" revision="lineage-24.0" />
+
   <!-- Dolby -->
   <project path="hardware/dolby" name="android_hardware_dolby" remote="nekoshirro" revision="lunaris" />
 </manifest>
