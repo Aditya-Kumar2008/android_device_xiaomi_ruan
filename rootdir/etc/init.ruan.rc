@@ -74,7 +74,7 @@ service vendor.audio-hal /vendor/bin/hw/android.hardware.audio.service
     task_profiles ProcessCapacityHigh HighPerformance
     onrestart restart audioserver
 
-# QTI thermal HAL: needs system group for GameBar's thermal zone nodes
+# QTI thermal HAL: needs system group for the thermal zone nodes
 service vendor.thermal-hal /vendor/bin/hw/android.hardware.thermal-service.qti
     override
     interface aidl android.hardware.thermal.IThermal/default
