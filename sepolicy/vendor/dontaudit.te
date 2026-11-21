@@ -22,3 +22,5 @@ dontaudit vendor_wcnss_service init:unix_stream_socket connectto;
 dontaudit vendor_wcnss_service property_socket:sock_file write;
 # modprobe probes CAP_SYS_ADMIN under enforcing; all 373 modules still load (b24).
 dontaudit vendor_modprobe self:capability sys_admin;
+# Xiaomi's RIL probes unlabeled property files; telephony works without them.
+dontaudit rild default_prop:file { getattr map open read };
