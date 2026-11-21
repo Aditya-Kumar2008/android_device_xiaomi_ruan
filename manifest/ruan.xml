@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Device : Redmi Pad Pro 5G / POCO Pad 5G (ruan) -->
+<!-- Put this in .repo/local_manifests/ after repo init, then repo sync -->
+
+<manifest>
+  <!-- Remotes -->
+  <remote name="ruan-dev" fetch="https://github.com/noble6/" />
+  <remote name="github-non-los" fetch="https://github.com/" />
+  <remote name="nekoshirro" fetch="https://github.com/nekoshirro/" />
+
+  <!-- Device tree -->
+  <project path="device/xiaomi/ruan" name="device_xiaomi_ruan" remote="ruan-dev" revision="infinity" />
+
+  <!-- Prebuilt stock vendor modules, dtb (+ stock Image as fallback) -->
+  <project path="device/xiaomi/ruan-kernel" name="device_xiaomi_ruan-kernel" remote="ruan-dev" revision="axion" />
+
+  <!-- Vendor blobs (from ruan HyperOS OS3.0.303.0.WFSMIXM) -->
+  <project path="vendor/xiaomi/ruan" name="vendor_xiaomi_ruan-" remote="ruan-dev" revision="axion" />
+
+  <!-- Kernel source (Xiaomi ruan-u-oss) -->
+  <project path="kernel/xiaomi/sm7435" name="kernel_xiaomi_ruan" remote="ruan-dev" revision="axion" clone-depth="1" />
+
+  <!-- Techpack UAPI headers for QTI HALs -->
+  <project path="kernel/xiaomi/sm7435-modules" name="kernel_xiaomi_garnet-modules" remote="ruan-dev" revision="bka" clone-depth="1" />
+
+  <!-- Hardware -->
+  <project path="hardware/xiaomi" name="LineageOS/android_hardware_xiaomi" remote="github-non-los" revision="lineage-24.0" />
+  <project path="hardware/dolby" name="android_hardware_dolby" remote="nekoshirro" revision="lunaris" />
+</manifest>

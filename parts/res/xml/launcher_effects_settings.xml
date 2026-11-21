@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/launcher_effects_title">
+
+
+    <SwitchPreferenceCompat
+        android:key="shade_blur"
+        android:title="@string/shade_blur_title"
+        android:summary="@string/shade_blur_summary"
+        android:persistent="false" />
+
+</PreferenceScreen>

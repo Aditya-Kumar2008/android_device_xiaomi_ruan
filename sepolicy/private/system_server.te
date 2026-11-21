@@ -1,0 +1,2 @@
+# Lineage's version props are read by system_server (e.g. for the build info).
+get_prop(system_server, custom_version_prop)

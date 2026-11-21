@@ -1,0 +1,2 @@
+# Torch strength: CameraProviderExtension sets the LED current directly.
+allow cameraserver sysfs_torch:file rw_file_perms;

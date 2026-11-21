@@ -1,0 +1,14 @@
+//
+// SPDX-FileCopyrightText: The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+// Device modes for the Lineage libperfmgr power HAL (double-tap to wake), selected
+// with power_libperfmgr.mode_extension_lib in device.mk.
+cc_library_static {
+    name: "libperfmgr-ext-ruan",
+    defaults: ["android.hardware.power-ndk_shared"],
+    vendor: true,
+    srcs: ["power-mode.cpp"],
+    shared_libs: ["libbase"],
+}

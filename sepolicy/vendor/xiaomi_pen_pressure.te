@@ -1,0 +1,16 @@
+type xiaomi_pen_pressure, domain;
+type xiaomi_pen_pressure_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(xiaomi_pen_pressure)
+
+allow xiaomi_pen_pressure device:dir r_dir_perms;
+# The pen's hidraw node (qcom no longer labels /dev/hidraw* for QVR on 24.0).
+allow xiaomi_pen_pressure hidraw_device:chr_file { open read ioctl getattr };
+allow xiaomi_pen_pressure vendor_mipp_device:chr_file { open write getattr };
+allow xiaomi_pen_pressure kmsg_device:chr_file w_file_perms;
+# Grab the IC's pen input device and republish it through uinput.
+allow xiaomi_pen_pressure input_device:dir r_dir_perms;
+allow xiaomi_pen_pressure input_device:chr_file { open read ioctl getattr };
+allow xiaomi_pen_pressure uhid_device:chr_file { open read write ioctl getattr };
+# Tell DiziPen while the pen is in use (vendor.pen.active).
+set_prop(xiaomi_pen_pressure, vendor_pen_active_prop)

@@ -1,0 +1,8 @@
+allow system_app sysfs_thermal:file write;
+allow system_app sysfs_thermal:file rw_file_perms;
+
+# Settings shows memory usage from zram stats.
+allow system_app sysfs_zram:file r_file_perms;
+
+set_prop(system_app, vendor_pen_prop)
+get_prop(system_app, vendor_pen_active_prop)

@@ -1,0 +1,60 @@
+From ad2a6dbea811af0e09cacc42914b1e862d5b6601 Mon Sep 17 00:00:00 2001
+From: noble6 <ruanproject01@gmail.com>
+Date: Tue, 6 Oct 2026 19:10:56 +0530
+Subject: [PATCH] PowerManagerService: Debounce wired charging feedback
+
+Some USB PD chargers drop VBUS once while they negotiate the contract.
+Android sees a plug, an unplug ~0.2 s later and a second plug ~1 s
+after that (Redmi Pad Pro 5G on a PPS charger), and plays the charging
+sound for each, plus the disconnect sound in between. Give wired
+charging feedback only for plug and unplug events more than 2 s apart.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ .../server/power/PowerManagerService.java     | 19 +++++++++++++++++--
+ 1 file changed, 17 insertions(+), 2 deletions(-)
+
+diff --git a/services/core/java/com/android/server/power/PowerManagerService.java b/services/core/java/com/android/server/power/PowerManagerService.java
+index cd3fb9a..81b678d 100644
+--- a/services/core/java/com/android/server/power/PowerManagerService.java
++++ b/services/core/java/com/android/server/power/PowerManagerService.java
+@@ -496,6 +496,15 @@ public final class PowerManagerService extends SystemService
+     // The current plug type, such as BatteryManager.BATTERY_PLUGGED_WIRELESS.
+     private int mPlugType;
+ 
++    // Some chargers drop VBUS once while they negotiate USB PD, which reads as a
++    // plug, an unplug and a second plug within a second or so. Wired charging
++    // feedback (sound, vibration) is given only for changes this far apart.
++    private static final long WIRED_CHARGING_FEEDBACK_DEBOUNCE_MS = 2000;
++
++    // Uptime of the last wired plug and unplug.
++    private long mLastWiredPlugTime;
++    private long mLastWiredUnplugTime;
++
+     // The current battery level percentage.
+     private int mBatteryLevel;
+ 
+@@ -2967,12 +2976,18 @@ public final class PowerManagerService extends SystemService
+                 if (mBootCompleted) {
+                     if (mIsPowered && !BatteryManager.isPlugWired(oldPlugType)
+                             && BatteryManager.isPlugWired(mPlugType)) {
+-                        mNotifier.onWiredChargingStarted(mUserId);
++                        if (now - mLastWiredUnplugTime > WIRED_CHARGING_FEEDBACK_DEBOUNCE_MS) {
++                            mNotifier.onWiredChargingStarted(mUserId);
++                        }
++                        mLastWiredPlugTime = now;
+                     } else if (wasPowered && !mIsPowered) {
+                         if (oldPlugType == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
+                             mNotifier.onWirelessChargingInterrupted(mUserId);
+                         } else {
+-                            mNotifier.onWiredChargingDisconnected(mUserId);
++                            if (now - mLastWiredPlugTime > WIRED_CHARGING_FEEDBACK_DEBOUNCE_MS) {
++                                mNotifier.onWiredChargingDisconnected(mUserId);
++                            }
++                            mLastWiredUnplugTime = now;
+                         }
+                     } else if (dockedOnWirelessCharger) {
+                         mNotifier.onWirelessChargingStarted(mBatteryLevel, mUserId);
+-- 
+2.56.0
+

@@ -1,0 +1,5 @@
+# health enumerates every power_supply, including Xiaomi's batt_verify.
+r_dir_file(hal_health_default, vendor_sysfs_battery_supply)
+
+# Lineage Health charging control (bypass charging) through qcom-battery/restrict_chg.
+rw_dir_file(hal_lineage_health_default, vendor_sysfs_battery_supply)

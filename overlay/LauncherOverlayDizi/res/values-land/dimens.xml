@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Pixel Launcher blurs the wallpaper behind overview by up to 600dp in landscape
+         (30dp in portrait). At 2560x1600 on the Adreno 710 that made recents 24% janky
+         (p50 26 ms): SurfaceFlinger re-blurs the whole screen every frame. Use the
+         portrait radius. -->
+    <dimen name="max_depth_blur_radius_enhanced">30dp</dimen>
+</resources>

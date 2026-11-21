@@ -1,0 +1,2 @@
+# usbd registers no service; servicemanager's callback into it is harmless.
+dontaudit servicemanager usbd:binder call;

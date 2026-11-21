@@ -1,0 +1,8 @@
+# hardware/dolby's Dolby Vision Codec2 store comes from another SoC and crashes in listComponents
+# (null RefBase) whenever a client enumerates it. Its codecs are stripped from media_codecs on dizi,
+# so nothing can use it; keep the service off.
+service dolbycodec2 /vendor/bin/hw/dolbycodec2
+    class hal
+    user mediacodec
+    group camera mediadrm drmrpc
+    disabled

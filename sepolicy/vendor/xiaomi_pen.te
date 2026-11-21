@@ -1,0 +1,7 @@
+type xiaomi_pen, domain;
+type xiaomi_pen_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(xiaomi_pen)
+
+allow xiaomi_pen touchfeature_device:chr_file rw_file_perms;
+allow xiaomi_pen kmsg_device:chr_file w_file_perms;
