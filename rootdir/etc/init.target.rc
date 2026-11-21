@@ -76,11 +76,11 @@ on post-fs-data
     write /sys/kernel/cnss/fs_ready 1
 
     #flashlight permission
-    chown system system /sys/class/leds/led:torch_0/brightness
+    chown cameraserver system /sys/class/leds/led:torch_0/brightness
     chmod 0664 /sys/class/leds/led:torch_0/brightness
     chown system system /sys/class/leds/led:torch_1/brightness
     chmod 0664 /sys/class/leds/led:torch_1/brightness
-    chown system system /sys/class/leds/led:switch_0/brightness
+    chown cameraserver system /sys/class/leds/led:switch_0/brightness
     chmod 0664 /sys/class/leds/led:switch_0/brightness
 
     mkdir /data/vendor/wlan_logs 0770 system wifi

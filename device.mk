@@ -118,6 +118,7 @@ PRODUCT_PACKAGES += \
     android.hardware.boot-service.qti.recovery
 
 # Camera
+$(call soong_config_set,libcameraservice,ext_lib,//$(LOCAL_PATH):libcameraservice_extension.ruan)
 PRODUCT_PACKAGES += \
     libcamera2ndk_vendor
 
