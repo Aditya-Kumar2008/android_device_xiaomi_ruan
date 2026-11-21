@@ -1,0 +1,73 @@
+From 901b6d8570aad72900b3777fd5c16636f6fa6429 Mon Sep 17 00:00:00 2001
+From: Aditya Kumar <Aditya-Kumar2008@users.noreply.github.com>
+Date: Sat, 21 Nov 2026 23:57:08 +0530
+Subject: [PATCH] products: Add ruan (POCO Pad 5G / Redmi Pad Pro 5G)
+
+---
+ products/AndroidProducts.mk |  2 ++
+ products/ruan/aospa_ruan.mk | 33 +++++++++++++++++++++++++++++++++
+ 2 files changed, 35 insertions(+)
+ create mode 100644 products/ruan/aospa_ruan.mk
+
+diff --git a/products/AndroidProducts.mk b/products/AndroidProducts.mk
+index 584f4fb..c614a78 100644
+--- a/products/AndroidProducts.mk
++++ b/products/AndroidProducts.mk
+@@ -34,6 +34,7 @@ PRODUCT_MAKEFILES += \
+     $(LOCAL_DIR)/phone2/aospa_phone2.mk \
+     $(LOCAL_DIR)/porsche/aospa_porsche.mk \
+     $(LOCAL_DIR)/psyche/aospa_psyche.mk \
++    $(LOCAL_DIR)/ruan/aospa_ruan.mk \
+     $(LOCAL_DIR)/sky/aospa_sky.mk \
+     $(LOCAL_DIR)/spes/aospa_spes.mk \
+     $(LOCAL_DIR)/sunny/aospa_sunny.mk \
+@@ -70,6 +71,7 @@ COMMON_LUNCH_CHOICES += \
+     aospa_phone2-userdebug \
+     aospa_porsche-userdebug \
+     aospa_psyche-userdebug \
++    aospa_ruan-userdebug \
+     aospa_sky-userdebug \
+     aospa_spes-userdebug \
+     aospa_sunny-userdebug \
+diff --git a/products/ruan/aospa_ruan.mk b/products/ruan/aospa_ruan.mk
+new file mode 100644
+index 0000000..c74f6b0
+--- /dev/null
++++ b/products/ruan/aospa_ruan.mk
+@@ -0,0 +1,33 @@
++#
++# SPDX-FileCopyrightText: Paranoid Android
++# SPDX-License-Identifier: Apache-2.0
++#
++
++ifeq (aospa_ruan,$(TARGET_PRODUCT))
++
++# Inherit from those products. Most specific first.
++$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
++$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
++
++# Inherit from the custom device configuration.
++$(call inherit-product, device/xiaomi/ruan/device.mk)
++
++# Inherit from the AOSPA configuration.
++$(call inherit-product, vendor/aospa/target/product/aospa-target.mk)
++
++PRODUCT_BRAND := Redmi
++PRODUCT_DEVICE := ruan
++PRODUCT_MANUFACTURER := Xiaomi
++PRODUCT_MODEL := 24074RPD2G
++PRODUCT_NAME := aospa_ruan
++
++PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
++
++PRODUCT_BUILD_PROP_OVERRIDES += \
++    DeviceProduct=ruan_global \
++    SystemName=ruan_global
++
++# Boot animation resolution.
++TARGET_BOOT_ANIMATION_RES := 1600
++TARGET_USES_BLUR := true
++endif
+-- 
+2.56.1
+
