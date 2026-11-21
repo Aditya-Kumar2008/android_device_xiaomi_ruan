@@ -48,9 +48,6 @@ PRODUCT_PACKAGES += \
 BOARD_SHIPPING_API_LEVEL := 31
 PRODUCT_SHIPPING_API_LEVEL := $(BOARD_SHIPPING_API_LEVEL)
 
-# XiaomiParts reaches vendor sysfs and props, so it can't be
-# coredomain. Android 17 enforces that for platform apps only on devices
-# launching with it; report it as a warning here.
 PRODUCT_ENFORCE_SELINUX_TREBLE_LABELING := false
 
 # Audio
@@ -139,9 +136,6 @@ PRODUCT_COPY_FILES += \
 # Device-specific settings
 PRODUCT_PACKAGES += \
     DSPVolumeSynchronizer
-
-PRODUCT_PACKAGES += \
-    XiaomiParts
 
 # Display
 PRODUCT_PACKAGES += \
