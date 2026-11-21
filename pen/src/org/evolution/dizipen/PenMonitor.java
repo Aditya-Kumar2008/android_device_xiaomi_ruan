@@ -32,7 +32,8 @@ public final class PenMonitor implements InputManager.InputDeviceListener {
 
     private final InputManager mInputManager;
     private final PenPairer mPairer;
-    private boolean mConnected;
+    private boolean mConnected;     // reported to the touch IC: a pen, or forced on
+    private boolean mPenConnected;  // a pen really is connected
 
     PenMonitor(Context context, PenPairer pairer) {
         mInputManager = context.getSystemService(InputManager.class);
@@ -44,7 +45,7 @@ public final class PenMonitor implements InputManager.InputDeviceListener {
         // Re-evaluate when persist.vendor.pen.force is toggled (e.g. via adb).
         SystemProperties.addChangeCallback(this::refresh);
         refresh();
-        mPairer.setPenConnected(mConnected);
+        mPairer.setPenConnected(mPenConnected);
     }
 
     private boolean isPen(int deviceId) {
@@ -55,20 +56,26 @@ public final class PenMonitor implements InputManager.InputDeviceListener {
     }
 
     private synchronized void refresh() {
-        boolean connected = SystemProperties.getBoolean(PROP_FORCE, false);
+        boolean pen = false;
         for (int id : mInputManager.getInputDeviceIds()) {
             if (isPen(id)) {
-                connected = true;
+                pen = true;
                 break;
             }
         }
+        // Forcing pen input on must not stop the pairer: a forgotten pen
+        // could never be paired again.
+        if (pen != mPenConnected) {
+            mPenConnected = pen;
+            Log.i(TAG, "pen " + (pen ? "connected" : "disconnected"));
+            mPairer.setPenConnected(pen);
+        }
+        boolean connected = pen || SystemProperties.getBoolean(PROP_FORCE, false);
         if (connected == mConnected) {
             return;
         }
         mConnected = connected;
-        Log.i(TAG, "pen " + (connected ? "connected" : "disconnected"));
         SystemProperties.set(PROP_STATE, connected ? "connected" : "disconnected");
-        mPairer.setPenConnected(connected);
     }
 
     @Override

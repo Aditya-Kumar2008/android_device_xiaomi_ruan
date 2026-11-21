@@ -120,11 +120,19 @@ final class PenPairer {
     }
 
     private static boolean isPen(BluetoothDevice device) {
-        return device != null && PEN_NAMES.contains(device.getName());
+        // A bonded device can be nameless, and Set.contains() rejects null.
+        String name = device != null ? device.getName() : null;
+        return name != null && PEN_NAMES.contains(name);
     }
 
     private void update() {
-        boolean scan = mWanted && mAdapter != null && mAdapter.isEnabled();
+        boolean enabled = mAdapter != null && mAdapter.isEnabled();
+        if (!enabled) {
+            // Turning Bluetooth off ends our scan; start it again once it is back.
+            mScanning = false;
+            return;
+        }
+        boolean scan = mWanted;
         if (scan == mScanning) {
             return;
         }
