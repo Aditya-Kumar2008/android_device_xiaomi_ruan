@@ -10,6 +10,11 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_ven
 # Enable project quotas and casefolding for emulated storage without sdcardfs
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
+
+# Disable soong dexpreopt (dex_bootjars) for the first bring-up;
+# ART still dexopts at install time.
+WITH_DEXPREOPT := false
+
 # Setup dalvik vm configs
 PRODUCT_CHARACTERISTICS := tablet
 PRODUCT_AAPT_CONFIG := normal large xlarge
