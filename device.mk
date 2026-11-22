@@ -399,3 +399,6 @@ PRODUCT_COPY_FILES += \
 
 # Vendor blobs
 $(call inherit-product, vendor/xiaomi/ruan/ruan-vendor.mk)
+
+# Xiaomi binaries (netmgrd, adpl) link the old rmnetctl API
+$(call soong_config_set,rmnetctl,old_rmnet_data,true)
