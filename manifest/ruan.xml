@@ -38,4 +38,7 @@
 
   <!-- Dolby -->
   <project path="hardware/dolby" name="android_hardware_dolby" remote="nekoshirro" revision="lunaris" />
+
+  <!-- PAL (pal_ipc_server) HAL implementation for thefriend; synced manually -->
+  <project path="vendor/qcom/opensource/arpal-lx" name="LineageOS/android_vendor_qcom_opensource_arpal-lx" remote="github-non-los" revision="lineage-24.0-caf-sm8450" clone-depth="1" />
 </manifest>
